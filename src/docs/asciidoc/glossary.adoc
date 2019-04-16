@@ -7,6 +7,7 @@ The following acronyms and abbreviations have been used in this report.
 |===
 | Term | Definition
 
+| AAI | Authentication & Authorisation Infrastructure
 | AOI | Area of Interest
 | API | Application Programming Interface
 | EO | Earth Observation
