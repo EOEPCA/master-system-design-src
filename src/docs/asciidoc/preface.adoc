@@ -1,0 +1,19 @@
+
+image::telespazio.png[float=right,width=200]
+
+.[big]#*{category}*#
+
+{description}
+
+COMMENTS and ISSUES::
+If you would like to raise comments or issues on this document, please do so by raising an Issue at the following URL https://github.com/EOEPCA/master-system-design/issues.
+
+PDF::
+This document is available in PDF format https://eoepca.github.io/use-case-analysis/EOEPCA-master-system-design.pdf[here].
+
+COPYRIGHT::
+Copyright © {copyrightYear} TBD (ESA or TVUK or something else ?)
+
+<<<
+
+toc::[]

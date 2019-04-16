@@ -1,0 +1,32 @@
+= EOEPCA - Master System Design
+
+*_(Document Source for Authors)_*
+
+This is the raw document source and build/publish system.
+
+The published documentation can be found https://eoepca.github.io/master-system-design/[here].
+
+The document is editable under link:src/docs/asciidoc[`src/docs/asciidoc`].
+
+The document is authored in AsciiDoc and converted to HTML using https://github.com/asciidoctor/asciidoctor[Asciidoctor]. It is additionally exported to PDF using https://github.com/asciidoctor/asciidoctor-pdf[Asciidoctor-pdf].
+
+The output is automatically published via GitHub at the URL https://eoepca.github.io/master-system-design/ using the https://github.com/ajoberstar/gradle-git-publish[Gradle Git Publish plugin]. In order to authenticate to the EOEPCA git repository it is necessary to obtain a 'Personal Access Token' for your GitHub user, and make this available to the gradle build in the environment variable `GRGIT_USER`.
+
+The document (source) is maintained in this repository (`master-system-design-src`), and the rendered version (build output) is published to the `/docs` folder of the sibling `master-system-design` repository, for public consumption.
+
+Build::
+The document is built by running...
+```
+$ ./gradlew build
+```
+
+Publish::
+The document is published by running...
+```
+$ ./gradlew gitPublishPush
+```
+
+Related links::
+* https://asciidoctor.org/[Asciidoctor Home Page]
+* https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[AsciiDoc syntax reference]
+* https://github.com/asciidoctor/asciidoctor-gradle-plugin[Gradle Asciidoc Plugin]

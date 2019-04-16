@@ -1,0 +1,16 @@
+
+= Introduction
+
+== Purpose and Scope
+
+This document presents the Master System Design for the Common Architecture.
+
+== Structure of the Document
+
+TBD
+
+include::reference-docs.adoc[leveloffset=+1]
+
+include::terminology.adoc[leveloffset=+1]
+
+include::glossary.adoc[leveloffset=+1]

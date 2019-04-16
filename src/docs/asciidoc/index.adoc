@@ -1,0 +1,34 @@
+= {titletext} ({docnum})
+:author: TVUK System Team
+:email: <Eoepca.SystemTeam@telespazio.com>
+:revnumber: v0.1
+:revdate: 16/04/2019
+:revremark: In-Progress Draft
+// attributes
+:hardbreaks:
+:sectnums:
+:toc: macro
+:toclevels: 4
+//:toc-title:
+:description: Master System Design for the Common Architecture
+:keywords: common architecture master system design
+:imagesdir: ./images
+:linkcss:
+:stylesheet: stylesheets/eoepca.css
+// custom attributes
+:category: Design Document
+:project: EOEPCA
+:docnum: {project}.SDD.001
+:title: Master System Design
+:titletext: {title}
+:copyrightYear: 2019
+
+:leveloffset: +1
+
+include::preface.adoc[]
+
+<<<
+
+include::introduction.adoc[]
+
+:leveloffset: -1
