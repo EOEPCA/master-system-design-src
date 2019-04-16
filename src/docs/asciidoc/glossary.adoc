@@ -10,8 +10,10 @@ The following acronyms and abbreviations have been used in this report.
 | AAI | Authentication & Authorisation Infrastructure
 | AOI | Area of Interest
 | API | Application Programming Interface
+| CMS | Content Management System
 | EO | Earth Observation
 | EP | Exploitation Platform
+| IdP | Identity Provider
 | SSH | Secure Shell
 | TOI | Time of Interest
 | VNC | Virtual Network Computing

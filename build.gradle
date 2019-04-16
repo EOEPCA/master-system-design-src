@@ -21,7 +21,7 @@ apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'org.ajoberstar.git-publish'
 
 asciidoctor {
-    backends 'html5', 'pdf'
+    backends 'html5'//, 'pdf'
     sources {
         include 'index.adoc'
     }
