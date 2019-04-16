@@ -106,4 +106,7 @@ The following terms are used in the Master System Design.
 | Terms & Conditions (T&Cs)
 | The obligations that the user agrees to abide by in regard of usage of products/services of the platform. T&Cs are set by the provider of each product/service.
 
+| Identity Provider (IdP)
+| The source for validating user identity in a federated identity system, (user authentication as a service).
+
 |===

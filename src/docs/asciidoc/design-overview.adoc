@@ -1,0 +1,39 @@
+= Design Overview
+
+The overall system design has been considered by taking the ‘Exploitation Platform – Functional Model’ <<EP-FM>> as a starting point and then evolving these ideas in the context of existing interface standards (with some emphasis on the OGC protocol suite) and the need for federated services.
+
+<<img_topLevelArchitecture>> depicts the domain areas as top level component blocks in a Platform ‘A’. The arrows may be read as “uses”, each implying one or more service interfaces.
+
+[#img_topLevelArchitecture,reftext='{figure-caption} {counter:figure-num}']
+.Top-level Architecture
+image::top-level-architecture.png[width=1000,align="center"]
+
+A potential federation concept is represented by interactions between corresponding blocks in a collaborating Platform ‘B’. The architecture aims to minimise dependencies and is conducive to the principle of subcontracting the implementation to experts in the respective domains. The web portal integrates various client components to form a rich user-facing interface. *The Web Portal is depicted as it has interfaces with the other domain areas - but it is not a priority concern for the Common Architecture. Each exploitation platform would be expected to develop its own web interfaces according to its needs.*
+
+== User Management
+
+_Responsible for all aspects related to the user’s account, profile and identity._
+
+It provides authentication, authorisation and accounting services that are required to access other elements of the architecture, including the processing-oriented services and resource-oriented services. Individual resources may have an associated access and/or charging policy, but these have to be checked against the identity of the user. Resource consumption may also be controlled e.g. by credits and/or quotas associated with the user account. In the Network of EO Resources, a user should not need to create an account on multiple platforms. Therefore some interactions will be required between the User Management functions, whether directly or in directly via trusted third party.
+
+== Processing and Chaining
+
+_Provides access to a variety of processing functions, tools and applications, as well as an executions environment in which to deploy them._
+
+The user can have a private workspace in which to upload files, and develop their own processing chains, experiments and workflows. Integrated with this environment is the facility to use the services of the Resource Provisioning and Management subsystem to discover and access relevant published datasets and processing elements. Then, subject to appropriate controls and permissions, the user can publish their own processing services and results. Workflows can be executed within the context of the processing facility, with the possibility to execute steps ‘remotely’ in collaborating platforms, with the results being collected for the continuation of the workflow.
+
+== Resource Provisioning and Management
+
+_Responsible for storing and cataloguing a variety of resources._
+
+First and foremost, this will contain multidimensional geo-spatial datasets. In addition it may include a variety of heterogeneous data and other resources, such as documentation, processing services, Docker images, etc.
+
+The catalogue holds corresponding metadata for every published resource item in the local platform storage, as well as entries for resources that are located on remote collaborating platforms. Catalogue search and data access is provided through a range of standard interfaces, which are used by the local Web Portal and Processing & Chaining elements and may be exposed externally as web services. Access to services and resources is controlled according to an associated policy. For identity authentication, authorisation, and accounting, this will require the services of the User Management component. Similarly, the ingestion process is controlled, in order to ensure the quality of any published resource, including associated metadata, and to maintain the integrity of the catalogue. This component may interact with corresponding peer components on other platforms, for example to synchronise catalogue entries.
+
+== Web Portal
+
+_Presents the platform user interface for interacting with the local resources and processing facilities, as well as the wider network of EO resources._
+
+It includes a web site, themed and branded according to the owning organisation. It provides the view onto the user’s private workspace and acts as their window on the world. It provides a rich, interactive web interface for discovering and working with all kinds of resources, including EO data, processing and documentation. It includes web service clients for smart search and data visualisations. It provides a workspace for developing and deploying processing algorithms, workflows, experiments and applications, and publishing results. It includes support and collaboration tools for the community.
+
+Web Portal integrates together various web service clients that uses services provided by the specialist domains (Processing, Resource, User) on the local platform and collaborating platforms.

@@ -3,7 +3,44 @@
 
 The following is a list of Reference Documents with a direct bearing on the content of this document.
 
-[horizontal]
-[[EOEPCA-UC]][EOEPCA-UC]:: EOEPCA - Use Case Analysis, EOEPCA.TN.005 (https://eoepca.github.io/use-case-analysis[https://eoepca.github.io/use-case-analysis]), Issue TBD, dd/mm/yyy
-[[EP-FM]][EP-FM]:: Exploitation Platform - Functional Model, ESA-EOPSDP-TN-17-050, Issue 1.0, 30/11/2017
-[[TEP-OA]][TEP-OA]:: Thematic Exploitation Platform Open Architecture, EMSS-EOPS-TN-17-002, Issue 1, 12/12/2017
+[cols="1,5,1"]
+|===
+| Reference | Document Details | Version
+
+| [[EOEPCA-UC]][EOEPCA-UC]
+a|
+--
+EOEPCA - Use Case Analysis (https://eoepca.github.io/use-case-analysis[https://eoepca.github.io/use-case-analysis]), +
+EOEPCA.TN.005
+--
+a|
+--
+Issue TBD, +
+dd/mm/yyy
+--
+
+| [[EP-FM]][EP-FM]
+a|
+--
+Exploitation Platform - Functional Model, +
+ESA-EOPSDP-TN-17-050
+--
+a|
+--
+Issue 1.0, +
+30/11/2017
+--
+
+| [[TEP-OA]][TEP-OA]
+a|
+--
+Thematic Exploitation Platform Open Architecture, +
+EMSS-EOPS-TN-17-002
+--
+a|
+--
+Issue 1, +
+12/12/2017
+--
+
+|===
