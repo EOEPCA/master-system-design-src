@@ -15,7 +15,7 @@ The Web Portal must provide a consistent and cohesive user experience that aggre
 * Discovery, execution and monitoring of processing jobs
 * Definition of workflows from discovered data/processing resources
 * Hosting of user defined applications with interactive user interfaces
-* Web Application Programming Interface (API) providing user’s external access to the platform’s services outside of the browser interface, *( expected to be a thin wrapper around the service end-points offered by other domain areas)
+* Web Application Programming Interface (API) providing user’s external access to the platform’s services outside of the browser interface, ( expected to be a thin wrapper around the service end-points offered by other domain areas)
 * Hosting of rich media content that is linked to catalogued resources. Such content ranges from documents & manuals to tutorials and i nstructional *media.
 * Hosting of community and collaboration tools such as Wikis, FAQs and forums
 

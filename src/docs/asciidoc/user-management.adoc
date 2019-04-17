@@ -1,5 +1,101 @@
 
 = User Management
 
-TBD
+From the point of view of the Common Architecture, the key concern of User Management is the provision of Federated Identity and access controls.
+
+TBD - what else ?
+
+== Identity and Access Management (IAM)
+
+The goal of IAM is to uniquely identify the user and limit access to protected resources to those having suitable access rights. We assume an Attribute Based Access Control (ABAC) approach in which authorisation decisions are made based upon attributes required by resources and possessed (as claims) by users. ABAC is is seen as a more flexible approach than Role Base Access Control (RBAC), affording the ability to express more sofisticated authorisations rules beyond the role(s) of the user - and noting the fact that a role-based ruleset could be implemented within an attribute based approach, (i.e. RBAC is a subset/specialisation of ABAC).
+
+In achieving this there are three main concerns:
+
+* Unique user identification
+* Determine what attributes are required to access the protected resource
+* Determine whether the user has the required attributes
+
+For the Common Architecture, we establish separation of User Identification from Access Management. User identity is federated and handled external to the platform. Within the Network of EO Resources, resources held within an exploitation platform are made available to federated partner platforms:
+
+* The identity is provided externally. The external IdP has no association to the exploitation platform, and hence is not the appropriate place to administer attributes that relate to EP resources.
+* The protected resources are under the custodianship of the exploitation platform and hence the exploitation platform defines internally its rules for accessing its protected resources.
+* The administrative domain for a set of attributes should not be tied to an exploitation platform, which facilitates the provision of federation and virtual organisations.
+
+=== IAM Approach
+
+<<img_iamOverview>> presents the basic approach. At this stage it does not consider the case in which an exploitation platform accesses resources in another platform on behalf of a user, (for example a workflow step that is invoked on another platform). This is addressed in a later section. Users are authenticated by redirection to an external identity provider, (their ‘home’ IdP). This returns the authentication decision and some basic user information as required (such as name, email, etc.).
+
+[#img_iamOverview,reftext='{figure-caption} {counter:figure-num}']
+.Identity and Access Management Overview
+image::iam-overview.png[width=1000,align="center"]
+
+Each protected resource is fronted by its Policy Enforcement Point (PEP) that will only permit access if the appropriate conditions are met. This decision is made according to a set of rules that are under the control of and configured within the exploitation platform.
+
+The Authentication Service is provided as a helper to the PEPs to perform the authentication flow with the external IdPs. The Authentication Service is provided as a common component that is ‘invoked’ by each PEP as required, by redirection of the User’s originating request. Use of redirection allows to maintain a direct communication between the User and the resource endpoint. This would not be the case if an API Gateway were used as an intermediary, having the effect of proxying the connection and thus spoiling the direct communication between end-user agent and resource server. This is of particular importance in the case of significant data volumes being returned to the User, in which a proxy would represent an inefficiency in the data path.
+
+The PEP interrogates the PDP for an authorisation decision. The PEP sends a request that indicates the pertinent details of the attempted access, including:
+
+* Identity of end-user (XACML subject)
+* The API (path/version etc.) being accessed (XACML resource)
+* The operation (HTTP verb) being performed (XACML action)
+
+The rules are expressed through attributes, and it is the job of the Policy Decision Point (PDP) to determine, for a given request, what attributes are required and what attributes the user possesses, in order to provide its access decision. In order to know whether a user possesses a given attribute it is necessary to interrogate the appropriate Attribute Authority for the attribute.
+
+An Attribute Authority represents the administrative domain for a set of attributes - and acts as Policy Information Point (PIP) for the attributes under its governance. A given attribute is administered by a single Attribute Authority. Thus, when making its decision, the PDP must know for each attribute who is the responsible Attribute Authority (e.g. by lookup), and then interrogate that Attribute Authority to know whether the user possesses the given attribute. For any given attribute, the attribute authority can be one within the EP or administered externally.
+
+Federated access and Virtual Organisations can be effected by use of ‘Federated Attributes’ (see below) that allow common attributes to be delegated under the administrative domain of a nominated Attribute Authority. Thus, for a given attribute there is a single authoritative endpoint for associated attribute queries. The exploitation platform supports the federation/VO by using the federated-attributes in its rules, and defers to the appropriate attribute authority when making policy decisions.
+
+From the perspective of a given EP, two classes of attribute result from the above:
+
+Local Attributes::
+Attributes that are used only internally by the EP, in which case the attributes are mapped to the local Attribute Authority.
+
+Federated Attributes::
+Attributes that are used to facilitate federated access to resources and in the establishment of Virtual Organisations. In this case the EP maps the attributes to the appropriate Attribute Authority – noting the fact that it could be the local EP if it happens to be the administrative domain for the attribute.
+
+<<img_iamNominalFlow>> illustrates the nominal IAM Flow.
+
+[#img_iamNominalFlow,reftext='{figure-caption} {counter:figure-num}']
+.IAM Nominal Flow
+image::iam-nominal-flow.png[width=1000,align="center"]
+
+Note that the interface between the OIDC and the External IdPs is simplified in this view. It is expanded in later sections.
+
+=== IAM Top-level Interfaces
+
+<<img_iamInterfaces>> illustrates the interfaces of the IAM architecture.
+
+[#img_iamInterfaces,reftext='{figure-caption} {counter:figure-num}']
+.IAM Interfaces
+image::iam-interfaces.png[width=1000,align="center"]
+
+User -> Protected Resource::
+The Protected Resource exposes a public API for user consumption.
+
+Protected Resource -> PEP::
+The PEP is implemented either as an in-process component of the Protected Resource, or as an out-of-process shim. Either way, the PEP intercepts the incoming request in order to enforce the authorisation policy decision.
+
+PEP -> Authentication Service::
+The PEP uses a redirect to delegate the authentication flow to the Authentication Service. Question: How does the redirection flow arrive back at the PEP? Assume the PEP would have to expose a ‘special’ endpoint to receive the result?
+
+Authentication Service -> External IdP::
+The Authentication Service initiates an OIDC authentication flow with the external identity provider. This interface is normalised to OIDC from the perspective of the exploitation platform by use of an IdP proxy to simplify the exploitation platform’s external interface and to minimise the number of trust relationships required. See later section TBD for more details.
+
+PEP -> AuthZ Rules Engine (PDP)::
+Question: what is the standard for this interface ? Does UMA fit here ?
+
+PDP -> Attribute Authority::
+Question: what is the standard for this interface ? SAML Attribute Query was mentioned ?
+
+=== Authenticated Identity
+
+Ref. 'Authentication Service'
+
+The _Authentication Agent_ is an _OIDC Client_ to the _Authentication Provider_ (which is an _OIDC Provider_). The Authentication Agent uses the _Authorisation Code Grant Flow_ to request an _Access Token_ with at least 'oidc' scope. This access token can then be used by the Authentication Agent to access the protected /userinfo endpoint of the Authentication Provider to obtain an _ID Token_ for the authenticated user. The successful retrieval of the ID Token completes the authenticated login of the user, and provides to the Authentication Agent identity information regarding the user, allowing them to be uniquely identified in the platform.
+
+Questions:
+
+* What cookies does the Authentication Agent put in the user's browser for session management ?
+* What does the Authentication Agent return to the PEP that initiated the flow ?
+* What does the PEP do in subsequent requests to access/validate the existing session, or know to initiate the login flow ?
 

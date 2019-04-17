@@ -8,13 +8,20 @@ The following acronyms and abbreviations have been used in this report.
 | Term | Definition
 
 | AAI | Authentication & Authorisation Infrastructure
+| ABAC | Attribute Based Access Control
 | AOI | Area of Interest
 | API | Application Programming Interface
 | CMS | Content Management System
 | EO | Earth Observation
 | EP | Exploitation Platform
+| IAM | Identity and Access Management
 | IdP | Identity Provider
+| PDP | Policy Decision Point
+| PEP | Policy Enforcement Point
+| PIP | Policy Information Point
+| RBAC | Role Based Access Control
 | SSH | Secure Shell
 | TOI | Time of Interest
 | VNC | Virtual Network Computing
+| XACML | eXtensible Access Control Markup Language
 |===
