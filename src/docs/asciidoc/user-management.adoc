@@ -1,9 +1,18 @@
 
 = User Management
 
-From the point of view of the Common Architecture, the key concern of User Management is the provision of Federated Identity and access controls.
+In the context of the Common Architecture, User Management covers the following main functional areas:
 
-TBD - what else ?
+Identity and Access Management (IAM)::
+Identification/authentication of users and authorization of access to protected resources (data/services) within the EP.
+
+Accounting and Billing::
+Maintaining an accounting record of all user accesses to data/services/applications, supported by appropriate systems of credits and billing.
+
+User Profile::
+Maintenance of details associated to the user that may be needed in support of access management and billing.
+
+These are explored in the following sub-sections.
 
 == Identity and Access Management (IAM)
 
@@ -40,6 +49,8 @@ The PEP interrogates the PDP for an authorisation decision. The PEP sends a requ
 * The operation (HTTP verb) being performed (XACML action)
 
 The rules are expressed through attributes, and it is the job of the Policy Decision Point (PDP) to determine, for a given request, what attributes are required and what attributes the user possesses, in order to provide its access decision. In order to know whether a user possesses a given attribute it is necessary to interrogate the appropriate Attribute Authority for the attribute.
+
+It should be additionally noted that the decision to allow the user access depends upon dynamic 'attributes', such as whether the user has enough credits to 'pay' for their usage, or whether they have accepted the necessary Terms & Conditions for a given dataset or service. Thus, the PDP must interrogate other EP-services such as 'Accounting & Billing' and 'User Profile' to answer such questions.
 
 An Attribute Authority represents the administrative domain for a set of attributes - and acts as Policy Information Point (PIP) for the attributes under its governance. A given attribute is administered by a single Attribute Authority. Thus, when making its decision, the PDP must know for each attribute who is the responsible Attribute Authority (e.g. by lookup), and then interrogate that Attribute Authority to know whether the user possesses the given attribute. For any given attribute, the attribute authority can be one within the EP or administered externally.
 
@@ -212,6 +223,8 @@ The session is checked to validate the ID Token that represents the session cook
 
 OIDC provides capabilities that facilitate user access federation, as described in section TBDzzz.
 
+WARNING: The approach described here is almost certainly a bad idea and/or does not make proper (intended) usage of OIDC tokens. Assuming it can be made to work technically, we should consider whether an EP should be allowed to make accesses on another EP on behalf of a user with this 'implied' consent, i.e. does it represent 'leakage' of consent between the platforms in a way that would not be desired by all users ?
+
 In particular, the ability to establish a distributed key-hierarchy with verifiable trust chains, allows the use of ID Token as trusted access identifiers with verifiable signature/encryption, amongst the participants of the EP federation.
 
 This allows…
@@ -221,6 +234,10 @@ In this case the signed/encrypted ID Token is used as a Bearer token to request 
 This could be seen as analogous to the OAuth Client Credentials Flow, in which the user is deemed to have a-priori authorised the third-party access. In this case, it is the identity of the user that is established (third-party), with the authorisation decision subject to the rules of the PDP/PEP of the remote system. The identified user must have appropriate a-priori permissions (attributes) on the target resources to be granted access, (ref. ‘Federated Attributes’).
 
 Thus, it is the ID of the user that has been passed machine-to-machine to facilitate the service federation. This effectively achieves cross-EP single sign-on, without relying upon the user agent of the end-user providing cookies to the other EP.
+
+==== Federated Access Flow (EP<->EP)
+
+TBD
 
 === Additional OIDC Capabilities
 
@@ -263,4 +280,29 @@ This would be of particular interest in the case that a 'centralised' Authentica
 
 The alternative would be to manually configure the local Authentication Provider as a Client of the IdP Proxy. This offers a more tightly managed approach with a possible additional maintenance overhead.
 
+=== Authorization (Policy Decision)
 
+TBD
+
+==== Policy Decision Point (PDP)
+
+TBD
+
+==== Attribute Authority
+
+TBD
+
+== Accounting and Billing
+
+TBD
+
+== User Profile
+
+The User Profile is a system resource that maintains a set of data for each user including:
+
+* User details
+* Terms and conditions accepted by the user
+* License keys held by the user
+* User API key management
+
+The User Profile for a given user is tied to the unique identifier provided by their Home-IdP through the authentication process.
