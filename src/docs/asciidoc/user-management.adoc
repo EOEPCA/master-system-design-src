@@ -15,7 +15,7 @@ In achieving this there are three main concerns:
 * Determine what attributes are required to access the protected resource
 * Determine whether the user has the required attributes
 
-For the Common Architecture, we establish separation of User Identification from Access Management. User identity is federated and handled external to the platform. Within the Network of EO Resources, resources held within an exploitation platform are made available to federated partner platforms:
+For the Common Architecture, we establish separation of User Identification from Access Management. User identity is federated and handled external to the platform. Within the Network of EO Resources, resources held within an exploitation platform are made available to federated partner platforms, under the policy decision of the local platform:
 
 * The identity is provided externally. The external IdP has no association to the exploitation platform, and hence is not the appropriate place to administer attributes that relate to EP resources.
 * The protected resources are under the custodianship of the exploitation platform and hence the exploitation platform defines internally its rules for accessing its protected resources.
@@ -59,7 +59,7 @@ Attributes that are used to facilitate federated access to resources and in the 
 .IAM Nominal Flow
 image::iam-nominal-flow.png[width=1000,align="center"]
 
-Note that the interface between the OIDC and the External IdPs is simplified in this view. It is expanded in later sections.
+Note that the interface between the Authentication Service and the External IdPs is simplified in this view. It is expanded in later sections.
 
 === IAM Top-level Interfaces
 
@@ -76,16 +76,16 @@ Protected Resource -> PEP::
 The PEP is implemented either as an in-process component of the Protected Resource, or as an out-of-process shim. Either way, the PEP intercepts the incoming request in order to enforce the authorisation policy decision.
 
 PEP -> Authentication Service::
-The PEP uses a redirect to delegate the authentication flow to the Authentication Service. Question: How does the redirection flow arrive back at the PEP? Assume the PEP would have to expose a ‘special’ endpoint to receive the result?
+The PEP uses a redirect to delegate the authentication flow to the Authentication Service.
 
 Authentication Service -> External IdP::
-The Authentication Service initiates an OIDC authentication flow with the external identity provider. This interface is normalised to OIDC from the perspective of the exploitation platform by use of an IdP proxy to simplify the exploitation platform’s external interface and to minimise the number of trust relationships required. See later section TBD for more details.
+In order to support multiple external identity suppliers, the Authentication Service must act as a client to multiple external IdPs, and so must establish individual trust relationships with each of these. Alternatively, the Authentication Service can instead interface to a single external IdP Proxy, that interfaces to the external IdPs on behalf of the EP. The IdP can provide this service to multiple EPs.
 
 PEP -> AuthZ Rules Engine (PDP)::
-Question: what is the standard for this interface ? Does UMA fit here ?
+Possible use of XACML requests for this interface.
 
 PDP -> Attribute Authority::
-Question: what is the standard for this interface ? SAML Attribute Query was mentioned ?
+Possible use of SAML attribute queries for this interface.
 
 === Authenticated Identity
 
@@ -99,3 +99,4 @@ Questions:
 * What does the Authentication Agent return to the PEP that initiated the flow ?
 * What does the PEP do in subsequent requests to access/validate the existing session, or know to initiate the login flow ?
 
+Take a look at https://www.npmjs.com/package/login-with to see what approach it takes to returning the auth 'answer' and how the session is handled.
