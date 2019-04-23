@@ -109,4 +109,7 @@ The following terms are used in the Master System Design.
 | Identity Provider (IdP)
 | The source for validating user identity in a federated identity system, (user authentication as a service).
 
+| Authentication Provider
+| An encapsulation of Authentication provision within the Exploitation Platform context. The Authentication Provider is an Authorization Server (OAuth) that is used purely for authentication.
+
 |===
