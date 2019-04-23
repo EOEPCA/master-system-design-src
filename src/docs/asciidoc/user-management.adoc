@@ -89,14 +89,178 @@ Possible use of SAML attribute queries for this interface.
 
 === Authenticated Identity
 
-Ref. 'Authentication Service'
+==== Authentication Service
 
-The _Authentication Agent_ is an _OIDC Client_ to the _Authentication Provider_ (which is an _OIDC Provider_). The Authentication Agent uses the _Authorisation Code Grant Flow_ to request an _Access Token_ with at least 'oidc' scope. This access token can then be used by the Authentication Agent to access the protected /userinfo endpoint of the Authentication Provider to obtain an _ID Token_ for the authenticated user. The successful retrieval of the ID Token completes the authenticated login of the user, and provides to the Authentication Agent identity information regarding the user, allowing them to be uniquely identified in the platform.
+The Authentication Services comprises two components:
 
-Questions:
+Authentication Agent::
+Provides re-usable login and session management functions within the EP. Designed to provide a simple interface to be exploited by the PEPs. Defers to the Authentication Provider for the user authentication.
 
-* What cookies does the Authentication Agent put in the user's browser for session management ?
-* What does the Authentication Agent return to the PEP that initiated the flow ?
-* What does the PEP do in subsequent requests to access/validate the existing session, or know to initiate the login flow ?
+Authentication Provider::
+Provides the ‘Login-With’ service that allows the platform to support multiple external identity providers.
 
-Take a look at https://www.npmjs.com/package/login-with to see what approach it takes to returning the auth 'answer' and how the session is handled.
+The Authentication Agent is an OIDC Client to the Authentication Provider (which is an OIDC Provider). The Authentication Agent uses the Authorisation Code Grant Flow to request an Access Token with at least 'oidc' scope. This access token can then be used by the Authentication Agent to access the protected /userinfo endpoint of the Authentication Provider to obtain an ID Token for the authenticated user. The successful retrieval of the ID Token completes the authenticated login of the user, and provides to the Authentication Agent identity information regarding the user, allowing them to be uniquely identified in the platform.
+
+These components are described in the following subsections.
+
+===== Authentication Agent
+
+The Authentication Agent acts as a helper to the PEPs for the purposes of ensuring that the user is authenticated and well identified.
+
+The identity of the authenticated user is maintained in an OIDC ID Token that is represented as a JWT (signed/encrypted by the Authentication Provider) stored as a Cookie in the users browser.
+
+The ID Token is obtained by the Authentication Agent from the Authentication Provider, which is an OIDC Provider. Thus, the Authentication Agent acts as an OIDC Client, using an Authorization Code Flow to obtain the OIDC ID Token.
+
+The returned OIDC ID Token has been signed (JWS) and encrypted (JWE) by the Authentication Provider and thus results in a token that is suitable as a session cookie that asserts authenticated identity with integrity, non-repudiation and confidentiality.
+
+For the interface with the PEP, the Authentication Agent presents the following HTTP endpoints:
+
+/login::
+Designed to be called by HTTP-redirect to initiate user login sequence.
+Supports redirection back to an originating URL (‘redirect_url’).
+
+/logout::
+Designed to be called by HTTP-redirect to initiate user logout.
+
+/validate::
+Designed to be called directly to validate the provided signed/encrypted ID Token.
+Returns a status indication as to the validity of the token, and the decrypted form of the valid token. This provides user information to the resource server.
+
+Thus, the PEP can extract the ID Token from the HTTP headers, and behave accordingly:
+
+* If the token is not present then no user is logged in, so the request should be redirected to the /login endpoint (HTTP redirect)
+* If the token is present, then it should be validated via the /validate endpoint (direct call)
+* If the token is valid, then the request can continue (pending authorisation), with the user identity provided in the token
+* If the token is invalid, then the request should be redirected to the /login endpoint (HTTP redirect)
+
+For the interface with the Authentication Provider, the Authentication Agent presents the endpoints required to support the OIDC Authorisation Code Flow, including:
+
+/callback::
+Callback endpoint to receive the authorisation code grant returned from the Authentication Provider via redirect. This is supplied to the Authentication Provider in the authorisation request (‘redirect_url’), and is registered at Client Registration.
+
+/.well-known/openid-federation::
+OIDC Federation API endpoint through which an Exploitation Platform is able to publish Entity Statements about itself. See section ‘OIDC Federation’.
+
+The Authorisation Code Flow would be invoked with a response_type of ‘code’ and scope ‘oidc profile’. Other scopes, such as ‘email’ may also be considered (TBD).
+
+===== Authentication Provider
+
+The Authentication Provider provides a ‘Login With’ service that allows the end-user to select their Identity Provider for purposes of authentication.
+
+It presents as an OIDC Provider to the Exploitation Platform (either internally or externally), specifically supporting the Authorisation Code Flow for the benefit of the Authentication Agent in the platform.
+
+The Authentication Provider is designed to support the onward forwarding of the authentication request through external identify services, which should be expected to include:
+* EduGain
+* GitHub
+* Google
+* Twitter
+* Facebook
+* LinkedIn
+* Others TBD
+
+The Authentication Provider must establish itself as a client of all supported external IdPs, with appropriate trust relationships and support for their authentication flows.
+
+The primary endpoints required to support the Authorisation Code Flow are as follows (these endpoints are taken, by example, from OKTA OIDC discovery metadata, https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration):
+
+authorization_endpoint (/authorize)::
+To initiate the authentication, and to return the code grant.
+
+token_endpoint (/token)::
+To exchange the code grant for the access tokens.
+
+userinfo_endpoint (/userinfo)::
+To obtain the user information ID token in accordance with the scopes requested in the authorisation request.
+
+jwks_uri (/keys)::
+To obtain signing keys for Token validation purposes.
+
+end_session_endpoint (/logout)::
+To logout the user from the Authentication Provider, i.e. clear session cookies etc. Although, given that the actual IdP is externalised from the Authentication Provider, it would remain the case that any session cookies maintained by the external IdP would still be in place for a future authentication flow.
+
+introspection_endpoint (/introspect)::
+Used by clients to verify access tokens.
+
+revocation_endpoint (/revoke)::
+Used for (refresh) token revocation.
+
+As described in section ‘Discovery’, the following endpoints relate to Discovery:
+
+OIDC Discovery (/.well-known/openid-configuration)::
+Dynamic discovery of OIDC endpoints by clients.
+
+As described in section ‘Client Registration’, the following endpoints relate to Dynamic Client Registration:
+
+registration_endpoint (/clients)::
+Dynamic registration of clients (Authentication Agents).
+
+As described in section ‘OIDC Federation’, the following endpoints relate to the establishment of a federation of collaborating Exploitation Platforms through a dynamic trust model:
+
+/.well-known/openid-federation::
+OIDC Federation API endpoint through which Entity Statements are published about itself and other entities (such as Exploitation Platform Authentication Agents). See section ‘Federation’.
+
+==== User Access Flow (Browser)
+
+<<img_iamAuthenticationFlow>> illustrates the basic user access flow, invoked through a user's browser.
+
+[#img_iamAuthenticationFlow,reftext='{figure-caption} {counter:figure-num}']
+.IAM Authentication Flow (Browser)
+image::iam-authentication-flow.png[width=1000,align="center"]
+
+The session is checked to validate the ID Token that represents the session cookie. If not present or invalid then the login flow through the Authentication Provider and external IdPs is followed.
+
+==== Federated User Access
+
+OIDC provides capabilities that facilitate user access federation, as described in section TBDzzz.
+
+In particular, the ability to establish a distributed key-hierarchy with verifiable trust chains, allows the use of ID Token as trusted access identifiers with verifiable signature/encryption, amongst the participants of the EP federation.
+
+This allows…
+
+In this case the signed/encrypted ID Token is used as a Bearer token to request access to protected resources within another EP. The signed/encrypted ID Token can be verified and trusted by the target EP (via ‘jwks_uri’ OIDC endpoints), which can use the token to reliably identify the user.
+
+This could be seen as analogous to the OAuth Client Credentials Flow, in which the user is deemed to have a-priori authorised the third-party access. In this case, it is the identity of the user that is established (third-party), with the authorisation decision subject to the rules of the PDP/PEP of the remote system. The identified user must have appropriate a-priori permissions (attributes) on the target resources to be granted access, (ref. ‘Federated Attributes’).
+
+Thus, it is the ID of the user that has been passed machine-to-machine to facilitate the service federation. This effectively achieves cross-EP single sign-on, without relying upon the user agent of the end-user providing cookies to the other EP.
+
+=== Additional OIDC Capabilities
+
+==== OIDC Federation
+
+Reference: https://openid.net/specs/openid-connect-federation-1_0.html
+
+OIDC provides a framework in which RPs and OPs can dynamically establish verifiable trust chains, and so share keys to support signing and encryption of JWTs.
+
+Dedicated ‘federation’ endpoints are defined that allow an entity (such as RP or OP) to publish their own Entity Statements, and to obtain Statements for other entities that are issued by trusted third-parties within the federation. The metadata/signatures within the Entity Statements establish a chain of trust that can be followed to known (trusted) Trust Anchors, and so the Entity Statements and the included entity public keys can be trusted.
+
+Thus, through this mechanism public keys can be shared to underpin the signing and encryption of JWTs.
+
+JWTs signed/encrypted within the context of the federation can be used to achieve federated access between collaborating Exploitation Platforms, including:
+
+Client Registration::
+Either implicit or explicit registration of ‘trusted-only’ clients, using the facilities of the Federation API to establish the RP (client) as a trusted entity.
+
+Session Management::
+Use of ID Tokens as cross-platform trusted identifiers that can support ‘Federated Access’ flows.
+
+==== OIDC Discovery
+
+Reference: https://openid.net/specs/openid-connect-discovery-1_0.html
+
+OpenID Connect makes provision for two types of discovery:
+
+.	Discovery of the OpenID Provider Issuer based upon the user’s identifier
+.	Discovery of the OpenID Provider Configuration Information
+
+In the case of our usage, type 1) is not application since the user’s ID comes from their ‘Home’ organisation and is not (necessarily) tied to an OpenID Connect Provider. Instead the Authentication Provider must implement a discovery ‘flow’ in which the user is able to select the provider of their identity, as one that is supported by the Authentication Provider deployment.
+
+Regarding discovery type 2), the Authentication Provider exposes an OIDC Provider interface, and this should support retrieval of OIDC Provider Configuration Information. Thus, the Authentication Agent can utilise the discovery interface of the Authentication Provider to exploit its services. This is not mandatory – in the simple case the local Authentication Agent can be configured directly with the endpoints URLs of the Authentication Provider.
+
+==== Client Registration
+
+The possibility exists for the Authentication Agent (Relying Party) to perform auto-registration with the Authentication Provider, using OIDC Client Registration. In doing so the client Authentication Agent obtains its Client ID and Secret.
+
+This would be of particular interest in the case that a 'centralised' Authentication Provider is deployed outside of the context of a given Exploitation Platform, as a shared resource acting in the role of an IdP Proxy for many EPs. In this case, the local Authentication provider of each EP would act as OIDC client to this proxy, and it may be convenient for these local providers to use auto-registration. It is to be analysed further when this is desirable within the context of the Exploitation Platform architecture.
+
+The alternative would be to manually configure the local Authentication Provider as a Client of the IdP Proxy. This offers a more tightly managed approach with a possible additional maintenance overhead.
+
+
