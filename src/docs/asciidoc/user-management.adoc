@@ -53,11 +53,11 @@ Attributes that are used only internally by the EP, in which case the attributes
 Federated Attributes::
 Attributes that are used to facilitate federated access to resources and in the establishment of Virtual Organisations. In this case the EP maps the attributes to the appropriate Attribute Authority – noting the fact that it could be the local EP if it happens to be the administrative domain for the attribute.
 
-<<img_iamNominalFlow>> illustrates the nominal IAM Flow.
+<<img_iamOverviewFlow>> provides an overview of the IAM Flow.
 
-[#img_iamNominalFlow,reftext='{figure-caption} {counter:figure-num}']
-.IAM Nominal Flow
-image::iam-nominal-flow.png[width=1000,align="center"]
+[#img_iamOverviewFlow,reftext='{figure-caption} {counter:figure-num}']
+.IAM Overview Flow
+image::iam-overview-flow.png[width=1000,align="center"]
 
 Note that the interface between the Authentication Service and the External IdPs is simplified in this view. It is expanded in later sections.
 
