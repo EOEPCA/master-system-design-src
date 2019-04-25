@@ -40,7 +40,7 @@ image::iam-overview.png[width=1000,align="center"]
 
 Each protected resource is fronted by its Policy Enforcement Point (PEP) that will only permit access if the appropriate conditions are met. This decision is made according to a set of rules that are under the control of and configured within the exploitation platform.
 
-The Authentication Service is provided as a helper to the PEPs to perform the authentication flow with the external IdPs. The Authentication Service is provided as a common component that is ‘invoked’ by each PEP as required, by redirection of the User’s originating request. Use of redirection allows to maintain a direct communication between the User and the resource endpoint. This would not be the case if an API Gateway were used as an intermediary, having the effect of proxying the connection and thus spoiling the direct communication between end-user agent and resource server. This is of particular importance in the case of significant data volumes being returned to the User, in which a proxy would represent an inefficiency in the data path.
+The Authentication Service is provided as a common component that is utilised by each PEP to perform the authentication flow with the external IdPs. In the case of an unauthenticated request, the PEP will initiate the Authentication Service by redirection of the User’s originating request. The successful flow ultimately redirects back to the PEP and so maintains the direct connection between the end-user agent and the resource server. This direct connection is of particular importance in the case of significant data volumes being returned to the User. An alternative approach would be the use of an API Gateway to perform the role of the PEP, acting as an intermediary between the end-user agent and the resource server. However, this would have the effect of proxying the connection and thus spoiling the direct communication between end-user agent and resource server, and so introduce an inefficiency in the data path.
 
 The PEP interrogates the PDP for an authorisation decision. The PEP sends a request that indicates the pertinent details of the attempted access, including:
 
@@ -90,7 +90,7 @@ PEP -> Authentication Service::
 The PEP uses a redirect to delegate the authentication flow to the Authentication Service.
 
 Authentication Service -> External IdP::
-In order to support multiple external identity suppliers, the Authentication Service must act as a client to multiple external IdPs, and so must establish individual trust relationships with each of these. Alternatively, the Authentication Service can instead interface to a single external IdP Proxy, that interfaces to the external IdPs on behalf of the EP. The IdP can provide this service to multiple EPs.
+In order to support multiple external identity suppliers, the Authentication Service must act as a client to multiple external IdPs, and so must establish individual trust relationships with each of these. Alternatively, the Authentication Service can instead interface to a single external IdP Proxy, that interfaces to the external IdPs on behalf of the EP. The IdP Proxy can provide this service to multiple EPs.
 
 PEP -> AuthZ Rules Engine (PDP)::
 Possible use of XACML requests for this interface.
