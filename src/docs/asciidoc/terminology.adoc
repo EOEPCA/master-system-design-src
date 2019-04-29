@@ -112,4 +112,19 @@ The following terms are used in the Master System Design.
 | Authentication Provider
 | An encapsulation of Authentication provision within the Exploitation Platform context. The Authentication Provider is an Authorization Server (OAuth) that is used purely for authentication.
 
+| Web Coverage Service (WCS)
+| OGC standard that provides an open specification for sharing raster datasets on the web.
+
+| Web Feature Service (WFS)
+| OGC standard that makes geographic feature data (vector geospatial datasets) available on the web.
+
+| Web Map Service (WMS)
+| OGC standard that provides a simple HTTP interface for requesting geo-registered map images from one or more distributed geospatial databases.
+
+| Web Processing Services (WPS)
+| OGC standard that defines how a client can request the execution of a process, and how the output from the process is handled.
+
+| WPS (Transactional)
+| Transactional extension to WPS that allows adhoc deployment / undeployment of user-provided processors.
+
 |===

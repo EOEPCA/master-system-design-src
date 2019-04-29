@@ -14,8 +14,10 @@ The following acronyms and abbreviations have been used in this report.
 | CMS | Content Management System
 | EO | Earth Observation
 | EP | Exploitation Platform
+| FUSE | Filesystem in Userspace
 | IAM | Identity and Access Management
 | IdP | Identity Provider
+| OGC | Open Geospatial Consortium
 | PDP | Policy Decision Point
 | PEP | Policy Enforcement Point
 | PIP | Policy Information Point
@@ -23,5 +25,10 @@ The following acronyms and abbreviations have been used in this report.
 | SSH | Secure Shell
 | TOI | Time of Interest
 | VNC | Virtual Network Computing
+| WCS | Web Coverage Service
+| WFS | Web Feature Service
+| WMS | Web Map Service
+| WPS | Web Processing Service
+| WPS-T | WPS Transactional
 | XACML | eXtensible Access Control Markup Language
 |===
