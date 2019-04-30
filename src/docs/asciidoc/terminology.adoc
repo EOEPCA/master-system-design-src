@@ -124,7 +124,7 @@ The following terms are used in the Master System Design.
 | Web Processing Services (WPS)
 | OGC standard that defines how a client can request the execution of a process, and how the output from the process is handled.
 
-| WPS (Transactional)
+| Transactional Web Processing Service (WPS-T)
 | Transactional extension to WPS that allows adhoc deployment / undeployment of user-provided processors.
 
 |===
