@@ -1,5 +1,39 @@
 
 = Resource Management
 
-TBD
+The role of the Resource Management domain is the storage, discovery and access to resources in the Exploitation Platform. In this context, resources primarily refers to data and processing assets.
 
+Storage is largely taken care of by the Resource Tier upon which the Exploitation Platform is hosted. The role of the Exploitation Platform is to ensure that the data can be accessed through common data access protocols based upon open standards.
+
+This is important for:
+
+* the end-user wishing to access data directly
+* processing services accessing data for input/output
+* other federated Exploitation Platforms accessing each other’s data and services through well understood interfaces
+
+To exploit the services of the Platform, users need to discover available data, obtain detailed collection/product information, including the ability to visualise the data in the platform. This applies to data held within the platform, data added by end-users and data produced as the result of processing operations within the platform.
+
+Processing services and applications are also platform resources that must be discoverable by users, including the information required by users to exploit the service.
+
+The inventory and presentation of resources to users must be organised in such a way as to facilitate the discovery and usage of resources in other federated Exploitation Platforms. For example, users must be able to discover data and services in other EPs in order to construct and execute workflows that span multiple federated EPs.
+
+Access to resources must be controlled according to the privileges afforded to the logged in user, and appropriate hooks must be established into the EPs accounting and billing subsystems. Thus, the Resource Management services must be implemented according to the approach defined by User Management for authorisation, accounting and billing.
+
+In addition to the resource holding of the underlying resource tier, the EP maintains a User Workspace in which each user is able to maintain specific data/services of interest to them, and also provides a place to hold results of processing operations. The User Workspace should be provided as a building block of the system that provides this personal inventory. Moreover, the concept can be extended to define Group Workspaces to create a place for sharing and collaboration.
+
+A Data Ingestion component abstracts the interface to the underlying Resource Tier storage, ensures that incoming data is formatted in accordance with defined standards, is supported by appropriate metadata and directed towards the appropriate dataset collection.
+
+Thus, the main components comprising the Resource Management domain are:
+
+* Data Catalogue
+* Application Catalogue
+* Data Access Services
+** AWS S3 Object Store
+** Swift Object Store (OpenStack)
+** OGC Web Map Service (WMS)
+** OGC Web Coverage Service (WCS)
+** OGC Web Feature Service (WFS)
+* Data Ingestion
+* User Workspace
+
+To some degree, the role of these components is to provide an integration of the Exploitation Platform to the Resource Tier, by providing public services that bridge to the underlying data supply.
