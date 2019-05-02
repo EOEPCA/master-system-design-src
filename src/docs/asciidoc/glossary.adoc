@@ -9,20 +9,26 @@ The following acronyms and abbreviations have been used in this report.
 
 | AAI | Authentication & Authorisation Infrastructure
 | ABAC | Attribute Based Access Control
+| ADES | Application Deployment and Execution Service
 | AOI | Area of Interest
 | API | Application Programming Interface
 | CMS | Content Management System
 | CWL | Common Workflow Language
+| EMS | Execution Management Service
 | EO | Earth Observation
 | EP | Exploitation Platform
 | FUSE | Filesystem in Userspace
 | IAM | Identity and Access Management
 | IdP | Identity Provider
+| JSON | JavaScript Object Notation
+| K8s | Kubernetes
+| M2M | Machine-to-machine
 | OGC | Open Geospatial Consortium
 | PDP | Policy Decision Point
 | PEP | Policy Enforcement Point
 | PIP | Policy Information Point
 | RBAC | Role Based Access Control
+| REST | Representational State Transfer
 | SSH | Secure Shell
 | TOI | Time of Interest
 | VNC | Virtual Network Computing

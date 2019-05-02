@@ -43,4 +43,74 @@ Issue 1, +
 12/12/2017
 --
 
+| [[WPS-T]][WPS-T]
+a|
+--
+Cauchy, A.: OpenGIS® WPS2.0 Transactional Extension Implementation Standard, Open Geospatial Consortium, +
+OGC 13-071r2, http://www.opengeospatial.org/docs/discussion-papers (2013)
+--
+a|
+--
+13-071r2
+--
+
+| [[CWL]][CWL]
+a|
+--
+Common Workflow Language Specifications, +
+https://www.commonwl.org/v1.0/
+--
+a|
+--
+v1.0.2
+--
+
+| [[TB13-AP]][TB13-AP]
+a|
+--
+OGC Testbed-13, EP Application Package Engineering Report, +
+OGC 17-023, http://docs.opengeospatial.org/per/17-023.html
+--
+a|
+--
+17-023, +
+30/01/2018
+--
+
+| [[TB13-ADES]][TB13-ADES]
+a|
+--
+OGC Testbed-13, Application Deployment and Execution Service Engineering Report, +
+OGC 17-024, http://docs.opengeospatial.org/per/17-024.html
+--
+a|
+--
+17-024, +
+11/01/2018
+--
+
+| [[TB14-AP]][TB14-AP]
+a|
+--
+OGC Testbed-14, Application Package Engineering Report, +
+OGC 18-049r1, http://docs.opengeospatial.org/per/18-049r1.html
+--
+a|
+--
+18-049r1, +
+07/02/2019
+--
+
+| [[TB14-ADES]][TB14-ADES]
+a|
+--
+OGC Testbed-14, ADES & EMS Results and Best Practices Engineering Report, +
+OGC 18-050r1, http://docs.opengeospatial.org/per/18-050r1.html
+--
+a|
+--
+18-050r1, +
+08/02/2019
+--
+
 |===
