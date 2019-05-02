@@ -7,56 +7,65 @@ The following terms are used in the Master System Design.
 |===
 | Term | Meaning
 
-| Platform (EP)
-| An on-line collection of products, services and tools for exploitation of EO data
-
-| User
-| An individual using the EP, of any type (Admin/Consumer/Expert/Guest)
-
 | Admin
 | User with administrative capability on the EP
 
-| Consumer
-| User accessing existing services/products within the EP. Consumers may be scientific/research or commercial, and may or may not be experts of the domain
+| Algorithm
+| A self-contained set of operations to be performed, typically to achieve a desired data manipulation. The algorithm must be implemented (codified) for deployment and execution on the platform.
 
-| Expert
-| User developing and integrating added-value to the EP (Scientific Researcher or Service Developer)
+| Analysis Result
+| The _Products_ produced as output of an _Interactive Application_ analysis session.
 
-| Scientific Researcher
-| Expert user with the objective to perform scientific research. Having minimal IT knowledge with no desire to acquire it, they want the effort for the translation of their algorithm into a service/product to be minimised by the platform.
+| Analytics
+| A set of activities aimed to discover, interpret and communicate meaningful patters within the data. Analytics considered here are performed manually (or in a semi-automatic way) on-line with the aid of _Interactive Applications_.
 
-| Service Developer
-| Expert user with the objective to provide a performing, stable and reliable service/product. Having deeper IT knowledge or a willingness to acquire it, they require deeper access to the platform IT functionalities for optimisation of their algorithm.
+| Application Artefact
+| The 'software' component that provides the execution unit of the _Application Package_.
 
-| Guest
-| An unregistered User or an unauthenticated Consumer with limited access to the EP's services
+| Application Deployment and Execution Service (ADES)
+| WPS-T (REST/JSON) service that incorporates the Docker execution engine, and is responsible for the execution of the processing service (as a WPS request) within the ‘target’ Exploitation Platform.
 
-| Discovery
-| User finds products/services of interest to them based upon search criteria.
+| Application Descriptor
+| A file that provides the metadata part of the _Application Package_. Provides all the metadata required to accommodate the processor within the WPS service and make it available for execution.
 
-| Products
-| EO data (commercial and non-commercial) and Value-added products and made available through the EP. _It is assumed that the Hosting Environment for the EP makes available an existing supply of EO Data_
+| Application Package
+| A platform independent and self-contained representation of a software item, providing executable, metadata and dependencies such that it can be deployed to and executed within an Exploitation Platform. Comprises the _Application Descriptor_ and the _Application Artefact_.
 
-| Value-added products
-| Products generated from processing services of the EP (or external processing) and made available through the EP. This includes products uploaded to the EP by users and published for collaborative consumption
-
-| Processing Service
-| A non-interactive data processing that has a well-defined set of input data types, input parameterisation, producing _Processing Results_ with a well-defined output data type.
-
-| On-demand Processing Service
-| A _Processing Service_ whose execution is initiated directly by the user on an ad-hoc basis.
-
-| Systematic Processing Service
-| A _Processing Service_ whose execution is initiated automatically (on behalf of a user), either according to a schedule (routine) or triggered by an event (e.g. arrival of new data).
+| Authentication Provider
+| An encapsulation of Authentication provision within the Exploitation Platform context. The Authentication Provider is an Authorization Server (OAuth) that is used purely for authentication.
 
 | Bulk Processing
 | Execution of a _Processing Service_ on large amounts of data specified by AOI and TOI.
 
-| Processing Result
-| The _Products_ produced as output of a _Processing Service_ execution.
+| Code
+| The codification of an algorithm performed with a given programming language - compiled to Software or directly executed (interpretted) within the platform.
 
-| Reusable Research Object
-| An encapsulation of some research/analysis that describes all aspects required to reproduce the analysis, including data used, processing performed etc.
+| Consumer
+| User accessing existing services/products within the EP. Consumers may be scientific/research or commercial, and may or may not be experts of the domain
+
+| Development
+| The act of building new products/services/applications to be exposed within the platform and made available for users to conduct exploitation activities. Development may be performed inside or outside of the platform. If performed outside, an integration activity will be required to accommodate the developed service so that it is exposed within the platform.
+
+| Discovery
+| User finds products/services of interest to them based upon search criteria.
+
+| Execution
+| The act to start a _Processing Service_ or an _Interactive Application_.
+
+| Execution Management Service (EMS)
+| The EMS is responsible for the orchestration of workflows, including the possibility of steps running on other (remote) platforms, and the on-demand deployment of processors to local/remote ADES as required.
+
+| Expert
+| User developing and integrating added-value to the EP (Scientific Researcher or Service Developer)
+
+| External Application
+| An application or script that is developed and executed outside of the Exploitation Platform, but is able to use the data/services of the EP via a programmatic interface (API).
+
+| Guest
+| An unregistered User or an unauthenticated Consumer with limited access to the EP's services
+
+| Identity Provider (IdP)
+| The source for validating user identity in a federated identity system, (user authentication as a service).
 
 | Interactive Application
 | A stand-alone application provided within the exploitation platform for on-line hosted processing. Provides an interactive interface through which the user is able to conduct their analysis of the data, producing _Analysis Results_ as output. Interactive Applications include at least the following types: console application, web application (rich browser interface), remote desktop to a hosted VM.
@@ -64,53 +73,62 @@ The following terms are used in the Master System Design.
 | Interactive Console Application
 | A simple _Interactive Application_ for analysis in which a console interface to a platform-hosted terminal is provided to the user. The console interface can be provided through the user's browser session or through a remote SSH connection.
 
-| Interactive Web Application
-| An Interactive Application for analysis provided as a rich user interface through the user's web browser.
-
 | Interactive Remote Desktop
 | An Interactive Application for analysis provided as a remote desktop session to an OS-session (or directly to a 'native' application) on the exploitation platform. The user will have access to a number of applications within the hosted OS. The remote desktop session is provided through the user’s web browser.
 
-| External Application
-| An application or script that is developed and executed outside of the Exploitation Platform, but is able to use the data/services of the EP via a programmatic interface (API).
+| Interactive Web Application
+| An Interactive Application for analysis provided as a rich user interface through the user's web browser.
 
-| Analysis Result
-| The _Products_ produced as output of an _Interactive Application_ analysis session.
+| Kubernetes (K8s)
+| Container orchestration system for automating application deployment, scaling and management.
 
-| Execution
-| The act to start a _Processing Service_ or an _Interactive Application_.
+| On-demand Processing Service
+| A _Processing Service_ whose execution is initiated directly by the user on an ad-hoc basis.
 
-| Visualisation
-| To obtain a visual representation of any data/products held within the platform - presented to the user within their web browser session.
+| Platform (EP)
+| An on-line collection of products, services and tools for exploitation of EO data
 
 | Processing
 | A set of pre-defined activities that interact to achieve a result. For the exploitation platform, comprises on-line processing to derive data products from input data, conducted by a hosted processing service execution.
 
-| Algorithm
-| A self-contained set of operations to be performed, typically to achieve a desired data manipulation. The algorithm must be implemented (codified) for deployment and execution on the platform.
+| Processing Result
+| The _Products_ produced as output of a _Processing Service_ execution.
 
-| Code
-| The codification of an algorithm performed with a given programming language - compiled to Software or directly executed (interpretted) within the platform.
+| Processing Service
+| A non-interactive data processing that has a well-defined set of input data types, input parameterisation, producing _Processing Results_ with a well-defined output data type.
+
+| Products
+| EO data (commercial and non-commercial) and Value-added products and made available through the EP. _It is assumed that the Hosting Environment for the EP makes available an existing supply of EO Data_
+
+| Reusable Research Object
+| An encapsulation of some research/analysis that describes all aspects required to reproduce the analysis, including data used, processing performed etc.
+
+| Scientific Researcher
+| Expert user with the objective to perform scientific research. Having minimal IT knowledge with no desire to acquire it, they want the effort for the translation of their algorithm into a service/product to be minimised by the platform.
+
+| Service Developer
+| Expert user with the objective to provide a performing, stable and reliable service/product. Having deeper IT knowledge or a willingness to acquire it, they require deeper access to the platform IT functionalities for optimisation of their algorithm.
 
 | Software
 | The compilation of code into a binary program to be executed within the platform on-line computing environment.
 
-| Analytics
-| A set of activities aimed to discover, interpret and communicate meaningful patters within the data. Analytics considered here are performed manually (or in a semi-automatic way) on-line with the aid of _Interactive Applications_.
-
-| Development
-| The act of building new products/services/applications to be exposed within the platform and made available for users to conduct exploitation activities. Development may be performed inside or outside of the platform. If performed outside, an integration activity will be required to accommodate the developed service so that it is exposed within the platform.
-
-| Workspace
-| A user-scoped 'container' in the EP, in which each user maintains their own links to resources (products and services) that have been collected by a user during their usage of the EP. The workspace acts as the hub for a user's exploitation activities within the EP
+| Systematic Processing Service
+| A _Processing Service_ whose execution is initiated automatically (on behalf of a user), either according to a schedule (routine) or triggered by an event (e.g. arrival of new data).
 
 | Terms & Conditions (T&Cs)
 | The obligations that the user agrees to abide by in regard of usage of products/services of the platform. T&Cs are set by the provider of each product/service.
 
-| Identity Provider (IdP)
-| The source for validating user identity in a federated identity system, (user authentication as a service).
+| Transactional Web Processing Service (WPS-T)
+| Transactional extension to WPS that allows adhoc deployment / undeployment of user-provided processors.
 
-| Authentication Provider
-| An encapsulation of Authentication provision within the Exploitation Platform context. The Authentication Provider is an Authorization Server (OAuth) that is used purely for authentication.
+| User
+| An individual using the EP, of any type (Admin/Consumer/Expert/Guest)
+
+| Value-added products
+| Products generated from processing services of the EP (or external processing) and made available through the EP. This includes products uploaded to the EP by users and published for collaborative consumption
+
+| Visualisation
+| To obtain a visual representation of any data/products held within the platform - presented to the user within their web browser session.
 
 | Web Coverage Service (WCS)
 | OGC standard that provides an open specification for sharing raster datasets on the web.
@@ -124,7 +142,7 @@ The following terms are used in the Master System Design.
 | Web Processing Services (WPS)
 | OGC standard that defines how a client can request the execution of a process, and how the output from the process is handled.
 
-| Transactional Web Processing Service (WPS-T)
-| Transactional extension to WPS that allows adhoc deployment / undeployment of user-provided processors.
+| Workspace
+| A user-scoped 'container' in the EP, in which each user maintains their own links to resources (products and services) that have been collected by a user during their usage of the EP. The workspace acts as the hub for a user's exploitation activities within the EP
 
 |===
