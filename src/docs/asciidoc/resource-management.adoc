@@ -1,7 +1,7 @@
 
 = Resource Management
 
-The role of the Resource Management domain is the storage, discovery and access to resources in the Exploitation Platform. In this context, resources primarily refers to data and processing assets.
+The role of the Resource Management domain is the storage, discovery and access to resources in the Exploitation Platform. In this context, resources primarily refers to data and processing assets. The concerns of processing assets are addressed in the ‘Processing & Chaining’ domain area. Thus, Resource Management focuses primarily on the provision of data within the EP.
 
 Storage is largely taken care of by the Resource Tier upon which the Exploitation Platform is hosted. The role of the Exploitation Platform is to ensure that the data can be accessed through common data access protocols based upon open standards.
 
@@ -13,7 +13,7 @@ This is important for:
 
 To exploit the services of the Platform, users need to discover available data, obtain detailed collection/product information, including the ability to visualise the data in the platform. This applies to data held within the platform, data added by end-users and data produced as the result of processing operations within the platform.
 
-Processing services and applications are also platform resources that must be discoverable by users, including the information required by users to exploit the service.
+Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the ‘Processing & Chaining’ domain area by the provision of an Application Catalogue. See <<section zzz>> for more details.
 
 The inventory and presentation of resources to users must be organised in such a way as to facilitate the discovery and usage of resources in other federated Exploitation Platforms. For example, users must be able to discover data and services in other EPs in order to construct and execute workflows that span multiple federated EPs.
 
@@ -26,13 +26,8 @@ A Data Ingestion component abstracts the interface to the underlying Resource Ti
 Thus, the main components comprising the Resource Management domain are:
 
 * Data Catalogue
-* Application Catalogue
 * Data Access Services
-** AWS S3 Object Store
-** Swift Object Store (OpenStack)
-** OGC Web Map Service (WMS)
-** OGC Web Coverage Service (WCS)
-** OGC Web Feature Service (WFS)
+* Data Access Gateway
 * Data Ingestion
 * User Workspace
 
