@@ -31,8 +31,8 @@ The following terms are used in the Master System Design.
 | Application Package
 | A platform independent and self-contained representation of a software item, providing executable, metadata and dependencies such that it can be deployed to and executed within an Exploitation Platform. Comprises the _Application Descriptor_ and the _Application Artefact_.
 
-| Authentication Provider
-| An encapsulation of Authentication provision within the Exploitation Platform context. The Authentication Provider is an Authorization Server (OAuth) that is used purely for authentication.
+| Login Service
+| An encapsulation of Authenticated Login provision within the Exploitation Platform context. The Login Service is an Authorization Server (OAuth) that is used purely for authentication. It acts as a Relying Party in flows with external IdPs to obtain access to the user's identity.
 
 | Bulk Processing
 | Execution of a _Processing Service_ on large amounts of data specified by AOI and TOI.

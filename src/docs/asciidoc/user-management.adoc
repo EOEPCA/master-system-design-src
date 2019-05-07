@@ -42,7 +42,7 @@ image::iam-overview.png[width=1000,align="center"]
 
 Each protected resource is fronted by its Policy Enforcement Point (PEP), which acts as filter that will only permit access if the appropriate conditions are met. This decision is made according to a set of rules that are under the control of and configured within the exploitation platform.
 
-The Authentication Service is provided as a common component that is utilised by each PEP to perform the authentication flow with the external IdPs. In the case of an unauthenticated request that requires authentication, the PEP will initiate the Authentication Service by redirection of the User’s originating request. The successful flow ultimately redirects back to the PEP and so maintains the direct connection between the end-user agent and the resource server. An alternative approach would be the use of an API Gateway to perform the role of the PEP, acting as an intermediary between the end-user agent and the resource server. However, this would have the effect of proxying the connection which can have an impact on data transfer performance, which is of particular importance in the case of significant data volumes being returned to the User.
+The Login Service is provided as a common component that is utilised by each PEP to perform the authentication flow with the external IdPs. In the case of an unauthenticated request that requires authentication, the PEP will initiate the Login Service by redirection of the User’s originating request. The successful flow ultimately redirects back to the PEP and so maintains the direct connection between the end-user agent and the resource server. An alternative approach would be the use of an API Gateway to perform the role of the PEP, acting as an intermediary between the end-user agent and the resource server. However, this would have the effect of proxying the connection which can have an impact on data transfer performance, which is of particular importance in the case of significant data volumes being returned to the User.
 
 The PEP interrogates the PDP for an authorisation decision. The PEP sends a request that indicates the pertinent details of the attempted access, including:
 
@@ -62,7 +62,7 @@ It should be additionally noted that the decision to allow the user access depen
 .IAM Overview Flow
 image::iam-overview-flow.png[width=1000,align="center"]
 
-Note that the interface between the Authentication Service and the External IdPs is simplified in this view. It is expanded in later sections.
+Note that the interface between the Login Service and the External IdPs is simplified in this view. It is expanded in later sections.
 
 === IAM Top-level Interfaces
 
@@ -78,11 +78,11 @@ The Protected Resource exposes a public API for user consumption.
 Protected Resource -> PEP::
 The PEP acts as a filter on the access request to the resource. The PEP intercepts the incoming request in order to enforce the authorisation policy decision.
 
-PEP -> Authentication Service::
-The PEP uses a redirect to delegate the authentication flow to the Authentication Service.
+PEP -> Login Service::
+The PEP uses a redirect to delegate the authentication flow to the Login Service.
 
-Authentication Service -> External IdP::
-In order to support multiple external identity suppliers, the Authentication Service must act as a client to multiple external IdPs, and so must establish individual trust relationships with each of these. Alternatively, the Authentication Service can instead interface to a single external IdP Proxy, that interfaces to the external IdPs on behalf of the EP. The IdP Proxy can provide this service to multiple EPs.
+Login Service -> External IdP::
+In order to support multiple external identity suppliers, the Login Service must act as a client to multiple external IdPs, and so must establish individual trust relationships with each of these. Alternatively, the Login Service can instead interface to a single external IdP Proxy, that interfaces to the external IdPs on behalf of the EP. The IdP Proxy can provide this service to multiple EPs.
 
 PEP -> PDP::
 Request carries the user identification, the URI of the resource, and the action.
@@ -97,13 +97,13 @@ The approach to user identity and authentication centres around the use of OpenI
 
 === Overview
 
-The Authentication Service is an OpenID Connect Provider that provides a ‘Login With’ service that allows the platform to support multiple external identity providers. The Authentication Service acts as a Relying Party in its interactions with the external IdPs to establish the authenticated identity of the user through delegated authentication.
+The Login Service is an OpenID Connect Provider that provides a ‘Login With’ service that allows the platform to support multiple external identity providers. The Login Service acts as a Relying Party in its interactions with the external IdPs to establish the authenticated identity of the user through delegated authentication.
 
-The Authentication Service presents an OIDC Provider interface to its clients, through which the OIDC clients can obtain Access Tokens to resources. The access tokens are presented by the clients in their requests to resource servers (intercepted by PEP). The PEP (acting on behalf of the resource server) relies upon the access token to establish the authenticated identity of the users making the requests. Once the user identity is established, then the PEP can continue with its policy decision (deferred to the PDP).
+The Login Service presents an OIDC Provider interface to its clients, through which the OIDC clients can obtain Access Tokens to resources. The access tokens are presented by the clients in their requests to resource servers (intercepted by PEP). The PEP (acting on behalf of the resource server) relies upon the access token to establish the authenticated identity of the users making the requests. Once the user identity is established, then the PEP can continue with its policy decision (deferred to the PDP).
 
 Thus, clients of the EP must act as OIDC Clients in order to authenticate their users to the platform, before invoking its services. Clients include the web applications that provide the UI of the exploitation platform, as well as other external applications/systems (including other exploitation platforms) wishing to use the services of the EP.
 
-The Authentication Service must act as client (Relying Party) to each of the External IdPs to be supported and offered as a ‘Login With’ option. The interface/flow with the External IdP is integrated into the OIDC flow implemented by the Authentication Service. This includes prompting the user to discover their ‘home’ Identity provider. The interactions with the external IdP represents the ‘user authentication step’ within the OIDC flows. Completion of a successful authentication with the external IdP allows the Authentication Service to issue the requested access tokens (depending on the flow used).
+The Login Service must act as client (Relying Party) to each of the External IdPs to be supported and offered as a ‘Login With’ option. The interface/flow with the External IdP is integrated into the OIDC flow implemented by the Login Service. This includes prompting the user to discover their ‘home’ Identity provider. The interactions with the external IdP represents the ‘user authentication step’ within the OIDC flows. Completion of a successful authentication with the external IdP allows the Login Service to issue the requested access tokens (depending on the flow used).
 
 <<img_iamAuthenticationFlow>> illustrates the basic user access flow, invoked through a web browser.
 
@@ -111,11 +111,11 @@ The Authentication Service must act as client (Relying Party) to each of the Ext
 .IAM Authentication Flow (Browser)
 image::iam-authentication-flow.png[width=1000,align="center"]
 
-=== Authentication Service
+=== Login Service
 
-The Authentication Service is an OIDC Provider that provides a ‘Login With’ service that allows the end-user to select their Identity Provider for purposes of authentication.
+The Login Service is an OIDC Provider that provides a ‘Login With’ service that allows the end-user to select their Identity Provider for purposes of authentication.
 
-The Authentication Service is designed to support the onward forwarding of the authentication request through external identity services, which should be expected to include:
+The Login Service is designed to support the onward forwarding of the authentication request through external identity services, which should be expected to include:
 
 * EduGain
 * GitHub
@@ -125,7 +125,7 @@ The Authentication Service is designed to support the onward forwarding of the a
 * LinkedIn
 * Others TBD
 
-The Authentication Service must establish itself as a client (Relying Party) of all supported external IdPs, with appropriate trust relationships and support for their authentication flows.
+The Login Service must establish itself as a client (Relying Party) of all supported external IdPs, with appropriate trust relationships and support for their authentication flows.
 
 The primary endpoints required to support the OIDC flows are as follows (these endpoints are taken, by example, from OKTA OIDC discovery metadata, https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration):
 
@@ -142,7 +142,7 @@ jwks_uri (/keys)::
 To obtain signing keys for Token validation purposes.
 
 end_session_endpoint (/logout)::
-To logout the user from the Authentication Service, i.e. clear session cookies etc. Although, given that the actual IdP is externalised from the Authentication Service, it would remain the case that any session cookies maintained by the external IdP would still be in place for a future authentication flow.
+To logout the user from the Login Service, i.e. clear session cookies etc. Although, given that the actual IdP is externalised from the Login Service, it would remain the case that any session cookies maintained by the external IdP would still be in place for a future authentication flow.
 
 introspection_endpoint (/introspect)::
 Used by clients to verify access tokens.
@@ -167,7 +167,7 @@ OIDC Federation API endpoint through which Entity Statements are published about
 
 === OIDC ID Token
 
-The ID Token is a JWT that is returned to from the /userinfo endpoint of the Authentication Service. The returned OIDC ID Token has been signed (JWS) by the Authentication Service and thus results in a token that asserts a user’s authenticated identity with integrity, and non-repudiation.
+The ID Token is a JWT that is returned to from the /userinfo endpoint of the Login Service. The returned OIDC ID Token has been signed (JWS) by the Login Service and thus results in a token that asserts a user’s authenticated identity with integrity, and non-repudiation.
 
 === OIDC Clients
 
@@ -189,18 +189,18 @@ Thus, the PEP follows the logic:
 * If no authenticated user is required then the request can continue (pending authorisation) as an 'anonymous' user
 * If access requires an authenticated user then
 ** If the access token is not present then no user is logged in, so the request should be redirected to the /authorize endpoint (HTTP redirect)
-** If the access token is present, then it should be validated with the Authentication Service (direct call), as described below
+** If the access token is present, then it should be validated with the Login Service (direct call), as described below
 ** If the access token validation completes successfully then the request can continue (pending authorisation), with the user identity provided by the ID Token received during token validation
 ** If the token is invalid, then the request should be redirected to the /authorize endpoint (HTTP redirect)
 
 === Access Token Validation
 
-The PEP validates the access token by using it as a Bearer token in a request to the Authentication Service’s /userinfo endpoint. A successful response has two outcomes:
+The PEP validates the access token by using it as a Bearer token in a request to the Login Service’s /userinfo endpoint. A successful response has two outcomes:
 
-* Confirms the validity of the access token from the point-of-view of the Authentication Service that issued it
+* Confirms the validity of the access token from the point-of-view of the Login Service that issued it
 * Provides an ID Token for the user that provides the information required to uniquely identify the user within the EP and utilise this identity within the subsequent policy decision made by the PDP
 
-The ID Token is a JWT that has been signed by the Authentication Service. Using the jwks (see section ‘OIDC Federation’) endpoint of the Authentication Service, the PEP is able to obtain the necessary keys to validate the signature of the ID Token. This provides the full user context for the resource access.
+The ID Token is a JWT that has been signed by the Login Service. Using the jwks (see section ‘OIDC Federation’) endpoint of the Login Service, the PEP is able to obtain the necessary keys to validate the signature of the ID Token. This provides the full user context for the resource access.
 
 === Federated User Access
 
@@ -215,7 +215,7 @@ Using the facilities of the Exploitation Platform, the user (perhaps via their U
 
 At the point where the EP needs to access a resource on another EP, then the access tokens are obtained from the user's profile and used as Bearer token in the resource request to the other EP. Refresh tokens can be used to ensure that authorisation is long-lived.
 
-Conversly, the user's profile at a given EP should also provide the ability to manage any inward authrosations they have granted to other EPs, i.e. ability to revoke a previous authorisation by invalidating the refresh token. This would invole interface with the Authentication Service.
+Conversly, the user's profile at a given EP should also provide the ability to manage any inward authrosations they have granted to other EPs, i.e. ability to revoke a previous authorisation by invalidating the refresh token. This would invole interface with the Login Service.
 
 ==== Possible use of OIDC JWKS Federation
 
@@ -231,7 +231,7 @@ Thus, through this mechanism public keys can be shared to underpin the signing a
 
 Within an EP, when a resource server is executing a user’s request, it may need to invoke a resource in another EP with which it is collaborating. The resource access to the other EP must be made on behalf of the originating user.
 
-The nominal solution is for the originating EP to act as an OIDC Client to interface with the Authentication Service of the other EP, and so obtain the access token required to access the other resource. In this case, we should consider the fact that the resource access may be asynchronous to the end-user request and is not made within the context of the end-user’s user agent. Therefore, we should explore possibilities (flows) provided by OIDC/OAuth that support this type of access.
+The nominal solution is for the originating EP to act as an OIDC Client to interface with the Login Service of the other EP, and so obtain the access token required to access the other resource. In this case, we should consider the fact that the resource access may be asynchronous to the end-user request and is not made within the context of the end-user’s user agent. Therefore, we should explore possibilities (flows) provided by OIDC/OAuth that support this type of access.
 
 One possibility is to make use of the signed-JWT ID Token that can be carried through the calls into and across resource servers. Through the facilities provided by JSON Web Key Set (JWKS), ID Tokens can be verified and trusted by other platforms operating within the same JWKS key hierarchy.
 
@@ -252,22 +252,22 @@ OpenID Connect makes provision for two types of discovery:
 . Discovery of the OpenID Provider Issuer based upon the user’s identifier
 . Discovery of the OpenID Provider Configuration Information
 
-In the case of our usage within the Exploitation Platform, type 1) is not application since the user’s ID comes from their ‘Home’ organisation and is not (necessarily) tied to an OpenID Connect Provider. Instead the Authentication Service must implement a discovery ‘flow’ in which the user is able to select the provider of their identity, as one that is supported by the Authentication Service deployment.
+In the case of our usage within the Exploitation Platform, type 1) is not application since the user’s ID comes from their ‘Home’ organisation and is not (necessarily) tied to an OpenID Connect Provider. Instead the Login Service must implement a discovery ‘flow’ in which the user is able to select the provider of their identity, as one that is supported by the Login Service deployment.
 
-Regarding discovery type 2), the Authentication Service exposes an OIDC Provider interface, and this should support retrieval of OIDC Provider Configuration Information. Thus, OIDC Clients can utilise the discovery interface of the Authentication Service to exploit its services.
+Regarding discovery type 2), the Login Service exposes an OIDC Provider interface, and this should support retrieval of OIDC Provider Configuration Information. Thus, OIDC Clients can utilise the discovery interface of the Login Service to exploit its services.
 
-This is of most interest in the case of access to federated resources in other EPs, where a resource server in one EP may be acting as an OIDC client of the Authentication Service in another EP – in which case auto-discovery might be more attractive.
+This is of most interest in the case of access to federated resources in other EPs, where a resource server in one EP may be acting as an OIDC client of the Login Service in another EP – in which case auto-discovery might be more attractive.
 
 ==== Client Registration
 
 Reference: https://openid.net/specs/openid-connect-registration-1_0.html
 
-The possibility exists for the OIDC Client (Authentication Service) to perform auto-registration with the Authentication Service, using OIDC Client Registration. In doing so the OIDC client obtains its Client ID and Secret.
+The possibility exists for the OIDC Client (Login Service) to perform auto-registration with the Login Service, using OIDC Client Registration. In doing so the OIDC client obtains its Client ID and Secret.
 
 This may be of interest in a couple of cases:
 
-* The case of access to federated resources in other EPs, where a resource server in one EP may be acting as an OIDC client of the Authentication Service in another EP – in which case auto-client-registration might be of interest.
-* The case where a common Authentication Service is deployed outside of the context of a given Exploitation Platform, acting as an IdP Proxy. In this case, the local Authentication Service deployed in each EP would register as an OIDC Client of the IdP Proxy.
+* The case of access to federated resources in other EPs, where a resource server in one EP may be acting as an OIDC client of the Login Service in another EP – in which case auto-client-registration might be of interest.
+* The case where a common Login Service is deployed outside of the context of a given Exploitation Platform, acting as an IdP Proxy. In this case, the local Login Service deployed in each EP would register as an OIDC Client of the IdP Proxy.
 
 === Authorization (Policy Decision)
 
