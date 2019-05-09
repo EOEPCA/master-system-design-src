@@ -14,6 +14,7 @@ The following acronyms and abbreviations have been used in this report.
 | API | Application Programming Interface
 | CMS | Content Management System
 | CWL | Common Workflow Language
+| DAL | Data Access Library
 | EMS | Execution Management Service
 | EO | Earth Observation
 | EP | Exploitation Platform

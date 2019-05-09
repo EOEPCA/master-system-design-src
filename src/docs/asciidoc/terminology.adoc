@@ -43,6 +43,9 @@ The following terms are used in the Master System Design.
 | Consumer
 | User accessing existing services/products within the EP. Consumers may be scientific/research or commercial, and may or may not be experts of the domain
 
+| Data Access Library
+| An abstraction of the interface to the data layer of the resource tier. The library provides bindings for common languages (including python, Javascript) and presents a common object model to the code.
+
 | Development
 | The act of building new products/services/applications to be exposed within the platform and made available for users to conduct exploitation activities. Development may be performed inside or outside of the platform. If performed outside, an integration activity will be required to accommodate the developed service so that it is exposed within the platform.
 
