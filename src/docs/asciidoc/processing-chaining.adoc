@@ -209,7 +209,7 @@ The work carried out in the OGC Testbeds 13/14, performed the execution of the â
 This approach is consistent with the current Application Package / ADES definition that specifies a docker image for the processing service. As illustrated in <<img_procAdesExecute>>, the ADES provides a K8s-aware Execution Engine that handles the complexities of constructing the jobs and interfacing with the K8s cluster.
 
 [#img_procAdesExecute,reftext='{figure-caption} {counter:figure-num}']
-.EMS Process Execution
+.ADES Process Execution
 image::processing-ADES-execute.png[width=1000,align="center"]
 
 A Kubernetes cluster comprises a set of Nodes. A Node is a worker machine in Kubernetes and may be either a virtual or a physical machine. Each Node is managed by the Master. A Node can have multiple pods, and the Kubernetes master automatically handles scheduling the pods across the Nodes in the cluster. The Master's automatic scheduling takes into account the available resources on each Node.
@@ -237,8 +237,13 @@ Nevertheless, we might envisage that additional data access approaches need to b
 
 With the exception of local storage, the above-mentioned data access technologies rely upon HTTP-based protocol access. Regarding these HTTP-based interfaces there are two possibilities that need to be handled by the Processing Framework:
 
-. The processing service / application natively supports the data access protocol, in which case there is no need to stage-in the data. Nevertheless, the Processing Framework must support the pass-through of input data as URL, and the reception of the output(s) as URL. Also, it must be ensured that any outputs, e.g. to object store, are appropriately directed.
+. The processing service / application natively supports the data access protocol, in which case there is no need to stage-in the data. Nevertheless, the Processing Framework must support the pass-through of input data as URL, and the reception of the output(s) as URL. This is facilitated by the utilisation of a <<Data Access Library>> as described below. Also, it must be ensured that any outputs, e.g. to object store, are appropriately directed.
 . The processing service / application only supports local storage (mounted volume), in which case the Processing Framework must perform the data retrieval to stage-in the data. At the conclusion of the processing the outputs must be marshalled into the appropriate platform storage for further consumption, e.g. object store.
+
+[[Data Access Library]]
+*Use of Data Access Library*
+
+The above case 1) is facilitated by the provision of a Data Access Library (DAL) that provides an abstraction of the interface to the data. The library provides bindings for common languages (including python, Javascript) and presents a common object model to the processing code. Specific implementations of the DAL can be made to abstract the data access layer for a given Exploitation Platform. The Processing Framework must support the ability to 'plugin' an alternative implementation of the DAL at processor execution time.
 
 *Use of Filesystem in Userspace (FUSE)*
 
