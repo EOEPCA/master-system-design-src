@@ -3,7 +3,7 @@
 
 The following is a list of Reference Documents with a direct bearing on the content of this document.
 
-[cols="1,1,1"]
+[cols="2,7,1"]
 |===
 | Reference | Document Details | Version
 
