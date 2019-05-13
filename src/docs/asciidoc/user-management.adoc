@@ -88,7 +88,7 @@ PEP -> PDP::
 Request carries the user identification, the URI of the resource, and the action.
 Response returns the authorisation decision.
 
-PDP -> Other PDP
+PDP -> Other PDP::
 Same interface characteristics as PEP->PDP.
 
 == Authenticated Identity
