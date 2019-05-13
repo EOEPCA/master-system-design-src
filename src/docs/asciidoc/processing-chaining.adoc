@@ -13,6 +13,10 @@ Users must be able to develop and integrate their own processing services into t
 
 The interface between the Processing Framework and the compute resource should be abstract so that the solution is not tied to any particular provider (cloud, DIAS, etc.). 
 
+[#img_processingUseCase,reftext='{figure-caption} {counter:figure-num}']
+.Processing & Chaining Use Case
+image::use-cases-processing.png[width=1000,align="center"]
+
 In meeting these requirements the following key challenges are identified:
 
 * Processing and data interoperability must be established through clear and consistent metadata definitions, to ensure that type mismatches are avoided. This is particularly challenging across federated systems where it becomes more difficult to enforce use of common profiles and vocabularies
@@ -266,6 +270,10 @@ include::wps-t-rest-interface.adoc[]
 == Interactive (Graphical) Applications
 
 The work carried out in the OGC Testbeds focused on non-graphical applications, i.e. non-interactive processing functions executing algorithms without intervention. It is also noted that WPS does not facilitate the invocation of GUI-based interactive applications which offer a synchronous experience to the end-user.
+
+[#img_applicationsUseCase,reftext='{figure-caption} {counter:figure-num}']
+.Interactive Applications Use Case
+image::use-cases-applications.png[width=1000,align="center"]
 
 That said, the approach to application packaging undertaken in the testbeds does lend itself to the packaging of GUI-based applications, which can be packaged, deployed and executed as docker containers, including:
 
