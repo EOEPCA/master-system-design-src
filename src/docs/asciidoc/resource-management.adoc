@@ -17,7 +17,7 @@ To exploit the services of the Platform, users need to discover available data, 
 .Resource Management Use Case
 image::use-cases-data.png[width=1000,align="center"]
 
-Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the ‘Processing & Chaining’ domain area by the provision of an Application Catalogue. See <<sprocAppCatalogue>> for more details.
+Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the ‘Processing & Chaining’ domain area by the provision of an Application Catalogue. See <<procAppCatalogue>> for more details.
 
 The inventory and presentation of resources to users must be organised in such a way as to facilitate the discovery and usage of resources in other federated Exploitation Platforms. For example, users must be able to discover data and services in other EPs in order to construct and execute workflows that span multiple federated EPs.
 
@@ -27,7 +27,7 @@ In addition to the resource holding of the underlying resource tier, the EP main
 
 A Data Ingestion component abstracts the interface to the underlying Resource Tier storage, ensures that incoming data is formatted in accordance with defined standards, is supported by appropriate metadata and directed towards the appropriate dataset collection.
 
-The main components comprising the Resource Management domain are illustrated in <<fimg_resourceOverview>>:
+The main components comprising the Resource Management domain are illustrated in <<img_resourceOverview>>:
 
 * Data Catalogue
 * Data Access Services
@@ -73,10 +73,10 @@ This metadata model can be exploited, for example, using OpenSearch:
 
 For the Exploitation Platform, OpenSearch is used with the OGC extensions and recommendations:
 
-* OpenSearch GEO: OpenSearch Geo and Time Extensions <<OGC_10-032r8>>
-* OpenSearch EO: OGC OpenSearch Extension for Earth Observation <<OGC_13-026r9>>
-* OGC EO Dataset Metadata GeoJSON(-LD) Encoding Standard <<OGC_17-003r1_17-084>>
-* OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard <<OGC_17-047>>
+* OpenSearch GEO: OpenSearch Geo and Time Extensions <<OS-GEO-TIME>>
+* OpenSearch EO: OGC OpenSearch Extension for Earth Observation <<OS-EO>>
+* OGC EO Dataset Metadata GeoJSON(-LD) Encoding Standard <<GEOJSON-LD>>
+* OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard <<GEOJSON-LD-RESP>>
 
 The CEOS OpenSearch Best Practise <<CEOS-OS-BP>> provides a blueprint – this is the approach adopted by the FedEO project.
 

@@ -3,15 +3,16 @@
 
 The following is a list of Reference Documents with a direct bearing on the content of this document.
 
-[cols="1,5,1"]
+[cols="1,1,1"]
 |===
 | Reference | Document Details | Version
 
 | [[EOEPCA-UC]][EOEPCA-UC]
 a|
 --
-EOEPCA - Use Case Analysis (https://eoepca.github.io/use-case-analysis[https://eoepca.github.io/use-case-analysis]), +
-EOEPCA.TN.005
+EOEPCA - Use Case Analysis +
+EOEPCA.TN.005 +
+https://eoepca.github.io/use-case-analysis
 --
 a|
 --
@@ -47,7 +48,8 @@ Issue 1, +
 a|
 --
 OGC Testbed-14: WPS-T Engineering Report, +
-OGC 18-036r1, http://docs.opengeospatial.org/per/18-036r1.html
+OGC 18-036r1, +
+http://docs.opengeospatial.org/per/18-036r1.html
 --
 a|
 --
@@ -70,7 +72,8 @@ v1.0.2
 a|
 --
 OGC Testbed-13, EP Application Package Engineering Report, +
-OGC 17-023, http://docs.opengeospatial.org/per/17-023.html
+OGC 17-023, +
+http://docs.opengeospatial.org/per/17-023.html
 --
 a|
 --
@@ -82,7 +85,8 @@ a|
 a|
 --
 OGC Testbed-13, Application Deployment and Execution Service Engineering Report, +
-OGC 17-024, http://docs.opengeospatial.org/per/17-024.html
+OGC 17-024, +
+http://docs.opengeospatial.org/per/17-024.html
 --
 a|
 --
@@ -94,7 +98,8 @@ a|
 a|
 --
 OGC Testbed-14, Application Package Engineering Report, +
-OGC 18-049r1, http://docs.opengeospatial.org/per/18-049r1.html
+OGC 18-049r1, +
+http://docs.opengeospatial.org/per/18-049r1.html
 --
 a|
 --
@@ -114,31 +119,33 @@ a|
 08/02/2019
 --
 
-| [[OGC_10-032r8]][OGC_10-032r8]
+| [[OS-GEO-TIME]][OS-GEO-TIME]
 a|
 --
 OpenSearch GEO: OpenSearch Geo and Time Extensions, +
-OGC 10-032r8, http://www.opengeospatial.org/standards/opensearchgeo
+OGC 10-032r8, +
+http://www.opengeospatial.org/standards/opensearchgeo
 --
 a|
 --
-OGC 10-032r8, +
+10-032r8, +
 14/04/2014
 --
 
-| [[OGC_13-026r9]][OGC_13-026r9]
+| [[OS-EO]][OS-EO]
 a|
 --
 OpenSearch EO: OGC OpenSearch Extension for Earth Observation, +
-OGC 13-026r9, http://docs.opengeospatial.org/is/13-026r8/13-026r8.html
+OGC 13-026r9, +
+http://docs.opengeospatial.org/is/13-026r8/13-026r8.html
 --
 a|
 --
-OGC 13-026r9, +
+13-026r9, +
 16/12/2016
 --
 
-| [[OGC_17-003r1_17-084]][OGC_17-003r1_17-084]
+| [[GEOJSON-LD]][GEOJSON-LD]
 a|
 --
 OGC EO Dataset Metadata GeoJSON(-LD) Encoding Standard, +
@@ -146,10 +153,10 @@ OGC 17-003r1/17-084
 --
 a|
 --
-OGC 003r1/17-084
+17-003r1/17-084
 --
 
-| [[OGC_17-047]][OGC_17-047]
+| [[GEOJSON-LD-RESP]][GEOJSON-LD-RESP]
 a|
 --
 OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard, +
@@ -157,14 +164,14 @@ OGC 17-047
 --
 a|
 --
-OGC 17-047
+17-047
 --
 
 | [[CEOS-OS-BP]][CEOS-OS-BP]
 a|
 --
 CEOS OpenSearch Best Practise, +
-http://ceos.org/document_management/Working_Groups/WGISS/Interest_Groups/OpenSearch/CEOS-OPENSEARCH-BP-V1.2.pdf
+http://ceos.org/ourwork/workinggroups/wgiss/access/opensearch/
 --
 a|
 --

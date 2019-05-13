@@ -317,10 +317,10 @@ The current current OGC Testbed-15 (EOPAD)
 
 The Application Catalogue is the subject of the current OGC Testbed-15 EOPAD Thread, through which the Data Model and catalogue Service Interface are being explored:
 
-OGC 17-084 (GeoJSON(-LD) metadata encoding for EO collections) <<OGC_17-003r1_17-084>>::
+OGC 17-084 (GeoJSON(-LD) metadata encoding for EO collections) <<GEOJSON-LD>>::
 Explore the capabilities of OGC 17-084 to encode application metadata
 
-OGC 17-047 (OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard) <<OGC_17-047>>::
+OGC 17-047 (OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard) <<GEOJSON-LD-RESP>>::
 Explore the capabilities of OGC 17-047 to encode OpenSearch responses in GeoJSON(-LD)
 Use of multi-step discovery and faceted search
 
