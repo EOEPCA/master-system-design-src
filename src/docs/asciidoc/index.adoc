@@ -1,4 +1,5 @@
 = {titletext} ({docnum})
+:doctype: book
 :author: TVUK System Team
 :email: <Eoepca.SystemTeam@telespazio.com>
 :revnumber: v0.4
@@ -14,7 +15,9 @@
 :keywords: common architecture master system design
 :imagesdir: ./images
 :linkcss:
-:stylesheet: stylesheets/eoepca.css
+:stylesdir: stylesheets
+:stylesheet: eoepca.css
+:source-highlighter: coderay
 // custom attributes
 :category: Design Document
 :project: EOEPCA

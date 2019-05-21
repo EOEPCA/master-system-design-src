@@ -9,7 +9,7 @@ COMMENTS and ISSUES::
 If you would like to raise comments or issues on this document, please do so by raising an Issue at the following URL https://github.com/EOEPCA/master-system-design/issues.
 
 PDF::
-This document is available in PDF format https://eoepca.github.io/master-system-design/EOEPCA-master-system-design.pdf[here].
+This document is available in PDF format link:EOEPCA-master-system-design.pdf[here^].
 
 COPYRIGHT::
 Copyright © {copyrightYear} TBD (ESA or TVUK or something else ?)
