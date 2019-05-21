@@ -16,15 +16,21 @@ The document (source) is maintained in this repository (`master-system-design-sr
 
 Build::
 The document is built by running...
-```
-$ ./gradlew build
-```
++
+[source,bash]
+----
+$ ./generate.sh
+----
++
+NOTE: The generate relies upon the docker image `asciidoctor/docker-asciidoctor` at https://hub.docker.com/r/asciidoctor/docker-asciidoctor[DockerHub^].
 
 Publish::
 The document is published by running...
-```
-$ ./gradlew gitPublishPush
-```
++
+[source,bash]
+----
+$ ./publish.sh
+----
 
 Related links::
 * https://asciidoctor.org/[Asciidoctor Home Page]
