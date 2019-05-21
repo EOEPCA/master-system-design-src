@@ -25,8 +25,13 @@ docker run --rm -it -v $(pwd):/documents/ asciidoctor/docker-asciidoctor asciido
 echo "[done]"
 
 # Generate PDF
-echo -n "Generating PDF output (${PDF_FILE}): "
-docker run --rm -it -v $(pwd):/documents/ asciidoctor/docker-asciidoctor asciidoctor-pdf -D "${OUTPUT_DIR}" -o "${PDF_FILE}" src/docs/asciidoc/index.adoc
-echo "[done]"
+if [ "$1" == "nopdf" ]
+then
+    echo "WARNING: Skipping generation of PDF file (${PDF_FILE})"
+else
+    echo -n "Generating PDF output (${PDF_FILE}): "
+    docker run --rm -it -v $(pwd):/documents/ asciidoctor/docker-asciidoctor asciidoctor-pdf -D "${OUTPUT_DIR}" -o "${PDF_FILE}" src/docs/asciidoc/index.adoc
+    echo "[done]"
+fi
 
 cd "${ORIG_DIR}"
