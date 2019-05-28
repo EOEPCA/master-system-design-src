@@ -143,6 +143,7 @@ Other services that may also be considered include:
 
 The integration of these services into the data-layer of the hosting Resource Tier relies upon the Data Access Gateway providing an infrastructure agnostic interface for accessing the underlying data holding.
 
+[[resourcesDataAccessGateway,Data Access Gateway]]
 == Data Access Gateway
 
 The EO datasets are stored according to the underlying storage technology of the infrastructure Resource Tier. The storage interface presented is not under the control of the Exploitation Platform.
@@ -157,31 +158,30 @@ The main EP components that require data access are:
 
 In the EP system design, these services are designed to be deployed as containers through Kubernetes. This presents the possibility that some aspects of the Data Access Gateway can be met by the facilities offered by Kubernetes volumes. Access to underlying data is provided through volumes that are mounted into the container. Kubernetes volumes have native support for a number of common storage technologies (such as AWS EBS, Cinder), however these tend to be block rather than object storage.
 
-Thus, the Data Access Gateway must implement the data access interface to the infrastructure Resource Tier storage, and present a standard internal interface to other EP components. The internal interface must be sufficient to support the needs of the EP components:
-
-* Stage-in / out of processing service data
-* Data respository for Data Access services (WMS, WCS, WFS, etc.)
-* Data storage for ingestion of data
-
-At minimum, it would be expected to support Resource Tier interfaces for:
+The Gateway must provide a data bridge between the EP components and the Resource Tier. It fills the gap in the data access capabilities of a given a given service/application, and provides a common data access interface that such components can target in their implementation. Thus, the Gateway should provide a standard set of service interfaces to include:
 
 * AWS S3 Object Store
 * Swift Object Store (OpenStack)
+* OGC data access services: Web Map Service (WMS), Web Coverage Service (WCS), Web Feature Service (WFS)
 
-The gateway provides a data bridge between the EP components and the Resource Tier. It fills the gap in the data access capabilities of a given a given service/application, and provides a common data access interface that such components can target in their implementation.
+In providing these standard services to the other EP components, the Data Access Gateway must implement the data access interface to the infrastructure Resource Tier storage.
 
-== Data Access Library
+[[resourcesDAL,Data Access Library]]
+== Data Access Library (DAL)
 
-In addition to the Data Access Gateway, which operates as an internal service, the Data Access Library is provided specifically as a point of integration for processing services and applications.
+In addition to the Data Access Gateway, which operates as an internal service, the Data Access Library (DAL) is provided specifically as a point of integration for processing services and applications. The Data Access Library provides an abstraction of the interface to the data, with bindings for common languages (including python, Javascript) and presents a standard programmatic semantic for accessing the data from within the processing service codebase.
 
-The Data Access Library provides:
+The Data Access Library can provide an abstraction at two levels:
 
-* Common Data Model for library language bindings, e.g. python, javascript
-* Platform independence: Alternative deployment-specific implementations can be ‘plugged-in’ to processing services and applications. Handled by the execution engine at runtime
+Protocol abstraction::
+Standard programmatic semantics are provided for accessing the data (i.e. CRUD operations on data granules), that is agnostic of the underlying platform storage data access protocols. This is a lower level interface that should be applicable to all use cases.
 
-Processing service/applications are implemented against an object model that is well defined within the bindings for their development language. The object model hides the details of the underlying files/storage. Thus, processing services and applications can be implemented in a ‘portable’ way that is agnostic to the platform resource-tier storage technology.
+Data Model abstraction::
+A common object model is defined with programmatic semantics, which provides a higher-level abstraction of the data that hides the details of the underlying storage, files and file-formats. The abstraction accesses and parses the underlying data to present data structure representations within the language bindings. Such an object model would likely be applicable to some, but not all, use cases. In cases where this approach is not applicable, then protocol abstraction provides the fall-back option.
 
-The library offered to the processing service at runtime must implement the interface to the data access to the resource-tier storage. Hence, the library should not be ‘hard-coded’ into the processor application package (Docker image), but should instead be provided dynamically by the platform processing framework.
+Thus, processing services and applications can be implemented in a ‘portable’ way that is agnostic to the platform resource-tier storage technology.
+
+Specific implementations of the DAL can be made to abstract the data access layer for a given Exploitation Platform. The library offered to the processing service at runtime must implement the specific data access interface to the resource-tier storage. Hence, the library should not be ‘hard-coded’ into the processor application package (Docker image). The Processing Framework must support the ability to 'plugin' an alternative (platform-specific) implementation of the DAL dynamically at processor execution time. It may be possible to develop a 'generic' Data Access Library by implementation against the standard (internal) interface provided by the Data Access Gateway. In this case, the platform-specifics regarding data access are borne entirely by the Data Access Gateway.
 
 == Data Ingestion
 

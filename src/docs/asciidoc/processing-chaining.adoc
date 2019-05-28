@@ -232,26 +232,46 @@ The work carried out in the OGC Testbeds 13/14 relied upon use of mounted volume
 
 Thus, for Mounted Volumes, the approach is to use standard container volumes that present as well-identified directories within the container. The input data is provided in a read-only input directory that mounts into the container hosting infrastructure. Similarly, an empty writable directory is presented for the processing to write is outputs, to be collected by the Processing Framework.
 
-Nevertheless, we might envisage that additional data access approaches need to be supported, including:
+Nevertheless, we might envisage that access to the underlying data will be provided by the hosting platform through a variety of data access protocols, including: Object Store (S3/Swift), OGC (WMS, WCS, WFS), OPeNDAP, plus local file-system as mentioned above.
+
+The processing framework must establish an environment in which the data access capabilities of the processing service are matched to the data access offering of the platform. There are two possibilities that need to be handled by the Processing Framework:
+
+. The processing service / application natively supports the data access protocol, in which case there is no need to stage-in the data. Nevertheless, the Processing Framework must support the pass-through of input data as URL, and the reception of the output(s) as URL. This is facilitated by the utilisation of a <<procDAL>> as described below. Also, it must be ensured that any outputs, e.g. to object store, are appropriately directed.
+. The processing service / application does not natively support the data access protocol(s) offered by the underlying platform storage, e.g. the processing service only supports local storage (mounted volume), in which case the Processing Framework must facilitate access to the data on behalf of the processing service.
+
+Solutions to the above are explored in the following <<procDataAccess, section>>.
+
+[[procDataAccess]]
+=== Data Access
+
+In cases where the processing service does not natively support the data access protocols offered by the underlying platform, the processing framework must facilitate acces to platform data in a form that can be consumed by the processing service.
+
+To support this, the service/application should declare the data access protocol that it requires. This declaration should be made in the Application Descriptor (ref. Application Package), and is selected from a standard set of protocols, including:
 
 * AWS S3 Object Store
 * Swift Object Store (OpenStack)
 * OGC data access services: Web Map Service (WMS), Web Coverage Service (WCS), Web Feature Service (WFS)
+* OPeNDAP
 * Mounted Volume (local storage)
 
-With the exception of local storage, the above-mentioned data access technologies rely upon HTTP-based protocol access. Regarding these HTTP-based interfaces there are two possibilities that need to be handled by the Processing Framework:
+The platform implementation must then ensure that the data interface is presented to the processing container in accordance with its descriptor. It is the job of the platform implementation to translate from the back-end data access protocol to that required by the container. There are a number of techniques that can be employed by the processing framework to facilitate this data access mediation:
 
-. The processing service / application natively supports the data access protocol, in which case there is no need to stage-in the data. Nevertheless, the Processing Framework must support the pass-through of input data as URL, and the reception of the output(s) as URL. This is facilitated by the utilisation of a <<procDAL>> as described below. Also, it must be ensured that any outputs, e.g. to object store, are appropriately directed.
-. The processing service / application only supports local storage (mounted volume), in which case the Processing Framework must perform the data retrieval to stage-in the data. At the conclusion of the processing the outputs must be marshalled into the appropriate platform storage for further consumption, e.g. object store.
+Local File-system Stage-in/out::
+The processing framework must perform the data retrieval to stage-in the data for presentation through a mounted volume as local file-system access. At the conclusion of the processing the outputs must be marshalled into the appropriate platform storage for further consumption, e.g. push to object store. +
+The approach can be facilitated by use of a FUSE file-system driver to achieve the mediation.
+
+Use of Filesystem in Userspace (FUSE)::
+Access to the back-end data storage (e.g. HTTP-based) is provided through a user-space driver that presents the remote data as if it were a local directory. For example, using s3fs-fuse (https://github.com/s3fs-fuse/s3fs-fuse), access to data in an S3 object store is provided through a FUSE mounted directory. Thus, from the perspective of the processing task, inputs (read) and outputs (write) are accessed through the local file-system interface – satisfying the constraints of the processor.
 
 [[procDAL,Data Access Library]]
-*Use of Data Access Library*
+Use of Data Access Library::
+A Data Access Library (DAL) provides an abstraction of the interface to the data. The library provides bindings for common languages (including python, Javascript) and presents a standard programmatic semantic for accessing the data from within the processing service codebase. Specific implementations of the DAL can be made to abstract the data access layer for a given Exploitation Platform. The Processing Framework must support the ability to 'plugin' an alternative implementation of the DAL at processor execution time.
+See section <<resourcesDAL>>.
 
-The above case 1) is facilitated by the provision of a Data Access Library (DAL) that provides an abstraction of the interface to the data. The library provides bindings for common languages (including python, Javascript) and presents a common object model to the processing code. Specific implementations of the DAL can be made to abstract the data access layer for a given Exploitation Platform. The Processing Framework must support the ability to 'plugin' an alternative implementation of the DAL at processor execution time.
-
-*Use of Filesystem in Userspace (FUSE)*
-
-Regarding case 2), another possibility exists that requires further investigation. Access to the back-end data storage (e.g. HTTP-based) is provided through a user-space driver that presents the remote data as if it were a local directory. For example, access to data in an S3 object store is provided through a FUSE mounted directory. Thus, from the perspective of the processing task, inputs (read) and outputs (write) are accessed through the local file-system interface – satisfying the constraints of the processor.
+Data Access Gateway::
+Access to the underlying platform data is provided through a common service layer that provides standard data access interfaces that are translated (gateway) to those of the underlying data tier. +
+For example, to satisfy a processing service that requires an S3 interface, but is executed in an environment where the data is available through a POSIX file system. Minio (https://github.com/minio/minio) is an open source object store implementation that overlays an S3 interface over a POSIX file system. +
+See section <<resourcesDataAccessGateway>>.
 
 === User Authorisation Context
 
