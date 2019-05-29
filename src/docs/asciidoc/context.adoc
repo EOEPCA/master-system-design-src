@@ -14,16 +14,3 @@ The system design must go beyond the provision of a standalone EO Exploitation P
 The goal is to create an Integrated Data Exploitation Environment. Users will apply their workflows close to the hosted data, supplemented by their own data. Processing outputs may be hosted as new products that can themselves contribute to the global catalogue. This paradigm can then be extended to encompass the federated set of Exploitation Platforms within the Network of EO Resources. The result is a Federated, Integrated Data Analysis Environment.
 
 A Reference Implementation of the full architecture will be developed to prove the concepts and also to provide an off-the-shelf solution that can be instantiated by future projects to implement their EO Exploitation Platform, thus facilitating their ability to join the federated Network of EO Resources. *Thus, the Reference Implementation can be regarded as a set of re-usable platform services, in the context of a re-usable platform architecture.*
-
-== Domain Areas
-
-The system architecture is designed to meet the use cases as defined in <<EOEPCA-UC>> and <<EP-FM>>. <<EOEPCA-UC>> makes a high-level analysis of the use-cases to identify the main system functionalities organised into domain areas: 'User Management', 'Processing & Chaining' and 'Resource Management'. The high-level functionalities are often met by more than one domain area, and User Management (specifically Identification, Authentication and Authorisation) cuts across all use cases, and forms the basis of all access control restrictions that are applied to platform services and data.
-
-User Management::
-All aspects of user identification, authentication and authorisation in a federated system-ofsystems environment.
-
-Processing and Chaining::
-Hosting and maintaining an inventory of all processing tasks, analysis tools and interactive applications. Handles and abstracts the low-level complexities of the different underlying compute technologies, and ensures the compute layer is scaled in accordance with current demand. Provides an integrated development environment to facilitate development of new processing algorithms and applications. Facilitating the network of EO resources by providing a federated interface to other processing services within the wider EO network.
-
-Resource Provisioning and Management::
-Storage and cataloguing of all persistent resources, including data and other supporting material such as documents. Handles and abstracts the low-level complexities of different underlying storage technologies and strategies. Facilitating the network of EO resources by providing a federated interface to other data services within the wider EO network.

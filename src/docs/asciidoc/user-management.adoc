@@ -14,6 +14,7 @@ Maintenance of details associated to the user that may be needed in support of a
 
 These are explored in the following sub-sections.
 
+[[IAM,Identity and Access Management]]
 == Identity and Access Management (IAM)
 
 The goal of IAM is to uniquely identify the user and limit access to protected resources to those having suitable access rights. We assume an Attribute Based Access Control (ABAC) approach in which authorisation decisions are made based upon access policies/rules that define attributes required by resources and possessed (as claims) by users. ABAC is is seen as a more flexible approach than Role Base Access Control (RBAC), affording the ability to express more sofisticated authorisations rules beyond the role(s) of the user - and noting the fact that a role-based ruleset could be implemented within an attribute based approach, (i.e. RBAC is a subset/specialisation of ABAC).
