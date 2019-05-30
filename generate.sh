@@ -9,7 +9,7 @@ OUTPUT_DIR="${BUILD_ROOT}/asciidoc/html5"
 PDF_FILE="EOEPCA-master-system-design.pdf"
 
 echo "Remove existing output directory"
-rm -rf "${BUILD_ROOT}"
+find "${BUILD_ROOT}" -type f -exec rm -f {} \;
 
 # Create output dirs and copy resources
 echo "Create output directory: ${OUTPUT_DIR}"
