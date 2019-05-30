@@ -1,4 +1,4 @@
-
+[[mainUserManagement,User Management]]
 = User Management
 
 In the context of the Common Architecture, User Management covers the following main functional areas:

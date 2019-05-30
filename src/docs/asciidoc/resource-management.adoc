@@ -1,4 +1,4 @@
-
+[[mainResourceManagement,Resource Management]]
 = Resource Management
 
 The role of the Resource Management domain is the storage, discovery and access to resources in the Exploitation Platform. In this context, resources primarily refers to data and processing assets. The concerns of processing assets are addressed in the ‘Processing & Chaining’ domain area. Thus, Resource Management focuses primarily on the provision of data within the EP.

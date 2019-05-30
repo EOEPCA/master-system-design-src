@@ -1,4 +1,4 @@
-
+[[mainProcessingAndChaining,Processing and Chaining]]
 = Processing and Chaining
 
 The Processing & Chaining domain area must provide an extensible repository of processing functions, tools and applications (referred here generically as ‘processing services’) that can be discovered by search query, invoked individually, and utilised in workflows.
