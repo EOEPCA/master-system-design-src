@@ -9,8 +9,8 @@ This document presents the Master System Design for the Common Architecture.
 
 TBD
 
-include::reference-docs.adoc[leveloffset=+1]
+include::03.reference-docs.adoc[leveloffset=+1]
 
-include::terminology.adoc[leveloffset=+1]
+include::04.terminology.adoc[leveloffset=+1]
 
-include::glossary.adoc[leveloffset=+1]
+include::05.glossary.adoc[leveloffset=+1]

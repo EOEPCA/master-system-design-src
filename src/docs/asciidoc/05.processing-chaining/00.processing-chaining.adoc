@@ -144,7 +144,7 @@ An example Application Descriptor follows…
 
 [source,json]
 ----
-include::src/app-descriptor-example.json[]
+include::../src/app-descriptor-example.json[]
 ----
 
 == Execution Management Service (EMS)
@@ -285,7 +285,7 @@ WPS-T extends standard WPS by adding _DeployProcess_ and _UndeployProcess_ opera
 
 The following table is reproduced from <<TB14-ADES>>.
 
-include::wps-t-rest-interface.adoc[]
+include::include/wps-t-rest-interface.adoc[]
 
 == Interactive (Graphical) Applications
 

@@ -4,10 +4,10 @@ The overall system design has been considered by taking the ‘Exploitation Plat
 
 :leveloffset: +1
 
-include::domain-areas.adoc[]
+include::01.domain-areas.adoc[]
 
 <<<
 
-include::architecture-layers.adoc[]
+include::02.architecture-layers.adoc[]
 
 :leveloffset: -1

@@ -32,30 +32,30 @@ include::preface.adoc[]
 
 <<<
 
-include::introduction.adoc[]
+include::01.introduction/00.introduction.adoc[]
 
 <<<
 
-include::context.adoc[]
+include::02.context/00.context.adoc[]
 
 <<<
 
-include::design-overview.adoc[]
+include::03.design-overview/00.design-overview.adoc[]
 
 <<<
 
-include::user-management.adoc[]
+include::04.user-management/00.user-management.adoc[]
 
 <<<
 
-include::processing-chaining.adoc[]
+include::05.processing-chaining/00.processing-chaining.adoc[]
 
 <<<
 
-include::resource-management.adoc[]
+include::06.resource-management/00.resource-management.adoc[]
 
 <<<
 
-include::web-portal.adoc[]
+include::07.web-portal/00.web-portal.adoc[]
 
 :leveloffset: -1
