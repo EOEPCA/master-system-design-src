@@ -1,13 +1,13 @@
 = Architecture Layers
 
-<<img_architectureLayers>> provides a simplified view that illustrates the broad architecture layes of the Exploitation Platform, in the context of the infrastructure in which it is hosted and the end-users performing exploitation activities.
+<<img_architectureLayers>> provides a simplified architectural view that illustrates the broad architecture layes of the Exploitation Platform, presented in the context of the infrastructure in which it is hosted and the end-users performing exploitation activities.
 
 [#img_architectureLayers,reftext='{figure-caption} {counter:figure-num}']
 .Architecture Layers
 image::architecture-layers.png[width=1000,align="center"]
 
 Resource Tier::
-The Resource Layer represents the hosting infrastructure and provides the EO data, storage and compute upon which the exploitation is deployed.
+The Resource Tier represents the hosting infrastructure and provides the EO data, storage and compute upon which the exploitation is deployed.
 
 Platform Tier::
 The Platform Tier represents the Exploitation Platform and the services it offers to end-users. The layers comprising the Platform Tier are further described below.
@@ -19,9 +19,9 @@ The Exploitation Platform builds upon the services provided by the hosting infra
 
 The EP's services access the data resources through a Data Access Gateway that provides an abstraction of the data access interface provided by the resource tier. This abstraction provides a 'standard' data access semantic that can be relied upon by other EP services - thus isolating specific data access concerns of the resource tier to a single EP component.
 
-The Processing Framework provides the environment through which processing services and applications are executed in support of end-user analysis activities. It might be envisiaged that some built-in (common) processing functions are provided, but the main focus of the processing framework is to support deployment and execution of bespoke end-user processing algorithms, and interactive analysis. Access to the underlying data from the executing processes is marshalled through the Data Access Gateway and its supporting library.
+The Processing Framework provides the environment through which processing services and applications are executed in support of end-user analysis activities. It might be envisiaged that some built-in (common) processing functions are provided, but the main focus of the processing framework is to support deployment and execution of bespoke end-user processing algorithms, and interactive analysis. Access to the underlying data from the executing processes is marshalled through the Data Access Gateway and its supporting Data Access Library.
 
-The EP provides a Data Catalogue, so that its end-users can discover and browse the data available for inclusion in their analysis. Similarly an Application Catalogue provides this discovery service for processing services and applications available within the platform.
+The EP provides a Data Catalogue, so that end-users can discover and browse the data available for inclusion in their analysis. Similarly an Application Catalogue provides this discovery service for processing services and applications available within the platform.
 
 Data Services based upon open standards serve the clients of the Exploitation Platform for data access and data visualisation. Access to the underlying data is made via the Data Access Gateway.
 
@@ -36,10 +36,13 @@ All user interactions with the services of the EP are executed within the contex
 The focus of this design document is the Platform Tier, which is elaborated in subsequent sections of the document:
 
 Section <<mainUserManagement>>::
-TBD
+This section adresses the main concerns of User Management which are user identity, access to resources and billing for resource usage.
 
 Section <<mainProcessingAndChaining>>::
-TBD
+This section covers service/application discovery (Application Catalogue), application packaging and the Processing Framework through which services/applications can be deployed in federated workflows.
 
 Section <<mainResourceManagement>>::
-TBD
+This section covers data discovery (Data Catalogue), provision (Gateway) of data access to the processing framework, and public data services to visualise and consume platform data.
+
+Section <<mainPlatformApi>>::
+The section provides a consolidated decription of the service interface of the EP and its associated client library, which together present a standard platform interface against which analysis and exploitation activities may be developed, and through which platform services can be federated.

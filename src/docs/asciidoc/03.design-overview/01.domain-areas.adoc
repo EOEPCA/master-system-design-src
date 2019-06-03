@@ -18,11 +18,11 @@ It provides authentication, authorisation and accounting services that are requi
 
 == Processing and Chaining
 
-_Provides access to a variety of processing functions, tools and applications, as well as an execution environments in which to deploy them._
+_Provides access to a variety of processing functions, tools and applications, as well as execution environments in which to deploy them._
 
 Hosting and maintaining an inventory of all processing tasks, analysis tools and interactive applications. Handles and abstracts the low-level complexities of the different underlying compute technologies, and ensures the compute layer is scaled in accordance with current demand. Provides an integrated development environment to facilitate development of new processing algorithms and applications. Facilitating the network of EO resources by providing a federated interface to other processing services within the wider EO network.
 
-The user has a personal workspace in which to upload files, and develop their own processing chains, experiments and workflows. Shared workspaces for collaboration can similarly be provisioned. The platform catalogue services (for data, processing servics and applications) are integrated with this environment to discover and access relevant published datasets and processing elements. Then, subject to appropriate controls and permissions, the user can publish their own processing services and results. Workflows can be executed within the context of the processing facility, with the possibility to execute steps ‘remotely’ in collaborating platforms, with the results being collected for the continuation of the workflow.
+The user has a personal workspace in which to upload files, and develop their own processing chains, experiments and workflows. Shared workspaces for collaboration can similarly be provisioned. The development and analysis environment integrates with platform catalogue services (for data, processing servics and applications) for discovery of available published datasets and processing elements. Subject to appropriate controls and permissions, the user can publish their own processing services and results. Workflows can be executed within the context of the processing facility, with the possibility to execute steps ‘remotely’ in collaborating platforms, with the results being collected for the continuation of the workflow.
 
 == Resource Provisioning and Management
 
@@ -38,6 +38,6 @@ The catalogue holds corresponding metadata for every published resource item in 
 
 _Presents the platform user interface for interacting with the local resources and processing facilities, as well as the wider network of EO resources._
 
-It includes a web site, themed and branded according to the owning organisation. It provides the view onto the user’s private workspace and acts as their window on the world. It provides a rich, interactive web interface for discovering and working with all kinds of resources, including EO data, processing and documentation. It includes web service clients for smart search and data visualisations. It provides a workspace for developing and deploying processing algorithms, workflows, experiments and applications, and publishing results. It includes support and collaboration tools for the community.
+The Web Portal provides the user interface (themed and branded according to the owning organisation) through which the user discovers the data/services available within the platform, and the analysis environemtn through which they can exploit these resources. It provides a rich, interactive web interface for discovering and working with all kinds of resources, including EO data, processing and documentation. It includes web service clients for smart search and data visualisations. It provides a workspace for developing and deploying processing algorithms, workflows, experiments and applications, and publishing results. It includes support and collaboration tools for the community.
 
 Web Portal integrates together various web service clients that uses services provided by the specialist domains (Processing, Resource, User) on the local platform and collaborating platforms.
