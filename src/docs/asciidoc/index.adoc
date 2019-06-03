@@ -56,6 +56,10 @@ include::06.resource-management/00.resource-management.adoc[]
 
 <<<
 
-include::07.web-portal/00.web-portal.adoc[]
+include::07.platform-api/00.platform-api.adoc[]
+
+<<<
+
+include::08.web-portal/00.web-portal.adoc[]
 
 :leveloffset: -1
