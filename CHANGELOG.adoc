@@ -1,7 +1,7 @@
 = Changelog
 All notable changes to this project will be documented in this file.
 
-== https://github.com/EOEPCA/master-system-design-src/compare/v0.2...HEAD[Unreleased]
+== https://github.com/EOEPCA/master-system-design-src/compare/v0.2%2E%2E%2EHEAD[Unreleased]
 
 === Added
 * tbd
@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 === Changed
 * tbd
 
-== https://github.com/EOEPCA/master-system-design-src/compare/v0.2...v0.3[v0.3] - 2019.05.13
+== https://github.com/EOEPCA/master-system-design-src/compare/v0.2%2E%2E%2Ev0.3[v0.3] - 2019.05.13
 
 === Added
 * Login Service
@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 * Updates to Glossary and Terminology
 * IAM: Federated authorisation
 
-== https://github.com/EOEPCA/master-system-design-src/compare/v0.1...v0.2[v0.2] - 2019.04.25
+== https://github.com/EOEPCA/master-system-design-src/compare/v0.1%2E%2E%2Ev0.2[v0.2] - 2019.04.25
 
 === Changed
 * Re-work IAM approach
