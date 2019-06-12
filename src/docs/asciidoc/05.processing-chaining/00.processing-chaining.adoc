@@ -65,6 +65,18 @@ In order for processing services and their data input/outputs to be aligned a fo
 
 The Application Catalogue is the subject of the current Testbed-15 through which the Data Model and catalogue Service Interface are being explored.
 
+For the Expert User with a service/application to execute in the EP, we might consider three levels of integration:
+
+* *Importing* +
+The service/application is packaged (unchanged) as a black-box. +
+Relies upon the stage-in/out of data to the applications existing data access expectations by the Processing Framework.
+
+* *Adapting* +
+The service/application is adapted (modified) to use the data access interfaces offered by the Common Architecture.
+
+* *Porting* +
+The service/application is ported to use the services of the EP intrinsically - typically by use of the <<mainClientLibrary>> defined by the common architecture.
+
 [[procK8s]]
 == Resource Layer (Infrastructure) Interface
 
