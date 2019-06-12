@@ -71,6 +71,8 @@ This metadata model can be exploited, for example, using OpenSearch:
 
 === OpenSearch
 
+TBDzzz - Ref. CEOS OpenSearch Best Practice
+
 For the Exploitation Platform, OpenSearch is used with the OGC extensions and recommendations:
 
 * OpenSearch GEO: OpenSearch Geo and Time Extensions <<OS-GEO-TIME>>
@@ -85,13 +87,15 @@ The CEOS OpenSearch Best Practise <<CEOS-OS-BP>> provides a blueprint – this i
 Perhaps the most challenging aspect of this is that the Catalogues for both Data and Processing-Services must facilitate the proper construction of processing tasks, to ensure there is a proper match of the data types expected as input to the processing. This extends into the construction of workflows where the data types output by a processing task must match the supported inputs of the next task in the chain. The Catalogue must have a rich and consistent metadata model for both Data and Processing-Services in order to achieve these goals.
 
 === Data Access
-There is also a link between the way the data is described in the Catalogue and how it is accessed by the consumers of the data. This links to the Data Access Services (e.g. WMS. WCS, WFS, etc.) provided by the EP, and the way in which the access links are encoded into the Catalogue. These links must be usable by the data consumers which could be processing services, or users downloading the data.
+There is a direct link between the way the data is described in the Catalogue and how it is accessed by the consumers of the data. This links to the Data Access Services (e.g. WMS. WCS, WFS, etc.) provided by the EP, and the way in which the access links are encoded into the Catalogue. These links must be usable by the data consumers which could be processing services, or users downloading the data.
 
-=== EP Catalogue vs Infrastructure Catalogue
+Hence the contents of the Catalogue reflects the data services offered by the platform, including the underlying resource tier services. Each data Collection is presented in the Catalogue as accessible through one or more data access services, as applicable to the specfic data. The Catalogue must present the data access URLs is such a way that the URL resolves correctly to the underlying data via the providing data access service.
 
-The Exploitation Platform is designed to be hosted in a compute environment that is close to the data of interest. This means that the typical deployment is made to the likes of DIAS, Public Cloud (such as AWS), or National Research Infrastructure (such as CEDA/JASMIN) – that provide the Resources-tier/infrastructure upon which the EP relies.
+=== Catalogue Composition/Aggregation
 
-The Resources-tier provides virtual ICT-infrastructure and data. It is common that the Resources-tier provides their own Catalogue to support the data hosted within. However, the Resource-tier catalogue may not present a Catalogue interface that is in accordance with the approach advocated by the Exploitation Platform Common Architecture, or it may not provide a data catalogue at all. It is therefore incumbent upon the EP to define a catalogue architecture that takes account of these possibilities. Additionally, the EP will maintain its own ‘value-added’ and user contributed data that must be catalogued at the level of the exploitation platform. <<img_catalogueAggregation>> illustrates.
+The Exploitation Platform is designed to be hosted in a compute environment that is close to the data of interest. This means that the typical deployment is made to the likes of DIAS, Public Cloud (such as AWS), or National Research Infrastructure (such as CEDA/JASMIN) – that provide the Resources-tier/infrastructure upon which the EP relies. The Resources-tier provides virtual ICT-infrastructure and data. It is common that the Resources-tier provides their own Catalogue to support the data hosted within.
+
+In order to ensure a coherent link between data discovery and access, the Exploitation Platform provides its own Catalogue that presents the data holding to be accessed through the available data access services. In doing so it must aggregate the catalogue records of the underlying resource tier, the records of other 'federated' platforms, and the value-added data that is contributed through the actions of users on the EP. Thus the EP provides a Catalgue that is tailored to its service offering to ensure a consistent data access interface that can be relied upon by other EP services, in particular by the executing user analysis functions running within the Processing & Chaining context.
 
 [#img_catalogueAggregation,reftext='{figure-caption} {counter:figure-num}']
 .Catalogue Aggregation
