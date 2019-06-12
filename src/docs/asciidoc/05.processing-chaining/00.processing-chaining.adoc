@@ -25,7 +25,7 @@ In meeting these requirements the following key challenges are identified:
 
 * Federation of processing services across the network of EO resources, such that processing implementations can be made available ‘on-demand’ amongst federated platforms, to facilitate the movement of the “processing to the data”. Use of a common packaging format that is agnostic of underlying host characteristics is key to this challenge
 
-* Enforcement of access controls to processing and data resources through multi-step federated workflows requires the user’s ‘request context’ to be carried through all layers of the request fulfilment. At each point of resource access, the user’s identify and access rights must be asserted. The service interface standards, (such as WPS, CSW and WCS), must be evaluated and necessary enhancements identified to ensure that the user’s access envelope is respected
+* Enforcement of access controls to processing and data resources through multi-step federated workflows requires the user’s ‘request context’ to be carried through all layers of the request fulfilment. At each point of resource access, the user’s identify and access rights must be asserted. The service interface standards, (such as WPS, CSW, WCS, etc.), must be evaluated and necessary enhancements identified to ensure that the user’s access envelope is respected
 
 == Solution Overview
 
@@ -244,7 +244,7 @@ The work carried out in the OGC Testbeds 13/14 relied upon use of mounted volume
 
 Thus, for Mounted Volumes, the approach is to use standard container volumes that present as well-identified directories within the container. The input data is provided in a read-only input directory that mounts into the container hosting infrastructure. Similarly, an empty writable directory is presented for the processing to write is outputs, to be collected by the Processing Framework.
 
-Nevertheless, we might envisage that access to the underlying data will be provided by the hosting platform through a variety of data access protocols, including: Object Store (S3/Swift), OGC (WMS, WCS, WFS), OPeNDAP, plus local file-system as mentioned above.
+Nevertheless, we might envisage that access to the underlying data will be provided by the hosting platform through a variety of data access protocols, including: Object Store (S3/Swift), OGC (WMS, WMTS, WFS, WCS, WCPS), OPeNDAP, plus local file-system as mentioned above.
 
 The processing framework must establish an environment in which the data access capabilities of the processing service are matched to the data access offering of the platform. There are two possibilities that need to be handled by the Processing Framework:
 
@@ -262,7 +262,12 @@ To support this, the service/application should declare the data access protocol
 
 * AWS S3 Object Store
 * Swift Object Store (OpenStack)
-* OGC data access services: Web Map Service (WMS), Web Coverage Service (WCS), Web Feature Service (WFS)
+* OGC data access services:
+** Web Map Service (WMS)
+** Web Map Tile Service (WMTS)
+** Web Feature Service (WFS)
+** Web Coverage Service (WCS)
+** Web Coverage Processing Service (WCPS)
 * OPeNDAP
 * Mounted Volume (local storage)
 
