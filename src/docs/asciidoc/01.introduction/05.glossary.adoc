@@ -34,8 +34,10 @@ The following acronyms and abbreviations have been used in this report.
 | TOI | Time of Interest
 | VNC | Virtual Network Computing
 | WCS | Web Coverage Service
+| WCPS | Web Coverage Processing Service
 | WFS | Web Feature Service
 | WMS | Web Map Service
+| WMTS | Web Map Tile Service
 | WPS | Web Processing Service
 | WPS-T | Transactional Web Processing Service
 | XACML | eXtensible Access Control Markup Language

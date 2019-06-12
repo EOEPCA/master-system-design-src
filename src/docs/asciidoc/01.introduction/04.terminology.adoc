@@ -136,11 +136,17 @@ The following terms are used in the Master System Design.
 | Web Coverage Service (WCS)
 | OGC standard that provides an open specification for sharing raster datasets on the web.
 
+| Web Coverage Processing Service (WCPS)
+| OGC standard that defines a protocol-independent language for the extraction, processing, and analysis of multi-dimentional coverages representing sensor, image, or statistics data.
+
 | Web Feature Service (WFS)
 | OGC standard that makes geographic feature data (vector geospatial datasets) available on the web.
 
 | Web Map Service (WMS)
 | OGC standard that provides a simple HTTP interface for requesting geo-registered map images from one or more distributed geospatial databases.
+
+| Web Map Tile Service (WMTS)
+| OGC standard that provides a simple HTTP interface for requesting map tiles of spatially referenced data using the images with predefined content, extent, and resolution.
 
 | Web Processing Services (WPS)
 | OGC standard that defines how a client can request the execution of a process, and how the output from the process is handled.
