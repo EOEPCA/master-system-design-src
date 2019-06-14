@@ -278,6 +278,31 @@ TBD
 
 TBD
 
+Chargeable Resource::
+* Underlying resources (Resource Tier):
+** Storage
+** Compute
+** Network bandwidth
+* Service/Data consumption (Platform Tier)
+* Application Usage (Exploitation Tier)
+
+Service Plans::
+* Subscription
+** Monthly / Yearly / Lifetime
+** Unlimited or capped usage profiles
+** Charges for consumption beyond subscription
+* Pay-per-usage
+** Monthly: Pay by monthly invoice (i.e. in arears)
+** Pre-pay: Pay in advance (e.g. credits)
+
+Billing Actors::
+* Sellers (Application Providers) +
+Provide their services/applications/value-added-data, for possible remuneration.
+* Customers (Application Consumers) +
+Paying users of the EP.
+* End-users +
+Customers of the EP Customers (maybe unknown to the EP).
+
 == User Profile
 
 The User Profile is a system resource that maintains a set of data for each user including:
