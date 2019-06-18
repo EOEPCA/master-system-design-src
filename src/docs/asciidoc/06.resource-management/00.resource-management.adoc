@@ -42,6 +42,7 @@ image::resource-overview.png[width=1000,align="center"]
 
 To some degree, the role of these components is to provide an integration of the Exploitation Platform to the Resource Tier, by providing public services that bridge to the underlying data supply.
 
+[[mainDataCatalogue,Data Catalogue]]
 == Data Catalogue
 
 The Catalogue provides the user the capability to discover data/products by browse/search, and to obtain details on specific data/products discovered.
@@ -69,6 +70,7 @@ This metadata model can be exploited, for example, using OpenSearch:
 * Once discovered, the granules can then be exploited by the user, for example as input to a processing request, or downloaded.
 * Facets can be applied to both the Browse and Discovery metadata, to supported facetted search at both levels.
 
+[[mainOpenSearch,Open Search]]
 === OpenSearch
 
 TBDzzz - Ref. CEOS OpenSearch Best Practice

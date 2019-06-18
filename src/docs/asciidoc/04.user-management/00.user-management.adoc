@@ -112,6 +112,7 @@ The Login Service must act as client (Relying Party) to each of the External IdP
 .IAM Authentication Flow (Browser)
 image::iam-authentication-flow.png[width=1000,align="center"]
 
+[[mainLoginService,Login Service]]
 === Login Service
 
 The Login Service is an OIDC Provider that provides a ‘Login With’ service that allows the end-user to select their Identity Provider for purposes of authentication.
@@ -274,6 +275,7 @@ This may be of interest in a couple of cases:
 
 TBD
 
+[[mainBilling,Accounting and Billing]]
 == Accounting and Billing
 
 TBD

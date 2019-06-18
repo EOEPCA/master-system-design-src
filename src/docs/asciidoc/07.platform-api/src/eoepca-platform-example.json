@@ -1,0 +1,16 @@
+{
+    "oidc_endpoint": "/connect",
+    "billing_endpoint": "/billing",
+    "data_catalogue": "/data",
+    "data_csw_endpoint": "/csw",
+    "app_catalogue": "/apps",
+    "wms_service": "/wms",
+    "wmts_service": "/wmts",
+    "wfs_service": "/wfs",
+    "wcs_service": "/wcs",
+    "wcps_service": "/wcps",
+    "ems_service": "/ems",
+    "ades_service": "/ades",
+    "workspace_endpoint": "/workspace",
+    "s3_endpoint": "/s3",
+}
