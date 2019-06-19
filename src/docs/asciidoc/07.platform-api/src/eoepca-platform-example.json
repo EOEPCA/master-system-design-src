@@ -1,16 +1,22 @@
+
 {
-    "oidc_endpoint": "/connect",
-    "billing_endpoint": "/billing",
-    "data_catalogue": "/data",
-    "data_csw_endpoint": "/csw",
-    "app_catalogue": "/apps",
-    "wms_service": "/wms",
-    "wmts_service": "/wmts",
-    "wfs_service": "/wfs",
-    "wcs_service": "/wcs",
-    "wcps_service": "/wcps",
-    "ems_service": "/ems",
-    "ades_service": "/ades",
-    "workspace_endpoint": "/workspace",
-    "s3_endpoint": "/s3",
+    "services": [
+        { "type": "oidc", "role": "authentication", "path": "/connect" },
+        { "type": "<tbd>", "role": "billing", "path": "/billing" },
+        { "type": "opensearch", "role": "data_search", "path": "/search" },
+        { "type": "csw", "role": "data_catalogue", "path": "/catalogue" },
+        { "type": "opensearch", "role": "app_search", "path": "/applications" },
+        { "type": "wms", "role": "map", "path": "/maps" },
+        { "type": "wmts", "role": "tile", "path": "/tile" },
+        { "type": "wfs", "role": "feature", "path": "/feature" },
+        { "type": "wcs", "role": "coverage", "path": "/coverage" },
+        { "type": "wcps", "role": "datacube", "path": "/datacube" },
+        { "type": "s3", "role": "object_store", "path": "/storage" },
+        { "type": "wps-t", "role": "ems", "path": "/ems" },
+        { "type": "wps-t", "role": "ades", "path": "/ades" },
+        { "type": "<tbd>", "role": "workspace", "path": "/workspace" },
+    ],
+    "extended_capabilities": [
+        { "type": "dask", "role": "cluster", "details": {} },
+    ]
 }
