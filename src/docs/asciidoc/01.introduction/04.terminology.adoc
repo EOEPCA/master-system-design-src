@@ -103,6 +103,9 @@ The following terms are used in the Master System Design.
 | Products
 | EO data (commercial and non-commercial) and Value-added products and made available through the EP. _It is assumed that the Hosting Environment for the EP makes available an existing supply of EO Data_
 
+| Resource
+| A entity, such as a Product, Processing Service or Interactive Application, which is of interest to a user, is indexed in a catalogue and can be returned as a single meaningful search result
+
 | Reusable Research Object
 | An encapsulation of some research/analysis that describes all aspects required to reproduce the analysis, including data used, processing performed etc.
 
