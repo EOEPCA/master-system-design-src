@@ -3,7 +3,7 @@
 :author: TVUK System Team
 :email: <Eoepca.SystemTeam@telespazio.com>
 :revnumber: v0.4
-:revdate: dd/mm/yyyy
+:revdate: 21.06.2019
 :revremark: In-Progress Draft
 // attributes
 :hardbreaks:
