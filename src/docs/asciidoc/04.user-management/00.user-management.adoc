@@ -112,6 +112,7 @@ The Login Service must act as client (Relying Party) to each of the External IdP
 .IAM Authentication Flow (Browser)
 image::iam-authentication-flow.png[width=1000,align="center"]
 
+[[mainLoginService,Login Service]]
 === Login Service
 
 The Login Service is an OIDC Provider that provides a ‘Login With’ service that allows the end-user to select their Identity Provider for purposes of authentication.
@@ -274,7 +275,35 @@ This may be of interest in a couple of cases:
 
 TBD
 
+[[mainBilling,Accounting and Billing]]
 == Accounting and Billing
+
+Chargeable Resource::
+* Underlying resources (Resource Tier):
+** Storage
+** Compute
+** Network bandwidth
+* Service/Data consumption (Platform Tier)
+* Application Usage (Exploitation Tier)
+
+Service Plans::
+* Subscription
+** Monthly / Yearly / Lifetime
+** Unlimited or capped usage profiles
+** Charges for consumption beyond subscription
+* Pay-per-usage
+** Monthly: Pay by monthly invoice (i.e. in arears)
+** Pre-pay: Pay in advance (e.g. credits)
+
+Billing Actors::
+* Sellers (Application Providers) +
+Provide their services/applications/value-added-data, for possible remuneration.
+* Customers (Application Consumers) +
+Paying users of the EP.
+* End-users +
+Customers of the EP Customers (maybe unknown to the EP).
+
+
 
 The platform must account for resource use both within the platform and in other platforms via federation. In additional, several inter-platform billing models are supported as defined in the use cases, <<EOEPCA-UC>>. A number of principles must first be established:
 

@@ -179,4 +179,68 @@ v1.2, +
 13/06/2017
 --
 
+| [[OIDC]][OIDC]
+a|
+--
+OpenID Connect Core 1.0, +
+https://openid.net/specs/openid-connect-core-1_0.html
+--
+a|
+--
+v1.0, +
+08/11/2014
+--
+
+| [[OGC-CSW]][OGC-CSW]
+a|
+--
+OGC Catalogue Services 3.0 Specification - HTTP Protocol Binding (Catalogue Services for the Web), +
+OGC 12-176r7, +
+http://docs.opengeospatial.org/is/12-176r7/12-176r7.html
+--
+a|
+--
+v3.0, +
+10/06/2016
+--
+
+| [[OGC-WMS]][OGC-WMS]
+a|
+--
+OGC Web Map Server Implementation Specification, +
+OGC 06-042, +
+http://portal.opengeospatial.org/files/?artifact_id=14416
+--
+a|
+--
+v1.3.0, +
+05/03/2006
+--
+
+| [[OGC-WMTS]][OGC-WMTS]
+a|
+--
+OGC Web Map Tile Service Implementation Standard, +
+OGC 07-057r7, +
+http://portal.opengeospatial.org/files/?artifact_id=35326
+--
+a|
+--
+v1.0.0, +
+06/04/2010
+--
+
+| [[OGC-WFS]][OGC-WFS]
+a|
+--
+OGC® Web Feature Service 2.0 Interface Standard – With Corrigendum, +
+OGC 09-025r2, +
+http://docs.opengeospatial.org/is/09-025r2/09-025r2.html
+--
+a|
+--
+v2.0.2, +
+10/07/2014
+--
+
 |===

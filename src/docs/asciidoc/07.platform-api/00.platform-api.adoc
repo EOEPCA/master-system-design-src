@@ -11,32 +11,6 @@ image::client-portability.png[width=1000,align="center"]
 
 As illustrated in <<img_clientPortability>>, code implemented against the Client Library is not tied to a particular Exploitation Platform, but instead can be initialised and executed against any EP that supports the corresponding Service API. The User Service/Application shown in the figure can either be a process running external to the platform (e.g. on the users local platform), or running as a deployed process within the Processing Framework of the platform. It should be noted that the use of the Client Library is not mandatory - instead the application can be developed against the Service API directly.
 
-== Service API
+include::01.service-api.adoc[leveloffset=+1]
 
-TBD
-
-=== Platform Capabilities
-
-Bootstrap URL to discover the service endpoints of the platform.
-
-*/.well-known/eoepca-platform*
-
-[source,json]
-{
-    "oidc_endpoint": "/connect",
-    "data_catalogue": "/data",
-    "app_catalogue": "/apps",
-    "wms_service": "/wms",
-    "wmts_service": "/wmts",
-    "wfs_service": "/wfs",
-    "wcs_service": "/wcs",
-    "wcps_service": "/wcps",
-    "wps_service": "/wps",
-    "ems_service": "/ems",
-    "ades_service": "/ades",
-    "workspace_endpoint": "/workspace",
-}
-
-== Client Library
-
-TBD
+include::02.client-library.adoc[leveloffset=+1]

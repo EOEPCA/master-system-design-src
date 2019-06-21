@@ -156,7 +156,7 @@ An example Application Descriptor follows…
 
 [source,json]
 ----
-include::../src/app-descriptor-example.json[]
+include::src/app-descriptor-example.json[]
 ----
 
 == Execution Management Service (EMS)
@@ -345,6 +345,8 @@ A consistent vocabulary of services must be defined to unambiguously express the
 
 [[procAppCatalogue,Application Catalogue]]
 == Application Catalogue
+
+TBDzzz - Ref. CEOS OpenSearch Best Practice
 
 The Application Catalogue provides an inventory of applications/services that can be presented as a ‘Marketplace’ for users to discover and browse for processing services to use with EP data.
 

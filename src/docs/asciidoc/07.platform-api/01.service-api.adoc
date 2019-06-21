@@ -1,0 +1,83 @@
+
+[[mainServiceApi,Service API]]
+= Service API
+
+The Service API presented by the Exploitation Platform is largely defined and met by the fundamental data/processing services it offers. There are some additional meta-services that support the clients in the discovery and usage of these core services. The Service API defined in this section seeks to define a standard set of interfaces against which the Client Library can be developed and that can be relied upon for platform-to-platform interroperability.
+
+== Platform Capabilities
+
+Bootstrap URL to discover the service endpoints of the platform.
+
+*/.well-known/eoepca-platform*
+
+[source,json]
+----
+include::src/eoepca-platform-example.json[]
+----
+
+The endpoints referenced in eoepca-platform are described in the following sections.
+
+== oidc_endpoint
+
+The URL of the OpenID Connect Provider that implements the <<mainLoginService>> for user authentication.
+
+*/connect* (example)
+
+Implements the OpenID Connect protocol as described in <<OIDC>>.
+
+== billing_endpoint
+
+The URL of the endpoint of the Billing service in the platform.
+
+*/billing* (example)
+
+The Billing service provides a cenrtralised point of contact within the platform responsible for tracking and billing for usage of resources and services. The approach to billing is currently not defined, but will be documented in section <<mainBilling>>.
+
+== data_catalogue
+
+The URL of the OpenSearch interface to the <<mainDataCatalogue>>.
+
+*/data* (example)
+
+Implements an OpenSearch interface in accordance with section <<mainOpenSearch>>.
+
+== data_csw_endpoint
+
+The URL of the OGC CSW (Catalogue Services for the Web) interface to the <<mainDataCatalogue>>.
+
+*/csw* (example)
+
+Implements an OGC CSW catalogue in accordance with standard *OGC Catalogue Services 3.0 Specification - HTTP Protocol Binding* as defined in <<OGC-CSW>>.
+
+== app_catalogue
+
+The URL of the OpenSearch interface to the <<procAppCatalogue>>.
+
+*/apps* (example)
+
+Implements an OpenSearch interface in accordance with section <<procAppCatalogue>>.
+
+== wms_service
+
+The URL of the OGC WMS (Web Map Service) interface that supports the data maintained in the <<mainDataCatalogue>>.
+
+*/wms* (example)
+
+Implements an OGC WMS service in accordance with standard *OGC Web Map Server Implementation Specification* as defined in <<OGC-WMS>>.
+
+== wmts_service
+
+The URL of the OGC WMTS (Web Map Tile Service) interface that supports the data maintained in the <<mainDataCatalogue>>.
+
+*/wmts* (example)
+
+Implements an OGC WMTS service in accordance with standard *OGC Web Map Tile Service Implementation Standard* as defined in <<OGC-WMTS>>.
+
+== wfs_service
+
+The URL of the OGC WFS (Web Feature Service) interface that provides a _Feature-oriented_ access to the underlying data holding of the platform.
+
+*/wfs* (example)
+
+Implements an OGC WFS service in accordance with standard *OGC Web Feature Service 2.0 Interface Standard – With Corrigendum* as defined in <<OGC-WFS>>.
+
