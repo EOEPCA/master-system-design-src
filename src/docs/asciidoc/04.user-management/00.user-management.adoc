@@ -319,7 +319,7 @@ The platform must account for resource use both within the platform and in other
 
 A billing identity is a user identity for a user who has established a billing relationship with the platform. A billing user may delegate chargeable service access to other users within the system, permitting that user to use resources billed to the billing identity.
 
-Inidividual platforms may choose models with varying complexity. For example, one platform may require that the billing and user identity are always the same, whilst another may permit a user working on multiple cross-organizational projects to choose the billing identity to use. Identities may be related to organizations, projects, etc, for access control and credit control purposes - but these relationships are not required by the architecture.
+Individual platforms may choose models with varying complexity. For example, one platform may require that the billing and user identity are always the same, whilst another may permit a user working on multiple cross-organizational projects to choose the billing identity to use. Identities may be related to organizations, projects, etc, for access control and credit control purposes - but these relationships are not required by the architecture.
 
 As required by their purpose, cross-platform messaging will include both the user id and the relevant billing identity.
 
@@ -422,6 +422,10 @@ For time-based licences the flow can be simpler:
 * The component requests payment authorization from the Billing Service, specifying an exact price.
 * The component communicates with the host platform to acquire the licence.
 * The host platform sends a payment clearing message to the home platform Billing Service to clear the entire authorization.
+
+=== Payment Processing Systems
+
+Payment processing itself, in particular card payment processing, may be initiated by the Billing Service but should be strictly separate from it. <<PCI-DSS>> imposes many onerous requirements not just on the software and hardware used for payment processing, but also on the wider organization and its processes (for example, for formal change reviews and code reviews, the use of specialist cryptographic hardware security modules, the separation of duties between staff and requirements in recruitment and training). For these reasons some implementers will need to avoid card processing within the system entirely and redirect users to externally hosted payment servers. This may constrain them to an account credit-based model whilst other providers may be able to initiate an authorization or full payment on-demand.
 
 
 == User Profile

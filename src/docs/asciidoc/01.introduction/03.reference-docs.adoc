@@ -167,6 +167,17 @@ a|
 17-047
 --
 
+| [[PCI-DSS]][PCI-DSS]
+a|
+--
+The Payment Card Industry Data Security Standard, +
+https://www.pcisecuritystandards.org/document_library?category=pcidss&document=pci_dss
+--
+a|
+--
+v3.2.1
+--
+
 | [[CEOS-OS-BP]][CEOS-OS-BP]
 a|
 --
