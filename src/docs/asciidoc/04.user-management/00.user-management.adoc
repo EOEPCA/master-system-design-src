@@ -315,6 +315,13 @@ The platform must account for resource use both within the platform and in other
 * Debts can only be created where there is a direct contractual relationship and opportunity for credit control. A user can never owe money directly to another platform unless he has an account with it.
 * A platform prices in a single currency (but could choose to allow a user to settle a bill with another currency). Different federated platforms may choose different currencies.
 
+=== Billing Identities
+
+A billing identity is a user identity for a user who has established a billing relationship with the platform. A billing user may delegate chargeable service access to other users within the system, permitting that user to use resources billed to the billing identity.
+
+Inidividual platforms may choose models with varying complexity. For example, one platform may require that the billing and user identity are always the same, whilst another may permit a user working on multiple cross-organizational projects to choose the billing identity to use. Identities may be related to organizations, projects, etc, for access control and credit control purposes - but these relationships are not required by the architecture.
+
+As required by their purpose, cross-platform messaging will include both the user id and the relevant billing identity.
 
 === Billing Service
 
@@ -384,9 +391,9 @@ Where inter-platform payments are used the host platform is acting a subcontract
 
 === Federated Commercial Services Without Inter-platform Payments: Direct Payments
 
-If inter-platform payments are not available, for example because two platforms do not have a payment agreement, it may still be possible to provide services across multiple platforms providing the User has an account and billing relationship with each one directly.
+If inter-platform payments are not available, for example because two platforms do not have a payment agreement, it may still be possible to provide services across multiple platforms providing the user has an account and billing relationship with each one directly. This requires that both platforms recognize both the user and the selected billing identity, and that the billing user has delegated access to the user in both platforms.
 
-To handle direct payments the User must authorize the home platform to act on its behalf when submitting requests to the host platform. This is done using oAuth. The home platform must redirect the user to the host platform which then returns an authorization token to the home platform. Federated platforms must run an oAuth endpoint for this purpose and certain restrictions must be put on its functioning (for example on refresh token lifetime).
+To handle direct payments the user must authorize the home platform to act on its behalf when submitting requests to the host platform. This is done using oAuth. The home platform must redirect the user to the host platform which then returns an authorization token to the home platform. Federated platforms must run an oAuth endpoint for this purpose and certain restrictions must be put on its functioning (for example on refresh token lifetime).
 
 Other system components must then use an access token when making requests to the host platform. The host platform should still report costs and identifiers to the home platform, which must be passed to the Billing Service to be recorded. This aids dispute resolution and the reporting of total costs for particular requests.
 
