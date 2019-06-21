@@ -24,12 +24,12 @@ Hosting and maintaining an inventory of all processing tasks, analysis tools and
 
 The user has a personal workspace in which to upload files, and develop their own processing chains, experiments and workflows. Shared workspaces for collaboration can similarly be provisioned. The development and analysis environment integrates with platform catalogue services (for data, processing servics and applications) for discovery of available published datasets and processing elements. Subject to appropriate controls and permissions, the user can publish their own processing services and results. Workflows can be executed within the context of the processing facility, with the possibility to execute steps ‘remotely’ in collaborating platforms, with the results being collected for the continuation of the workflow.
 
-== Resource Provisioning and Management
+== Resource Management
 
 _Responsible for storing and cataloguing a variety of resources._
 
 
-Resource Provisioning and Management::
+Resource Management::
 Storage and cataloguing of all persistent resources. First and foremost, this will contain multidimensional geo-spatial datasets. In addition it may include a variety of heterogeneous data and other resources, such as documentation, Docker images, processing workflows, etc. Handles and abstracts the low-level complexities of different underlying storage technologies and strategies. Facilitating the network of EO resources by providing a federated interface to other data services within the wider EO network.
 
 The catalogue holds corresponding metadata for every published resource item in the local platform storage, as well as entries for resources that are located on remote collaborating platforms. Catalogue search and data access is provided through a range of standard interfaces, which are used by the local Web Portal and Processing & Chaining elements and may be exposed externally as web services. Access to services and resources is controlled according to an associated policy - ref <<IAM>>. Similarly, the ingestion process is controlled, in order to ensure the quality of any published resource, including associated metadata, and to maintain the integrity of the catalogue. This component may interact with corresponding peer components on other platforms - for example to synchronise catalogue entries.
