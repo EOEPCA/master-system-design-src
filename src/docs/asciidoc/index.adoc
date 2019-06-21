@@ -2,7 +2,7 @@
 :doctype: book
 :author: TVUK System Team
 :email: <Eoepca.SystemTeam@telespazio.com>
-:revnumber: v0.4
+:revnumber: v0.4.1
 :revdate: 21.06.2019
 :revremark: In-Progress Draft
 // attributes
