@@ -17,7 +17,7 @@ include::src/eoepca-platform-example.json[]
 
 The endpoints referenced in eoepca-platform are described in the following sections.
 
-== oidc_endpoint
+== authentication
 
 The URL of the OpenID Connect Provider that implements the <<mainLoginService>> for user authentication.
 
@@ -25,7 +25,7 @@ The URL of the OpenID Connect Provider that implements the <<mainLoginService>> 
 
 Implements the OpenID Connect protocol as described in <<OIDC>>.
 
-== billing_endpoint
+== billing
 
 The URL of the endpoint of the Billing service in the platform.
 
@@ -33,51 +33,74 @@ The URL of the endpoint of the Billing service in the platform.
 
 The Billing service provides a cenrtralised point of contact within the platform responsible for tracking and billing for usage of resources and services. The approach to billing is currently not defined, but will be documented in section <<mainBilling>>.
 
-== data_catalogue
+== data_search
 
 The URL of the OpenSearch interface to the <<mainDataCatalogue>>.
 
-*/data* (example)
+*/search* (example)
 
 Implements an OpenSearch interface in accordance with section <<mainOpenSearch>>.
 
-== data_csw_endpoint
+== data_catalogue
 
 The URL of the OGC CSW (Catalogue Services for the Web) interface to the <<mainDataCatalogue>>.
 
-*/csw* (example)
+*/catalogue* (example)
 
 Implements an OGC CSW catalogue in accordance with standard *OGC Catalogue Services 3.0 Specification - HTTP Protocol Binding* as defined in <<OGC-CSW>>.
 
-== app_catalogue
+== app_search
 
 The URL of the OpenSearch interface to the <<procAppCatalogue>>.
 
-*/apps* (example)
+*/applications* (example)
 
 Implements an OpenSearch interface in accordance with section <<procAppCatalogue>>.
 
-== wms_service
+== map
 
 The URL of the OGC WMS (Web Map Service) interface that supports the data maintained in the <<mainDataCatalogue>>.
 
-*/wms* (example)
+*/map* (example)
 
 Implements an OGC WMS service in accordance with standard *OGC Web Map Server Implementation Specification* as defined in <<OGC-WMS>>.
 
-== wmts_service
+== tile
 
 The URL of the OGC WMTS (Web Map Tile Service) interface that supports the data maintained in the <<mainDataCatalogue>>.
 
-*/wmts* (example)
+*/tile* (example)
 
 Implements an OGC WMTS service in accordance with standard *OGC Web Map Tile Service Implementation Standard* as defined in <<OGC-WMTS>>.
 
-== wfs_service
+== feature
 
 The URL of the OGC WFS (Web Feature Service) interface that provides a _Feature-oriented_ access to the underlying data holding of the platform.
 
-*/wfs* (example)
+*/feature* (example)
 
 Implements an OGC WFS service in accordance with standard *OGC Web Feature Service 2.0 Interface Standard – With Corrigendum* as defined in <<OGC-WFS>>.
 
+== coverage
+
+TBD
+
+== datacube
+
+TBD
+
+== object_store
+
+TBD
+
+== ems
+
+TBD
+
+== ades
+
+TBD
+
+== workspace
+
+TBD
