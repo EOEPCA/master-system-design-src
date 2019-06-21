@@ -6,7 +6,7 @@
         { "type": "opensearch", "role": "data_search", "path": "/search" },
         { "type": "csw", "role": "data_catalogue", "path": "/catalogue" },
         { "type": "opensearch", "role": "app_search", "path": "/applications" },
-        { "type": "wms", "role": "map", "path": "/maps" },
+        { "type": "wms", "role": "map", "path": "/map" },
         { "type": "wmts", "role": "tile", "path": "/tile" },
         { "type": "wfs", "role": "feature", "path": "/feature" },
         { "type": "wcs", "role": "coverage", "path": "/coverage" },
