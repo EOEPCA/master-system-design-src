@@ -40,6 +40,9 @@ The following terms are used in the Master System Design.
 | Code
 | The codification of an algorithm performed with a given programming language - compiled to Software or directly executed (interpretted) within the platform.
 
+| Compute Platform
+| The Platform on which execution occurs (this may differ from the Host or Home platform where federated processing is happening)
+
 | Consumer
 | User accessing existing services/products within the EP. Consumers may be scientific/research or commercial, and may or may not be experts of the domain
 
@@ -66,6 +69,12 @@ The following terms are used in the Master System Design.
 
 | Guest
 | An unregistered User or an unauthenticated Consumer with limited access to the EP's services
+
+| Home Platform
+| The Platform on which a User is based or from which an action was initiated by a User
+
+| Host Platform
+| The Platform through which a Resource has been published
 
 | Identity Provider (IdP)
 | The source for validating user identity in a federated identity system, (user authentication as a service).

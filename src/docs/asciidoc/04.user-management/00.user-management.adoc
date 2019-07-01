@@ -278,38 +278,11 @@ TBD
 [[mainBilling,Accounting and Billing]]
 == Accounting and Billing
 
-Chargeable Resource::
-* Underlying resources (Resource Tier):
-** Storage
-** Compute
-** Network bandwidth
-* Service/Data consumption (Platform Tier)
-* Application Usage (Exploitation Tier)
-
-Service Plans::
-* Subscription
-** Monthly / Yearly / Lifetime
-** Unlimited or capped usage profiles
-** Charges for consumption beyond subscription
-* Pay-per-usage
-** Monthly: Pay by monthly invoice (i.e. in arears)
-** Pre-pay: Pay in advance (e.g. credits)
-
-Billing Actors::
-* Sellers (Application Providers) +
-Provide their services/applications/value-added-data, for possible remuneration.
-* Customers (Application Consumers) +
-Paying users of the EP.
-* End-users +
-Customers of the EP Customers (maybe unknown to the EP).
-
-
-
 The platform must account for resource use both within the platform and in other platforms via federation. In additional, several inter-platform billing models are supported as defined in the use cases, <<EOEPCA-UC>>. A number of principles must first be established:
 
 * Actions are performed within the context of a 'billing identity', which may be different to the user's identity.
 * Charges are the result of discrete 'billing events' occuring within a particular 'billing window'. Pricing must consider all events within the window, not events individually (to support, for example, tiered pricing).
-* Different platforms may follow completely different pricing and billing models. The architecture and federation messaging can not assume any particular method of calculation or for describing prices.
+* Different platforms may follow completely different pricing and billing models. The architecture and federation messaging cannot assume any particular method of calculation or for describing prices.
 * Only the platform hosting it can accurately price the use of a licensed Resource or compute resource.
 * Costs may be estimated but the estimate is not required to be binding. Federated access can never rely on binding estimates.
 * Debts can only be created where there is a direct contractual relationship and opportunity for credit control. A user can never owe money directly to another platform unless he has an account with it.
@@ -322,6 +295,9 @@ A billing identity is a user identity for a user who has established a billing r
 Individual platforms may choose models with varying complexity. For example, one platform may require that the billing and user identity are always the same, whilst another may permit a user working on multiple cross-organizational projects to choose the billing identity to use. Identities may be related to organizations, projects, etc, for access control and credit control purposes - but these relationships are not required by the architecture.
 
 As required by their purpose, cross-platform messaging will include both the user id and the relevant billing identity.
+
+
+NOTE: Both the billing and user identities, and other information such as the location of each one and the type of organization involved, may be relevant to determining prices. This is because the place of supply for VAT purposes must be determined, plus any discounts for, for example, academic use. Note that 'location' means more than 'country' (eg, the Canary Islands have lower VAT than Madrid). Also, some organizations may be treated differently such as international organizations exempt from all tax.
 
 === Billing Service
 
@@ -349,17 +325,17 @@ To maximize reusability price calculation is separated in to a different service
 * Given a list of billing events or consolidated line items within a pricing window return calculated rates and prices for each one. For some pricing models this may involve multiple charges for each item or may contain blended rates/prices.
 * Return estimated prices for estimated resource use.
 * Where a platform wished to provide such a service to users, return price information and estimated prices in response to API requests.
-* Given a commercial license billing event, calculate the charge to the user, the credit to the Licenser and the platform fee.
+* Given a commercial licence billing event, calculate the charge to the user, the credit to the Licenser and the platform fee.
 
 === Commercially Licensed Resources
 
 Users may publish Resources which are licensed to others on commercial terms and use the platform to collect payments. There are two types of charges which require support within User Management: time-based and volume-based.
 
-Time-based charges occur when a user requests a licence which costs a fixed price for a fixed time, regardless of the accesses made to the Resource. The Data Access Services and Execution Management Services determine when such a licence is required and manage the process for buying one. However, once complete, the purchase must be reported as a billing event and the licence stored in the User Profile. The Billing Service has the opportunity to reject the purchase at this step.
+Time-based charges occur when a user requests a licence which costs a fixed price for a fixed time (or is permanent), regardless of the accesses made to the Resource. The Data Access Services and Execution Management Services determine when such a licence is required and the licence manager manages the process for buying one, including emitting a billing event. This typically will happen in advance of a request. The licence manager may give the billing service an opportunity to reject the request, if applicable to the platform's billing model.
 
-Volume-based charges occur as access to a licensed Resource proceeds or completes (for example, on first access to a specific satellite image or for each input image passed to a commercial machine learning model). Again, the DAS or EMS must report these as billing events.
+Volume-based charges occur as access to a licensed Resource proceeds or completes (for example, on first access to a specific satellite image or for each input image passed to a commercial machine learning model). Again, the licence manager reports these as billing events when a licence requirements check is made.
 
-Pricing is specified by the Licenser (in a particular form supported by the platform) and stored by the Resource Manager. The DAS/EMS must supply the pricing data in the billing event. The Billing Service then stores three billing events: a charge to the user, a credit to the Licenser and a charge to the Licenser representing the platform fee for handling payment processing.
+Pricing is specified by the Licenser (in a particular form supported by the platform) and stored by the pricing engine (quantity to price mapping) and licence manager (method for determining which licences and 'quantity'). The licence manager must emit three billing events when license grants are bought: a charge to the user, a credit to the Licenser and a charge to the Licenser representing the platform fee for handling payment processing.
 
 === Budgets
 
@@ -434,7 +410,67 @@ The User Profile is a system resource that maintains a set of data for each user
 
 * User details
 * Terms and conditions accepted by the user
-* License keys held by the user
+* Licence keys held by the user
 * User API key management
 
 The User Profile for a given user is tied to the unique identifier provided by their Home-IdP through the authentication process.
+
+
+=== Licence and T&C Management
+
+A licence manager must determine whether or not licence requirements permit certain actions by a certain user. For freely available resources simple acceptance of the licence may be necessary. For commercially licensed resources it may be much more complicated. For example, a licence may have been bought for non-educational use by up to 5 users for satellite images with a certain resolution and area, with an extra charge made for images less than 15 degress off nadir. Alternatively, a commercially licensed processing service may be charged by the CPU-hour or user-month. This is handled by the pricing and billing services, but acceptance of these terms must still be made first.
+
+Some concepts applicable within the licence manager must be established:
+
+* A licence consist of the legal text itself, a name and version, a description of pricing where appropiate and other metadata.
+* A licence terms acceptance is the acceptance by a particular user (and organization) of the licence terms and conditions.
+* A licence grant grants a users access to particular parts of a resource or for particular purposes. This is only applicable to commercial licensed resources. A licence grant is signed by the licenser.
+* The licence manager does not know which resources require which licences. It only knows data about identified licences and about which users have which acceptances and grants.
+
+The licence manager does not formally know how to calculate the price of a commercial licence grant. Instead, it produces an identifier for a particular type of grant and a quantity. The billing engine turns this in to a price, which may involve applying any user-specific or volume-based discounts. The quantity may be in, for example, square kilometres. Alternatively, the licences may be priced at €1/unit, effectively transferring responsibility to the licence manager's configuration.
+
+Note that licencers must ensure that their licences are uniquely identified across the whole federation. That is, if they use the same licence on multiple platforms they must give it the same ID and must not otherwise reuse IDs.
+
+==== Licence Requirement Checks
+
+At the request planning stage the EMS determines the licences required (as far as is possible in advance). This results in a list of licence requirement specifications. These may vary in complexity, from simply identifying a dataset to specifying an AoI, ToI and additional attributes, depending on platform support and on any knowledge the EMS has about which request fields are licence-relevant. The licence manager, however, only performs matching of these against rules or configuration using no or limited knowledge of the specific meaning of fields.
+
+On receiving licence requirement specifications, the licence manager must compare them against the licences and grants possessed by the user and determine what licences, if any, must be obtained by the user before the action is permitted. On failure, the result should contain something the user can act on, such as a URL for viewing and agreeing to dataset terms or for buying licences. On success, the licence manager may return information on which fields were used so that the EMS can avoid repeated checks.
+
+The licence manager should also be able to determine when additional commercial licence grants should be added (and charged for) automatically. The user must have previously agreed to the license terms and pricing. When a new licence grant is added it should record it and issue a billing event.
+
+Licence grants may also be managed by an external service operated by the licenser. This communication is managed entirely by the licence manager.
+
+Processing may cross platform boundaries within the federation. A platform executing processing or supplying a resource must be able to determine that the processing is running in a context in which any required licences are available. To support this, the context must include enough information to identify the licence manager of the originating platform. When a licence manager receives a licence requirement specification which can't be satisfied locally it should use this endpoint to perform a licence requirement check. The originating platform may fail this request, may accept it based on existing data (returning signed licence grants if appropriate) or may perform an automated licence grant acquisition. The host/compute platform may then store these licence grants against the user ID for use in future checks.
+
+Note that cross-platform executions may involve running, for example, a processing chain initiated from platform A with a component involving a commercially licenced compute service from platform B running on platform C. In these cases platform B may check that the user has accepted its platform acceptable use policy by contacting platform A, fetch the compute service from platform C which will then also directly contact platform A to ensure that licences are available before returning the container ot platform B.
+
+TODO: Diagrams!
+
+
+==== Licence Acquisition
+
+Unless managed by an external service, users must be able to view and accept terms and purchase licence grants using the licence manager. For licences where no licence grants must be bought this is very simple - for example, the licence manager may provide APIs enabling the UI to fetch licence text and submit acceptance. This can be done from a resource information display page or following a refused request.
+
+Where a licence grant must be bought the flow for the user is managed by other components. A user interface may be used to choose licence attributes or particular subsets of data, for example, or a user may have the option to allow automatic purchases as data is accessed. This licence manager must support this functionality in the following ways:
+
+* A human-readable description of the pricing model and prices is included with the licence metadata. This should be displayed to the user.
+* The licence manager can accept a licence requirement specification and turn it in to either a product code and quantity (which the caller can then pass to the pricing engine) or information on which additional fields are required. The field names, types and UI information is supplied by other services as part of the resource definition.
+* The licence manager can accept a command to buy a specified licence. It will then emit a billing event. This may happen synchronously or asynchronously depending on the needs of the platform's billing model.
+
+When federated access is involved, such as when a processing chain runs some components on another platform or when data or processing services are transferred to run locally, a user may need to accept licence terms or acquire a licence grant for a resource which is not published via the home platform. This must always be initiated from the home platform, either in advance of the execution or in response to an event returned by a host platform. For terms acceptance the licence manager must contact the host platform and transfer the necessary T&C data. For a (commercial) licence grant, the licence manager must ask the billing manager to authorize a payment to the host platform and then make a request to the host licence manager to buy the licence (specifying the payment ID). The host licence manager must verify the price before asking its own billing manager to clear the payment. It should then record the licence grant as well as returning it to the home platform.
+
+
+==== Licence Administration
+
+Resource owners must be able to configure licences. The UIs and APIs allowing them to do this must interact with the licence manager (and the pricing engine) to configure their licences. This includes only the licences themselves - assignment of licence requirements to resources is out of the licence manager's scope.
+
+==== Porting Licences Within the Federation
+
+In some cases users may have multiple home platforms, initiating some workloads from different locations. To ensure that users can use their licences for workloads initiated across all locations licence 'porting' may be used.
+
+A user 'ports' a licence from one platform to another by using oAuth to authorize the licence manager on the local platform to access his licences on another. This is only permitted if the licences have been marked as 'portable' by the licenser.
+
+
+This mechanism may be used for two purposes. In the first, a publisher a has publshed his Resource in both platforms (which may be done to permit lower processing latencies, lower payment processing costs or the use of proprietary features). The platform receiving the licence must verify its signature using the licenser's public key before accepting it. In the second case the Resource is not available on the receiving platform but may still be used in cross-platform workflows (including the case when a processing service is transferred from a remote host platform to execute locally).
+
