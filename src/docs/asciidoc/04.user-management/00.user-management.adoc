@@ -125,7 +125,7 @@ The Login Service is designed to support the onward forwarding of the authentica
 * Twitter
 * Facebook
 * LinkedIn
-* Others TBD
+* Others (to be defined)
 
 The Login Service must establish itself as a client (Relying Party) of all supported external IdPs, with appropriate trust relationships and support for their authentication flows.
 
@@ -175,7 +175,7 @@ The ID Token is a JWT that is returned to from the /userinfo endpoint of the Log
 
 Clients are Relying Parties that act on behalf of users accessing the services of the Exploitation Platform. They will either pre-emptively obtain their access token for required resources, or will attempt resource access and be redirected by exception to the OIDC Provider authentication flow.
 
-In the case of a web application (browser hosted), the Implicit Flow would be used. In other cases (TBD) the Authorisation Code Flow would be preferred.
+In the case of a web application (browser hosted), the Implicit Flow would be used. In other cases, where possible, the Authorisation Code Flow would be preferred.
 
 The OIDC flows are initiated with the appropriate response_type (‘id_token token’ for Implicit Flow, ‘code’ for Authorisation Code Flow) and scope of ‘oidc profile’.
 
@@ -273,7 +273,7 @@ This may be of interest in a couple of cases:
 
 === Authorization (Policy Decision)
 
-TBD
+#TBD#
 
 [[mainBilling,Accounting and Billing]]
 == Accounting and Billing
@@ -339,7 +339,7 @@ Pricing is specified by the Licenser (in a particular form supported by the plat
 
 === Budgets
 
-TBD
+#TBD#
 
 === Inter-platform Payments
 
@@ -375,7 +375,7 @@ Other system components must then use an access token when making requests to th
 
 === Estimating Inter-platform Costs
 
-TBD
+#TBD#
 
 === Relationship to System Components
 

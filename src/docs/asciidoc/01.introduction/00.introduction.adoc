@@ -7,7 +7,7 @@ This document presents the Master System Design for the Common Architecture.
 
 == Structure of the Document
 
-TBD
+#TBD#
 
 include::03.reference-docs.adoc[leveloffset=+1]
 

@@ -2,11 +2,20 @@
 [[mainServiceApi,Service API]]
 = Service API
 
-The Service API presented by the Exploitation Platform is largely defined and met by the fundamental data/processing services it offers. There are some additional meta-services that support the clients in the discovery and usage of these core services. The Service API defined in this section seeks to define a standard set of interfaces against which the Client Library can be developed and that can be relied upon for platform-to-platform interroperability.
+The Service API presented by the Exploitation Platform is largely defined and met by the fundamental data/processing services it offers. There are some additional meta-services that support the clients in the discovery and usage of these core services. The Service API defined in this section seeks to define a standard set of interfaces against which the Client Library can be developed and that can be relied upon for platform-to-platform interoperability.
 
+[[platformCapabilities]]
 == Platform Capabilities
 
-Bootstrap URL to discover the service endpoints of the platform.
+Provides a single well-known 'bootstrap' URL through which the service capabilities and their endpoints can be discovered:
+
+* Declare platform capabilities
+* Discover service endpoints
+* Core platform data/processing services
+* Additional meta-services to support clients
+* Used by <<mainClientLibrary>> to initialise its platform interfaces
+* Used by <<mainProcEMS, EMS>> to match service/application dependencies with platform capabilities
+* Used by other platforms to establish interoperability
 
 */.well-known/eoepca-platform*
 
@@ -15,7 +24,7 @@ Bootstrap URL to discover the service endpoints of the platform.
 include::src/eoepca-platform-example.json[]
 ----
 
-The endpoints referenced in eoepca-platform are described in the following sections.
+*The endpoints referenced in eoepca-platform are described in the following sections.*
 
 == authentication
 
@@ -51,11 +60,11 @@ Implements an OGC CSW catalogue in accordance with standard *OGC Catalogue Servi
 
 == app_search
 
-The URL of the OpenSearch interface to the <<procAppCatalogue>>.
+The URL of the OpenSearch interface to the <<mainAppCatalogue>>.
 
 */applications* (example)
 
-Implements an OpenSearch interface in accordance with section <<procAppCatalogue>>.
+Implements an OpenSearch interface in accordance with section <<mainAppCatalogue>>.
 
 == map
 
@@ -83,24 +92,59 @@ Implements an OGC WFS service in accordance with standard *OGC Web Feature Servi
 
 == coverage
 
-TBD
+The URL of the OGC WCS (Web Coverage Service) interface that provides a _Coverage-oriented_ access to the underlying data holding of the platform.
+
+*/coverage* (example)
+
+Implements an OGC WCS service in accordance with standard *OGC Web Coverage Service (WCS) 2.1 Interface Standard - Core* as defined in <<OGC-WCS>>.
 
 == datacube
 
-TBD
+The URL of the OGC WCPS (Web Coverage Processing Service) interface that provides a queryable 'data cube' interface to multi-dimensional coverage data.
+
+*/datacube* (example)
+
+Implements an OGC WCPS service in accordance with standard *Web Coverage Processing Service (WCPS) Language Interface Standard* as defined in <<OGC-WCPS>>.
 
 == object_store
 
-TBD
+The URL of the _Amazon S3_ interface that provides object storage access to the underlying data holding of the platform.
+
+*/object_store* (example)
+
+Implements an Amazon S3 service in accordance with *Amazon Simple Storage Service REST API* as defined in <<AWS-S3>>.
+
+[NOTE]
+.Amazon S3 Compatibility Subset
+====
+For the purposes of this interface, a subset of the full Amazon S3 REST API will be defined as mandatory. The motivation is to define a consistent interface that is supported by third-party object storage implementations that provide an S3-compatible API, such as:
+
+* Ceph (https://ceph.com/ceph-storage/)
+** CEPH OBJECT GATEWAY S3 API (http://docs.ceph.com/docs/mimic/radosgw/s3/)
+* OpenStack Swift (https://docs.openstack.org/swift)
+** S3/Swift REST API Comparison Matrix (https://docs.openstack.org/swift/latest/s3_compat.html)
+====
 
 == ems
 
-TBD
+The URL of the <<mainProcEMS>> service.
+
+*/ems* (example)
+
+Implements an *EMS service* as described in section <<mainProcEMS>>.
 
 == ades
 
-TBD
+The URL of the <<mainProcADES>> service.
+
+*/ades* (example)
+
+Implements an *ADES service* as described in section <<mainProcADES>>.
 
 == workspace
 
-TBD
+The URL of the 'user workspace' service as described in section <<mainWorkspace>>.
+
+*/workspace* (example)
+
+The interface for the workspace is currently #TBD#.

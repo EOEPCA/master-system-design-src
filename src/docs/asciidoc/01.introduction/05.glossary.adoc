@@ -23,6 +23,7 @@ The following acronyms and abbreviations have been used in this report.
 | IdP | Identity Provider
 | JSON | JavaScript Object Notation
 | K8s | Kubernetes
+| KVP | Key-value Pair
 | M2M | Machine-to-machine
 | OGC | Open Geospatial Consortium
 | PDP | Policy Decision Point

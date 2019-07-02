@@ -91,8 +91,14 @@ The following terms are used in the Master System Design.
 | Interactive Web Application
 | An Interactive Application for analysis provided as a rich user interface through the user's web browser.
 
+| Key-Value Pair
+| A key-value pair (KVP) is an abstract data type that includes a group of key identifiers and a set of associated values. Key-value pairs are frequently used in lookup tables, hash tables and configuration files.
+
 | Kubernetes (K8s)
 | Container orchestration system for automating application deployment, scaling and management.
+
+| Object Store
+| A computer data storage architecture that manages data as objects. Each object typically includes the data itself, a variable amount of metadata, and a globally unique identifier.
 
 | On-demand Processing Service
 | A _Processing Service_ whose execution is initiated directly by the user on an ad-hoc basis.

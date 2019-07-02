@@ -7,7 +7,7 @@
 image::architecture-layers.png[width=1000,align="center"]
 
 Resource Tier::
-The Resource Tier represents the hosting infrastructure and provides the EO data, storage and compute upon which the exploitation is deployed.
+The Resource Tier represents the hosting infrastructure and provides the EO data, storage and compute upon which the exploitation platform is deployed.
 
 Platform Tier::
 The Platform Tier represents the Exploitation Platform and the services it offers to end-users. The layers comprising the Platform Tier are further described below.
@@ -45,4 +45,4 @@ Section <<mainResourceManagement>>::
 This section covers data discovery (Data Catalogue), provision (Gateway) of data access to the processing framework, and public data services to visualise and consume platform data.
 
 Section <<mainPlatformApi>>::
-The section provides a consolidated decription of the service interface of the EP and its associated client library, which together present a standard platform interface against which analysis and exploitation activities may be developed, and through which platform services can be federated.
+This section provides a consolidated decription of the service interface of the EP and its associated client library, which together present a standard platform interface against which analysis and exploitation activities may be developed, and through which platform services can be federated.

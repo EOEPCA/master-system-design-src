@@ -12,7 +12,7 @@ PDF::
 This document is available in PDF format link:EOEPCA-master-system-design.pdf[here^].
 
 COPYRIGHT::
-Copyright © {copyrightYear} TBD (ESA or TVUK or something else ?)
+Copyright © {copyrightYear} #TBD (ESA or TVUK or something else ?)#
 
 <<<
 

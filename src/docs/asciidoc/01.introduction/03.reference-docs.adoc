@@ -16,7 +16,7 @@ https://eoepca.github.io/use-case-analysis
 --
 a|
 --
-Issue TBD, +
+Issue #TBD#, +
 dd/mm/yyy
 --
 
@@ -55,6 +55,18 @@ a|
 --
 18-036r1, +
 07/02/2019
+--
+
+| [[WPS-REST-JSON]][WPS-REST-JSON]
+a|
+--
+OGC WPS 2.0 REST/JSON Binding Extension, Draft, +
+OGC 18-062, +
+https://raw.githubusercontent.com/opengeospatial/wps-rest-binding/develop/docs/18-062.pdf
+--
+a|
+--
+1.0-draft
 --
 
 | [[CWL]][CWL]
@@ -252,6 +264,43 @@ a|
 --
 v2.0.2, +
 10/07/2014
+--
+
+| [[OGC-WCS]][OGC-WCS]
+a|
+--
+OGC Web Coverage Service (WCS) 2.1 Interface Standard - Core, +
+OGC 17-089r1, +
+http://docs.opengeospatial.org/is/17-089r1/17-089r1.html
+--
+a|
+--
+v2.1, +
+16/08/2018
+--
+
+| [[OGC-WCPS]][OGC-WCPS]
+a|
+--
+Web Coverage Processing Service (WCPS) Language Interface Standard, +
+OGC 08-068r2, +
+http://portal.opengeospatial.org/files/?artifact_id=32319
+--
+a|
+--
+v1.0.0, +
+25/03/2009
+--
+
+| [[AWS-S3]][AWS-S3]
+a|
+--
+Amazon Simple Storage Service REST API, +
+https://docs.aws.amazon.com/AmazonS3/latest/API
+--
+a|
+--
+API Version 2006-03-01
 --
 
 |===

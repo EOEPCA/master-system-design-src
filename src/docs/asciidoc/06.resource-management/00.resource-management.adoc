@@ -7,8 +7,9 @@ Storage is largely taken care of by the Resource Tier upon which the Exploitatio
 
 This is important for:
 
-* the end-user wishing to access data directly
+* the end-user wishing to access data directly, and accessing their results after processing
 * processing services accessing data for input/output
+* processing workflow steps accessing intermediate outputs from prior steps
 * other federated Exploitation Platforms accessing each other’s data and services through well understood interfaces
 
 To exploit the services of the Platform, users need to discover available data, obtain detailed collection/product information, including the ability to visualise the data in the platform. This applies to data held within the platform, data added by end-users and data produced as the result of processing operations within the platform.
@@ -17,7 +18,7 @@ To exploit the services of the Platform, users need to discover available data, 
 .Resource Management Use Case
 image::use-cases-data.png[width=1000,align="center"]
 
-Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the ‘Processing & Chaining’ domain area by the provision of an Application Catalogue. See <<procAppCatalogue>> for more details.
+Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the ‘Processing & Chaining’ domain area by the provision of an Application Catalogue. See <<mainAppCatalogue>> for more details.
 
 The inventory and presentation of resources to users must be organised in such a way as to facilitate the discovery and usage of resources in other federated Exploitation Platforms. For example, users must be able to discover data and services in other EPs in order to construct and execute workflows that span multiple federated EPs.
 
@@ -73,7 +74,7 @@ This metadata model can be exploited, for example, using OpenSearch:
 [[mainOpenSearch,Open Search]]
 === OpenSearch
 
-TBDzzz - Ref. CEOS OpenSearch Best Practice
+#TBD - Ref. CEOS OpenSearch Best Practice#
 
 For the Exploitation Platform, OpenSearch is used with the OGC extensions and recommendations:
 
@@ -86,7 +87,7 @@ The CEOS OpenSearch Best Practise <<CEOS-OS-BP>> provides a blueprint – this i
 
 === Resource Types
 
-Perhaps the most challenging aspect of this is that the Catalogues for both Data and Processing-Services must facilitate the proper construction of processing tasks, to ensure there is a proper match of the data types expected as input to the processing. This extends into the construction of workflows where the data types output by a processing task must match the supported inputs of the next task in the chain. The Catalogue must have a rich and consistent metadata model for both Data and Processing-Services in order to achieve these goals.
+Perhaps the most challenging aspect of this is that the Catalogues for both Data and Processing-Services must facilitate the proper construction of processing tasks, to ensure there is a correct match of the data types expected as input to the processing. This extends into the construction of workflows where the data types output by a processing task must match the supported inputs of the next task in the chain. The Catalogue must have a rich and consistent metadata model for both Data and Processing-Services in order to achieve these goals.
 
 === Data Access
 There is a direct link between the way the data is described in the Catalogue and how it is accessed by the consumers of the data. This links to the Data Access Services (e.g. WMS. WCS, WFS, etc.) provided by the EP, and the way in which the access links are encoded into the Catalogue. These links must be usable by the data consumers which could be processing services, or users downloading the data.
@@ -151,7 +152,7 @@ Other services that may also be considered include:
 
 The integration of these services into the data-layer of the hosting Resource Tier relies upon the Data Access Gateway providing an infrastructure agnostic interface for accessing the underlying data holding.
 
-[[resourcesDataAccessGateway,Data Access Gateway]]
+[[mainDataAccessGateway,Data Access Gateway]]
 == Data Access Gateway
 
 The EO datasets are stored according to the underlying storage technology of the infrastructure Resource Tier. The storage interface presented is not under the control of the Exploitation Platform.
@@ -167,6 +168,7 @@ The main EP components that require data access are:
 In the EP system design, these services are designed to be deployed as containers through Kubernetes. This presents the possibility that some aspects of the Data Access Gateway can be met by the facilities offered by Kubernetes volumes. Access to underlying data is provided through volumes that are mounted into the container. Kubernetes volumes have native support for a number of common storage technologies (such as AWS EBS, Cinder), however these tend to be block rather than object storage.
 
 The Gateway must provide a data bridge between the EP components and the Resource Tier. It fills the gap in the data access capabilities of a given a given service/application, and provides a common data access interface that such components can target in their implementation. We might regard the lowest-common-denominator for data access to be a combination of:
+
 * Local filesystem access
 * AWS S3 Object Store
 
@@ -176,10 +178,12 @@ The Processing Framework makes use of these capabilities to ensure that data is 
 
 Thus, the Data Access Gateway presents an S3 interface as an internal data access abstraction, whilst implementing the data access interface to the infrastructure Resource Tier storage.
 
-[[resourcesDAL,Data Access Library]]
+[[mainDataAccessLib,Data Access Library]]
 == Data Access Library (DAL)
 
-In addition to the Data Access Gateway, which operates as an internal service, the Data Access Library (DAL) is provided specifically as a point of integration for processing services and applications. The Data Access Library provides an abstraction of the interface to the data, with bindings for common languages (including python, Javascript) and presents a standard programmatic semantic for accessing the data from within the processing service codebase.
+In addition to the Data Access Gateway, which operates as an internal service, the Data Access Library (DAL) is provided specifically as a point of integration for processing services and applications. The Data Access Library provides an abstraction of the interface to the data, with bindings for common languages (including python. R, Javascript) and presents a standard programmatic semantic for accessing the data from within the processing service codebase.
+
+*_The Data Access Library can be seen as a subset of the facilities offered by the <<mainClientLibrary>>._*
 
 The Data Access Library can provide an abstraction at two levels:
 
@@ -193,11 +197,13 @@ Thus, processing services and applications can be implemented in a ‘portable�
 
 Specific implementations of the DAL can be made to abstract the data access layer for a given Exploitation Platform. The library offered to the processing service at runtime must implement the specific data access interface to the resource-tier storage. Hence, the library should not be ‘hard-coded’ into the processor application package (Docker image). The Processing Framework must support the ability to 'plugin' an alternative (platform-specific) implementation of the DAL dynamically at processor execution time. It may be possible to develop a 'generic' Data Access Library by implementation against the standard (internal) interface provided by the Data Access Gateway. In this case, the platform-specifics regarding data access are borne entirely by the Data Access Gateway.
 
+#*See also section <<procServiceDataAccess>> which provides a discussion of data access approaches for processing services and the stage-in/out of data.*#
+
 == Data Ingestion
 
-Presents a standard interface to the EP components, whilst transparently interfacing with the infrastructure Resource Tier.
+Data Ingestion presents a standard interface to the EP components, whilst transparently interfacing with the infrastructure Resource Tier.
 
-Performs the following steps:
+During data ingestion the following steps may be performed:
 
 * Authorisation check
 * Quota check
@@ -213,6 +219,7 @@ Ingestion raises notifications for the following events:
 •	Raise indicators to users (visual, emails, etc.)
 •	Trigger systematic actions in other EP services (e.g. systematic processing)
 
+[[mainWorkspace]]
 == Workspace
 
 The Workspace provides a service to users through which they can organise data/processing-services that are of current interest to them, they are currently working on, and to organise results of processing executed, Research Objects, etc.
@@ -221,5 +228,5 @@ This concept can be extended to create a Group Workspace for sharing and collabo
 
 It may be possible to model the Workspace as a Catalogue, in which the browse/discover access privilege is limited either to an individual user (personal workspace) or a group of collaborating users (group workspace):
 
-* OpenSearch interface for read
-* What interface for add, update, delete ?
+* READ access: OpenSearch should provide a good fit for this interface
+* CREATE/UPDATE/DELETE: Interface semantics must be defined
