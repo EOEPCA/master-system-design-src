@@ -77,7 +77,7 @@ The service/application is adapted (modified) to use the data access interfaces 
 * *Porting* +
 The service/application is ported to use the services of the EP intrinsically - typically by use of the <<mainClientLibrary>> defined by the common architecture.
 
-#*_Section <<procServiceDataAccess>> provides further discussion regarding the data stage-in/out approach for processing services._*#
+*_Section <<procServiceDataAccess>> provides further discussion regarding the data stage-in/out approach for processing services._*
 
 [[procK8s]]
 == Resource Layer (Infrastructure) Interface

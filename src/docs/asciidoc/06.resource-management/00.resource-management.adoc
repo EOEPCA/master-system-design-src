@@ -197,7 +197,7 @@ Thus, processing services and applications can be implemented in a ‘portable�
 
 Specific implementations of the DAL can be made to abstract the data access layer for a given Exploitation Platform. The library offered to the processing service at runtime must implement the specific data access interface to the resource-tier storage. Hence, the library should not be ‘hard-coded’ into the processor application package (Docker image). The Processing Framework must support the ability to 'plugin' an alternative (platform-specific) implementation of the DAL dynamically at processor execution time. It may be possible to develop a 'generic' Data Access Library by implementation against the standard (internal) interface provided by the Data Access Gateway. In this case, the platform-specifics regarding data access are borne entirely by the Data Access Gateway.
 
-#*See also section <<procServiceDataAccess>> which provides a discussion of data access approaches for processing services and the stage-in/out of data.*#
+*See also section <<procServiceDataAccess>> which provides a discussion of data access approaches for processing services and the stage-in/out of data.*
 
 == Data Ingestion
 

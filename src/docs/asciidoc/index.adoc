@@ -17,6 +17,7 @@
 :linkcss:
 :stylesdir: stylesheets
 :stylesheet: eoepca.css
+:icons: font
 :source-highlighter: coderay
 // custom attributes
 :category: Design Document
