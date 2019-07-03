@@ -2,10 +2,10 @@
 import eoepca
 
 # Connect to primary platform - e.g. when running on own desktop
-mainPlatform = eoepca.platform("http://main.platform.eo") # <1>
-mainPlatform = mainPlatform.authenticate("bob@home.org", "<<MY-API-KEY>>") # <2>
+primaryPlatform = eoepca.platform("http://primary.platform.eo") # <1>
+primaryPlatform = primaryPlatform.authenticate("bob@home.org", "<<MY-API-KEY>>") # <2>
 # Or, use the 'local' hosting platform - e.g. when running in 'cloud' platform
-mainPlatform = eoepca.platform().authenticate("bob@home.org", "<<MY-API-KEY>>") # <2> <3>
+primaryPlatform = eoepca.platform().authenticate("bob@home.org", "<<MY-API-KEY>>") # <2> <3>
 
 # Init supporting platforms
 platA = eoepca.platform("http://platform-a.eo") # <1> <4>
@@ -22,7 +22,7 @@ proc2 = platB.collection("PLAT_B_DATA").coverage(extent).process("MultiSensorNDV
 proc3 = platC.collection("PLAT_C_DATA").coverage(extent).process("MultiSensorNDVI") # <5> <6>
 
 # Specify workflow
-workflow = mainPlatform.parallel([proc1, proc2, proc3]).process("NDVIStacker") # <7>
+workflow = primaryPlatform.parallel([proc1, proc2, proc3]).process("NDVIStacker") # <7>
 
 # Get result - initiates 'lazy' execution
 result = workflow.retrieve(format="geotiff", options={}) # <8>
