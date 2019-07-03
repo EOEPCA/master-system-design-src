@@ -39,7 +39,7 @@ For the Common Architecture, we establish separation of User Identification from
 
 [#img_iamOverview,reftext='{figure-caption} {counter:figure-num}']
 .Identity and Access Management Overview
-image::iam-overview.png[width=1000,align="center"]
+image::iam-overview.png[width=100%,pdfwidth=100%,align="center"]
 
 Each protected resource is fronted by its Policy Enforcement Point (PEP), which acts as filter that will only permit access if the appropriate conditions are met. This decision is made according to a set of rules that are under the control of and configured within the exploitation platform.
 
@@ -61,9 +61,9 @@ It should be additionally noted that the decision to allow the user access depen
 
 [#img_iamOverviewFlow,reftext='{figure-caption} {counter:figure-num}']
 .IAM Overview Flow
-image::iam-overview-flow.png[width=1000,align="center"]
+image::iam-overview-flow.png[width=100%,pdfwidth=100%,align="center"]
 
-Note that the interface between the Login Service and the External IdPs is simplified in this view. It is expanded in later sections.
+Note that the interface between the Login Service and the External IdPs is simplified in this view. It is expanded in section <<mainAuthenticatedIdentity>>.
 
 === IAM Top-level Interfaces
 
@@ -71,7 +71,7 @@ Note that the interface between the Login Service and the External IdPs is simpl
 
 [#img_iamInterfaces,reftext='{figure-caption} {counter:figure-num}']
 .IAM Interfaces
-image::iam-interfaces.png[width=1000,align="center"]
+image::iam-interfaces.png[width=80%,pdfwidth=80%,align="center"]
 
 User -> Protected Resource::
 The Protected Resource exposes a public API for user consumption.
@@ -92,6 +92,7 @@ Response returns the authorisation decision.
 PDP -> Other PDP::
 Same interface characteristics as PEP->PDP.
 
+[[mainAuthenticatedIdentity]]
 == Authenticated Identity
 
 The approach to user identity and authentication centres around the use of OpenID Connect. Each Exploitation Platform maintains their own OIDC Provider through which tokens can be issued to permit access to protected resources within the EP. The authentication itself is delegated to external Identity Providers at the preference of the end-user wishing to reuse their existing identity provision.
@@ -110,7 +111,7 @@ The Login Service must act as client (Relying Party) to each of the External IdP
 
 [#img_iamAuthenticationFlow,reftext='{figure-caption} {counter:figure-num}']
 .IAM Authentication Flow (Browser)
-image::iam-authentication-flow.png[width=1000,align="center"]
+image::iam-authentication-flow.png[width=100%,pdfwidth=100%,align="center"]
 
 [[mainLoginService,Login Service]]
 === Login Service

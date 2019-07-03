@@ -20,6 +20,7 @@ Provides a single well-known 'bootstrap' URL through which the service capabilit
 */.well-known/eoepca-platform*
 
 [source,json]
+.Example Platform Capabilities
 ----
 include::src/eoepca-platform-example.json[]
 ----

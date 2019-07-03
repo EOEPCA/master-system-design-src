@@ -18,7 +18,7 @@ The design of the Client Library is not yet established. To illustrate its conce
 
 [#img_ndviStacker,reftext='{figure-caption} {counter:figure-num}']
 .OGC Testbed-14 Workflow Scenario (NDVI Stacker)
-image::ndvi-stacker.png[width=100%,pdfwidth=100%,align="center"]
+image::ndvi-stacker.png[width=80%,pdfwidth=80%,align="center"]
 
 Four platforms are involved in the scenario:
 

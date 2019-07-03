@@ -16,7 +16,7 @@ To exploit the services of the Platform, users need to discover available data, 
 
 [#img_resourceUseCase,reftext='{figure-caption} {counter:figure-num}']
 .Resource Management Use Case
-image::use-cases-data.png[width=1000,align="center"]
+image::use-cases-data.png[width=100%,pdfwidth=100%,align="center"]
 
 Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the ‘Processing & Chaining’ domain area by the provision of an Application Catalogue. See <<mainAppCatalogue>> for more details.
 
@@ -39,7 +39,7 @@ The main components comprising the Resource Management domain are illustrated in
 
 [#img_resourceOverview,reftext='{figure-caption} {counter:figure-num}']
 .Resource Management Overview
-image::resource-overview.png[width=1000,align="center"]
+image::resource-overview.png[width=85%,pdfwidth=85%,align="center"]
 
 To some degree, the role of these components is to provide an integration of the Exploitation Platform to the Resource Tier, by providing public services that bridge to the underlying data supply.
 
@@ -102,7 +102,7 @@ In order to ensure a coherent link between data discovery and access, the Exploi
 
 [#img_catalogueAggregation,reftext='{figure-caption} {counter:figure-num}']
 .Catalogue Aggregation
-image::catalogue-aggregation.png[width=1000,align="center"]
+image::catalogue-aggregation.png[width=100%,pdfwidth=100%,align="center"]
 
 We wish the exploitation platform to expose a public catalogue that provides both the Browse (collection) and Discovery (product) views:
 
@@ -119,7 +119,7 @@ In order that a user is able to discover data/services of interest in a federate
 
 [#img_catalogueFederation,reftext='{figure-caption} {counter:figure-num}']
 .Catalogue Federation
-image::catalogue-federation.png[width=1000,align="center"]
+image::catalogue-federation.png[width=70%,pdfwidth=70%,align="center"]
 
 As illustrated in <<img_catalogueFederation>> there are a number of possible approaches:
 

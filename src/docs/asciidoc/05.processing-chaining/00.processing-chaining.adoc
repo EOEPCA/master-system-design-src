@@ -15,7 +15,7 @@ The interface between the Processing Framework and the compute resource should b
 
 [#img_processingUseCase,reftext='{figure-caption} {counter:figure-num}']
 .Processing & Chaining Use Case
-image::use-cases-processing.png[width=1000,align="center"]
+image::use-cases-processing.png[width=100%,pdfwidth=100%,align="center"]
 
 In meeting these requirements the following key challenges are identified:
 
@@ -59,7 +59,7 @@ Thus, each platform that supports processing should include an ADES, and each pl
 
 [#img_procOverview,reftext='{figure-caption} {counter:figure-num}']
 .Processing & Chaining Overview
-image::processing-overview.png[width=1000,align="center"]
+image::processing-overview.png[width=100%,pdfwidth=100%,align="center"]
 
 In order for processing services and their data input/outputs to be aligned a formalism is required to describe the data types for M2M consumption. This is required to ensure that a processor is invoked with compatible data inputs, its outputs are understood, and that coherent workflows can be constructed in which the outputs -> inputs are aligned. For this purpose, Common Workflow Language (CWL) is used in the Application Package Description to describe the processor input/ouputs.
 
@@ -129,7 +129,7 @@ Machine-To-Machine (M2M):: Requiring all the information to ensure that the appl
 
 [#img_procAppDescriptor,reftext='{figure-caption} {counter:figure-num}']
 .Structure of Application Descriptor data model
-image::processing-application-descriptor.png[width=80%,pdfwidth=80%,align="center"]
+image::processing-application-descriptor.png[width=70%,pdfwidth=70%,align="center"]
 
 Thus, the WPS-T DeployDocument comprises the following parts:
 
@@ -155,9 +155,8 @@ Enumerates the type of the executionUnit. Currently supported:
 * Docker image (http://www.opengis.net/profiles/eoc/dockerizedApplication)
 * CWL Workflow (http://www.opengis.net/profiles/eoc/workflow)
 
-An example Application Descriptor follows…
-
 [source,json]
+.Example Application Descriptor
 ----
 include::src/app-descriptor-example.json[]
 ----
@@ -179,7 +178,7 @@ The EMS provides the endpoint for the user’s web client, through which applica
 
 [#img_procEmsDeploy,reftext='{figure-caption} {counter:figure-num}']
 .EMS Deployment
-image::processing-EMS-deploy.png[width=1000,align="center"]
+image::processing-EMS-deploy.png[width=90%,pdfwidth=90%,align="center"]
 
 Applications are deployed to the EMS so that they are available for inclusion in workflows.
 
@@ -189,7 +188,7 @@ As illustrated in <<img_procEmsExecute>>, the EMS orchestrates the workflow exec
 
 [#img_procEmsExecute,reftext='{figure-caption} {counter:figure-num}']
 .EMS Workflow Execution
-image::processing-EMS-execute.png[width=1000,align="center"]
+image::processing-EMS-execute.png[width=100%,pdfwidth=100%,align="center"]
 
 At time of `wps:Execute` the input data must be specified by the invoking user. Two possibilities are currently identified, both of which should be supported by EMS:
 
@@ -229,7 +228,7 @@ This approach is consistent with the current Application Package / ADES definiti
 
 [#img_procAdesExecute,reftext='{figure-caption} {counter:figure-num}']
 .ADES Process Execution
-image::processing-ADES-execute.png[width=1000,align="center"]
+image::processing-ADES-execute.png[width=85%,pdfwidth=85%,align="center"]
 
 A Kubernetes cluster comprises a set of Nodes. A Node is a worker machine in Kubernetes and may be either a virtual or a physical machine. Each Node is managed by the Master. A Node can have multiple pods, and the Kubernetes master automatically handles scheduling of the pods across the Nodes in the cluster. The Master's automatic scheduling takes into account the available resources on each Node.
 
@@ -297,7 +296,7 @@ Building upon the work of OGC Testbed-14 (ref. <<TB14-AP>>), the Application Des
 
 [#img_procAppDescriptorUpdated,reftext='{figure-caption} {counter:figure-num}']
 .Application Descriptor (Enhanced)
-image::application-descriptor-updated.png[width=80%,pdfwidth=80%,align="center"]
+image::application-descriptor-updated.png[width=70%,pdfwidth=70%,align="center"]
 
 The Application Descriptor is enhanced with additional components:
 
@@ -348,7 +347,7 @@ The work carried out in the OGC Testbeds focused on non-graphical applications, 
 
 [#img_applicationsUseCase,reftext='{figure-caption} {counter:figure-num}']
 .Interactive Applications Use Case
-image::use-cases-applications.png[width=1000,align="center"]
+image::use-cases-applications.png[width=100%,pdfwidth=100%,align="center"]
 
 That said, the approach to application packaging undertaken in the testbeds does lend itself to the packaging of GUI-based applications, which can be packaged, deployed and executed as docker containers, including:
 

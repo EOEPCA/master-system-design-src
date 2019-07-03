@@ -23,7 +23,7 @@ These user-facing web components form part of other domain areas that together p
 
 [#img_webPortal,reftext='{figure-caption} {counter:figure-num}']
 .Web Portal: Overview
-image::web-portal.png[width=1000,align="center"]
+image::web-portal.png[width=90%,pdfwidth=90%,align="center"]
 
 The platform should support provision of limited access to unauthenticated (guest) users, in which they can search the marketplace to discover the services and data available, and browse supporting materials. Access to the full capabilities of the platform requires registered users to identify and authenticate.
 
