@@ -1,10 +1,16 @@
-= {titletext} ({docnum})
+= {doc-title}
 :doctype: book
 :author: TVUK System Team
 :email: <Eoepca.SystemTeam@telespazio.com>
-:revnumber: v0.4.2
-:revdate: 21.06.2019
+:project: EOEPCA
+:project-name: EO Exploitation Platform Common Architecture
+:doc-title: Master System Design Document
+:doc-num: {project}.SDD.001
+:revnumber: 0.5
+:revdate: 04.07.2019
 :revremark: In-Progress Draft
+:category: Design Document
+:copyrightYear: 2019
 // attributes
 :hardbreaks:
 :sectnums:
@@ -19,13 +25,11 @@
 :stylesheet: eoepca.css
 :icons: font
 :source-highlighter: coderay
-// custom attributes
-:category: Design Document
-:project: EOEPCA
-:docnum: {project}.SDD.001
-:title: Master System Design
-:titletext: {title}
-:copyrightYear: 2019
+// pdf
+:pdf-stylesdir: resources/themes
+:pdf-style: eoepca
+:media: screen
+:title-logo-image: image::telespazio.png[top=5%, align=right, pdfwidth=6.5in]
 
 :leveloffset: +1
 
@@ -62,5 +66,9 @@ include::07.platform-api/00.platform-api.adoc[]
 <<<
 
 include::08.web-portal/00.web-portal.adoc[]
+
+'''
+
+include::end-of-document.adoc[]
 
 :leveloffset: -1

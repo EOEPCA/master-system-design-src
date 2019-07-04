@@ -30,7 +30,7 @@ then
     echo "WARNING: Skipping generation of PDF file (${PDF_FILE})"
 else
     echo -n "Generating PDF output (${PDF_FILE}): "
-    docker run --rm -it -v $(pwd):/documents/ asciidoctor/docker-asciidoctor asciidoctor-pdf -D "${OUTPUT_DIR}" -o "${PDF_FILE}" src/docs/asciidoc/index.adoc
+    docker run --rm -it -v $(pwd):/documents/ asciidoctor/docker-asciidoctor bash -c "cd src/docs/asciidoc && asciidoctor-pdf -D \"../../../${OUTPUT_DIR}\" -o \"${PDF_FILE}\" index.adoc"
     echo "[done]"
 fi
 
