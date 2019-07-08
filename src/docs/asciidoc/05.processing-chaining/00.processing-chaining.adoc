@@ -205,7 +205,7 @@ The EMS requires a means to determine the target platform (ADES) for the executi
 
 Performing the orchestration between steps, the EMS must handle the stage-in and stage-out of data. In the simple case, the result URL returned from a step can be directly used as an input URL for the subsequent step. Use of CWL and the accompanying `cwl-runner` tool should facilitate this orchestration.
 
-The end result of the successful execution is to present the output result to the invoking user. The EMS establishes the location of the results within the storage provision of the Exploitation Platform, and interfaces with the EP Workspace component (<<User Workspace>>) to register the result in the user’s workspace. At this point the WPS execution is complete as reported by the `wps:GetStatus` and `wps:GetResult`.
+The end result of the successful execution is to present the output result to the invoking user. The EMS establishes the location of the results within the storage provision of the Exploitation Platform, and interfaces with the EP Workspace component (<<mainWorkspace>>) to register the result in the user’s workspace. At this point the WPS execution is complete as reported by the `wps:GetStatus` and `wps:GetResult`.
 
 [[mainProcADES, Application Deployment and Execution Service]]
 == Application Deployment and Execution Service (ADES)
