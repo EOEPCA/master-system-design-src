@@ -1,13 +1,15 @@
 = Changelog
 All notable changes to this project will be documented in this file.
 
-== https://github.com/EOEPCA/master-system-design-src/compare/v0.2%2E%2E%2EHEAD[Unreleased]
+== https://github.com/EOEPCA/master-system-design-src/compare/v0.3%2E%2E%2Ev0.4[v0.4] - 21.06.2019
 
 === Added
-* tbd
+* Initial 'Platform API' section
+* Initial description of Service API
 
 === Changed
-* tbd
+* Re-organised 'Design Overview' section
+* Updated description of Data Access Library
 
 == https://github.com/EOEPCA/master-system-design-src/compare/v0.2%2E%2E%2Ev0.3[v0.3] - 2019.05.13
 
