@@ -1,6 +1,17 @@
 = Changelog
 All notable changes to this project will be documented in this file.
 
+== https://github.com/EOEPCA/master-system-design-src/compare/v0.4%2E%2E%2Ev0.5[v0.5] - 09.07.2019
+
+=== Added
+* Billing and payments
+* Description of Client Library
+* Initial thoughts around licensing
+
+=== Changed
+* Update description of 'Data Access' layer
+* Minor re-work of IAM description for greater clarity
+
 == https://github.com/EOEPCA/master-system-design-src/compare/v0.3%2E%2E%2Ev0.4[v0.4] - 21.06.2019
 
 === Added
