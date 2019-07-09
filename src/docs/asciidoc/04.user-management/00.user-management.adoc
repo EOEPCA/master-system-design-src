@@ -57,13 +57,13 @@ The authorisation policy defines a set of rules and how they should be evaluated
 
 It should be additionally noted that the decision to allow the user access depends upon dynamic 'attributes', such as whether the user has enough credits to 'pay' for their usage, or whether they have accepted the necessary Terms & Conditions for a given dataset or service. Thus, the PDP must interrogate other EP-services such as 'Accounting & Billing' and 'User Profile' to answer such questions.
 
-<<img_iamOverviewFlow>> provides an overview of the IAM Flow.
+<<img_iamOverviewFlow>> provides an overview of the IAM Flow, (success case).
 
 [#img_iamOverviewFlow,reftext='{figure-caption} {counter:figure-num}']
 .IAM Overview Flow
 image::iam-overview-flow.png[width=100%,pdfwidth=100%,align="center"]
 
-Note that the interface between the Login Service and the External IdPs is simplified in this view. It is expanded in section <<mainAuthenticatedIdentity>>.
+*Flows marked \<<redirect>> should be interpreted as flows between services that are made by redirection through the User Agent.* For brevity, the interface between the Login Service, the User Agent and the External IdPs is simplified in <<img_iamOverviewFlow>> - they are expanded in section <<mainAuthenticatedIdentity>>. It should also be noted that the flows with the External IdP will vary according to the protocol required by the External IdP, (e.g. OAuth, SAML, etc.).
 
 === IAM Top-level Interfaces
 
@@ -73,24 +73,26 @@ Note that the interface between the Login Service and the External IdPs is simpl
 .IAM Interfaces
 image::iam-interfaces.png[width=80%,pdfwidth=80%,align="center"]
 
-User -> Protected Resource::
-The Protected Resource exposes a public API for user consumption.
+User Agent -> PEP::
+The PEP acts as a HTTP filter on the access request to the API of the Protected Resource. The PEP intercepts the incoming request in order to enforce the authorisation policy decision.
 
-Protected Resource -> PEP::
-The PEP acts as a filter on the access request to the resource. The PEP intercepts the incoming request in order to enforce the authorisation policy decision.
+PEP -> Protected Resource::
+The Protected Resource exposes a public API for user consumption. The user's access to the protected resource is only granted once the request has passed the authorisation decision, which may or may not require user authentication.
 
 PEP -> Login Service::
 The PEP uses a redirect to delegate the authentication flow to the Login Service.
 
-Login Service -> External IdP::
-In order to support multiple external identity suppliers, the Login Service must act as a client to multiple external IdPs, and so must establish individual trust relationships with each of these. Alternatively, the Login Service can instead interface to a single external IdP Proxy, that interfaces to the external IdPs on behalf of the EP. The IdP Proxy can provide this service to multiple EPs.
+Login Service -> User Agent -> External IdP::
+The Login Service and External IdP interface via redirects through the User Agent. In order to support multiple external identity suppliers, the Login Service must act as a client to multiple external IdPs, and so must establish individual trust relationships with each of these. Alternatively, the Login Service can instead interface to a single external IdP Proxy, that interfaces to the external IdPs on behalf of the EP. The IdP Proxy can provide this service to multiple EPs.
 
 PEP -> PDP::
-Request carries the user identification, the URI of the resource, and the action.
-Response returns the authorisation decision.
+The PEP defers to the PDP to establish the authorisation status of the incoming access attempt.
+The request to the PDP carries the user identification, the URI of the resource, and the action requested.
+The PDP-response returns the authorisation decision.
 
 PDP -> Other PDP::
-Same interface characteristics as PEP->PDP.
+This interface represents federated authorisation.
+It has the same interface characteristics as PEP->PDP.
 
 [[mainAuthenticatedIdentity]]
 == Authenticated Identity
