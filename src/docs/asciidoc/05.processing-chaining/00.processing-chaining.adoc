@@ -214,7 +214,7 @@ The ADES provides a WPS-T (REST/JSON) service that incorporates the Docker execu
 
 The main responsibilities of the ADES are:
 
-* Check the user is authorised to access the requested data
+* Check the user is authorized to access the requested data
 * Perform stage-in of data before execution
 * Invoke the container from the Docker image in accordance with the ApplicationDescriptor and the `wps:Execute` request
 * Monitor the status of the job and obtain the results
@@ -327,7 +327,7 @@ Access to the underlying platform data is provided through a common service laye
 For example, to satisfy a processing service that requires an S3 interface, but is executed in an environment where the data is available through a POSIX file system. Minio (https://github.com/minio/minio) is an open source object store implementation that overlays an S3 interface over a POSIX file system. +
 See section <<mainDataAccessGateway>>.
 
-=== User Authorisation Context
+=== User Authorization Context
 
 The stage-in/out of data must operate within the context of the user’s ‘account’. Thus, the security context of the user must be passed through all aspects performed by the Processing Framework on behalf of the user. This is necessary to ensure that the user is only able to access data to which they are entitled and accounting & billing considerations are properly maintained.
 

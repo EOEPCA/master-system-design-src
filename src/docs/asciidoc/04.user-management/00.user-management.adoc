@@ -17,7 +17,7 @@ These are explored in the following sub-sections.
 [[IAM,Identity and Access Management]]
 == Identity and Access Management (IAM)
 
-The goal of IAM is to uniquely identify the user and limit access to protected resources to those having suitable access rights. We assume an Attribute Based Access Control (ABAC) approach in which authorisation decisions are made based upon access policies/rules that define attributes required by resources and possessed (as claims) by users. ABAC is is seen as a more flexible approach than Role Base Access Control (RBAC), affording the ability to express more sofisticated authorisations rules beyond the role(s) of the user - and noting the fact that a role-based ruleset could be implemented within an attribute based approach, (i.e. RBAC is a subset/specialisation of ABAC).
+The goal of IAM is to uniquely identify the user and limit access to protected resources to those having suitable access rights. We assume an Attribute Based Access Control (ABAC) approach in which authorization decisions are made based upon access policies/rules that define attributes required by resources and possessed (as claims) by users. ABAC is is seen as a more flexible approach than Role Base Access Control (RBAC), affording the ability to express more sophisticated authorizations rules beyond the role(s) of the user - and noting the fact that a role-based ruleset could be implemented within an attribute based approach, (i.e. RBAC is a subset/specialisation of ABAC).
 
 In achieving this there are three main concerns:
 
@@ -27,11 +27,13 @@ In achieving this there are three main concerns:
 ** what attributes are required to access the protected resource
 ** whether the user has the required attributes
 
-For the Common Architecture, we establish separation of User Identification from Access Management. User identity is federated and handled external to the platform. Within the Network of EO Resources, resources held within an exploitation platform are made available to federated partner platforms. Authorisation policy is enforced within the platform at point of access, but the access policy can be federated within the network of EO resources, leading to a system of _federated authorisation_.
+For the Common Architecture, we establish separation of User Identification from Access Management. User identity is federated and handled external to the platform. Within the Network of EO Resources, resources held within an exploitation platform are made available to federated partner platforms. Authorization policy is enforced within the platform at point of access, but the access policy can be federated within the network of EO resources, leading to a system of _federated authorization_.
 
 * The identity is provided externally. The external IdP has no association to the exploitation platform, and hence is not the appropriate place to administer attributes that relate to EP resources
 * The protected resources are under the custodianship of the exploitation platform and hence the exploitation platform enforces the access policy decision
 * The administrative domain for an access policy should should not be tied to an exploitation platform, which facilitates the provision of federation and virtual organisations
+
+Federation of services between exploitation platforms is an important goal of the Common Architecture. Thus, the IAM design must offer an approach through which user access is managed between platforms, ensuring proper enforcement of access controls and billing.
 
 === IAM Approach
 
@@ -45,15 +47,15 @@ Each protected resource is fronted by its Policy Enforcement Point (PEP), which 
 
 The Login Service is provided as a common component that is utilised by each PEP to perform the authentication flow with the external IdPs. In the case of an unauthenticated request that requires authentication, the PEP will initiate the Login Service by redirection of the User’s originating request. The successful flow ultimately redirects back to the PEP and so maintains the direct connection between the end-user agent and the resource server. An alternative approach would be the use of an API Gateway to perform the role of the PEP, acting as an intermediary between the end-user agent and the resource server. However, this would have the effect of proxying the connection which can have an impact on data transfer performance, which is of particular importance in the case of significant data volumes being returned to the User.
 
-The PEP interrogates the PDP for an authorisation decision. The PEP sends a request that indicates the pertinent details of the attempted access, including:
+The PEP interrogates the PDP for an authorization decision. The PEP sends a request that indicates the pertinent details of the attempted access, including:
 
 * Identity of end-user (subject)
 * The API (path/version etc.) being accessed (resource)
 * The operation (HTTP verb) being performed (action)
 
-The Policy Decision Point (PDP) returns an authorisation decision based upon details provided in the request, and the applicable authorisation policy. The authorisation policy may delegate all or part of the decision to external PDP(s) within the federated network. This represents a Federated Authorisation model and facilitates a model of shared resources and virtual organisations.
+The Policy Decision Point (PDP) returns an authorization decision based upon details provided in the request, and the applicable authorization policy. The authorization policy may delegate all or part of the decision to external PDP(s) within the federated network. This represents a Federated Authorization model and facilitates a model of shared resources and virtual organisations.
 
-The authorisation policy defines a set of rules and how they should be evaluated to determine the policy decision. The rules are expressed through attributes. The policy is evaluated to determine what attributes are required, and what attributes the user possesses. This evaluation extends through external PDPs according to any federated authorisation defined in the policy.
+The authorization policy defines a set of rules and how they should be evaluated to determine the policy decision. The rules are expressed through attributes. The policy is evaluated to determine what attributes are required, and what attributes the user possesses. This evaluation extends through external PDPs according to any federated authorization defined in the policy.
 
 It should be additionally noted that the decision to allow the user access depends upon dynamic 'attributes', such as whether the user has enough credits to 'pay' for their usage, or whether they have accepted the necessary Terms & Conditions for a given dataset or service. Thus, the PDP must interrogate other EP-services such as 'Accounting & Billing' and 'User Profile' to answer such questions.
 
@@ -74,10 +76,10 @@ image::iam-overview-flow.png[width=100%,pdfwidth=100%,align="center"]
 image::iam-interfaces.png[width=80%,pdfwidth=80%,align="center"]
 
 User Agent -> PEP::
-The PEP acts as a HTTP filter on the access request to the API of the Protected Resource. The PEP intercepts the incoming request in order to enforce the authorisation policy decision.
+The PEP acts as a HTTP filter on the access request to the API of the Protected Resource. The PEP intercepts the incoming request in order to enforce the authorization policy decision.
 
 PEP -> Protected Resource::
-The Protected Resource exposes a public API for user consumption. The user's access to the protected resource is only granted once the request has passed the authorisation decision, which may or may not require user authentication.
+The Protected Resource exposes a public API for user consumption. The user's access to the protected resource is only granted once the request has passed the authorization decision, which may or may not require user authentication.
 
 PEP -> Login Service::
 The PEP uses a redirect to delegate the authentication flow to the Login Service.
@@ -86,12 +88,12 @@ Login Service -> User Agent -> External IdP::
 The Login Service and External IdP interface via redirects through the User Agent. In order to support multiple external identity suppliers, the Login Service must act as a client to multiple external IdPs, and so must establish individual trust relationships with each of these. Alternatively, the Login Service can instead interface to a single external IdP Proxy, that interfaces to the external IdPs on behalf of the EP. The IdP Proxy can provide this service to multiple EPs.
 
 PEP -> PDP::
-The PEP defers to the PDP to establish the authorisation status of the incoming access attempt.
+The PEP defers to the PDP to establish the authorization status of the incoming access attempt.
 The request to the PDP carries the user identification, the URI of the resource, and the action requested.
-The PDP-response returns the authorisation decision.
+The PDP-response returns the authorization decision.
 
 PDP -> Other PDP::
-This interface represents federated authorisation.
+This interface represents federated authorization.
 It has the same interface characteristics as PEP->PDP.
 
 [[mainAuthenticatedIdentity]]
@@ -141,7 +143,7 @@ token_endpoint (/token)::
 To exchange the code grant for the access tokens.
 
 userinfo_endpoint (/userinfo)::
-To obtain the user information ID token in accordance with the scopes requested in the authorisation request.
+To obtain the user information ID token in accordance with the scopes requested in the authorization request.
 
 jwks_uri (/keys)::
 To obtain signing keys for Token validation purposes.
@@ -178,9 +180,9 @@ The ID Token is a JWT that is returned to from the /userinfo endpoint of the Log
 
 Clients are Relying Parties that act on behalf of users accessing the services of the Exploitation Platform. They will either pre-emptively obtain their access token for required resources, or will attempt resource access and be redirected by exception to the OIDC Provider authentication flow.
 
-In the case of a web application (browser hosted), the Implicit Flow would be used. In other cases, where possible, the Authorisation Code Flow would be preferred.
+In the case of a web application (browser hosted), the Implicit Flow would be used. In other cases, where possible, the Authorization Code Flow would be preferred.
 
-The OIDC flows are initiated with the appropriate response_type (‘id_token token’ for Implicit Flow, ‘code’ for Authorisation Code Flow) and scope of ‘oidc profile’.
+The OIDC flows are initiated with the appropriate response_type (‘id_token token’ for Implicit Flow, ‘code’ for Authorization Code Flow) and scope of ‘oidc profile’.
 
 At the successful conclusion of the flow the client receives the Access Token and ID Token. The Access Token is then used by the client as a Bearer token in its subsequent calls to access the EP resources.
 
@@ -191,11 +193,11 @@ The PEP (acting on behalf of the resource server) receives the client request to
 Thus, the PEP follows the logic:
 
 * The PEP checks with the PDP whether an authenticated user is required for access
-* If no authenticated user is required then the request can continue (pending authorisation) as an 'anonymous' user
+* If no authenticated user is required then the request can continue (pending authorization) as an 'anonymous' user
 * If access requires an authenticated user then
 ** If the access token is not present then no user is logged in, so the request should be redirected to the /authorize endpoint (HTTP redirect)
 ** If the access token is present, then it should be validated with the Login Service (direct call), as described below
-** If the access token validation completes successfully then the request can continue (pending authorisation), with the user identity provided by the ID Token received during token validation
+** If the access token validation completes successfully then the request can continue (pending authorization), with the user identity provided by the ID Token received during token validation
 ** If the token is invalid, then the request should be redirected to the /authorize endpoint (HTTP redirect)
 
 === Access Token Validation
@@ -211,16 +213,16 @@ The ID Token is a JWT that has been signed by the Login Service. Using the jwks 
 
 Based upon the above authentication model, an EP could access the resources of another EP by obtaining an access token through OIDC flows. However, considering that these EP->EP invocations will typically be Machine-to-machine (M2M), then we need to consider how the end-user (resource owner) is able to compete their consent. Two possibilities are explored in the subsequent sections:
 
-. The user pre-authorises the EP->EP access in advance of the operation
+. The user pre-authorizes the EP->EP access in advance of the operation
 . Use of OIDC JWKS for trusted federation of identity between platforms
 
-==== User Pre-authorisation
+==== User Pre-authorization
 
-Using the facilities of the Exploitation Platform, the user (perhaps via their User Profile management console) initiates the authorisation flow from one EP to another. The end result is that the originating EP obtains delegated access to another EP on behalf of the user - with the resulting access tokens being maintained within the user's profile on the EP.
+Using the facilities of the Exploitation Platform, the user (perhaps via their User Profile management console) initiates the authorization flow from one EP to another. The end result is that the originating EP obtains delegated access to another EP on behalf of the user - with the resulting access tokens being maintained within the user's profile on the EP.
 
-At the point where the EP needs to access a resource on another EP, then the access tokens are obtained from the user's profile and used as Bearer token in the resource request to the other EP. Refresh tokens can be used to ensure that authorisation is long-lived.
+At the point where the EP needs to access a resource on another EP, then the access tokens are obtained from the user's profile and used as Bearer token in the resource request to the other EP. Refresh tokens can be used to ensure that authorization is long-lived.
 
-Conversly, the user's profile at a given EP should also provide the ability to manage any inward authrosations they have granted to other EPs, i.e. ability to revoke a previous authorisation by invalidating the refresh token. This would invole interface with the Login Service.
+Conversly, the user's profile at a given EP should also provide the ability to manage any inward authrosations they have granted to other EPs, i.e. ability to revoke a previous authorization by invalidating the refresh token. This would invole interface with the Login Service.
 
 ==== Possible use of OIDC JWKS Federation
 
@@ -240,7 +242,7 @@ The nominal solution is for the originating EP to act as an OIDC Client to inter
 
 One possibility is to make use of the signed-JWT ID Token that can be carried through the calls into and across resource servers. Through the facilities provided by JSON Web Key Set (JWKS), ID Tokens can be verified and trusted by other platforms operating within the same JWKS key hierarchy.
 
-Thus, using the trusted ID Token, it may be possible follow an OIDC/OAuth flow from one EP to another, in which the user is deemed to have a-priori authorised the third-party access. At this point it is only the user’s identity that has been established, with the authorisation decision subject to the rules of the PDP/PEP of the remote system. The identified user must have appropriate a-priori permissions (attributes) on the target resources to be granted access, (ref. ‘Federated Attributes’).
+Thus, using the trusted ID Token, it may be possible follow an OIDC/OAuth flow from one EP to another, in which the user is deemed to have a-priori authorized the third-party access. At this point it is only the user’s identity that has been established, with the authorization decision subject to the rules of the PDP/PEP of the remote system. The identified user must have appropriate a-priori permissions (attributes) on the target resources to be granted access, (ref. ‘Federated Attributes’).
 
 Thus, it is the ID of the user that has been passed machine-to-machine to facilitate the service federation. This effectively achieves cross-EP single sign-on, without relying upon the user agent of the end-user providing cookies to the other EP.
 
@@ -372,7 +374,7 @@ Where inter-platform payments are used the host platform is acting a subcontract
 
 If inter-platform payments are not available, for example because two platforms do not have a payment agreement, it may still be possible to provide services across multiple platforms providing the user has an account and billing relationship with each one directly. This requires that both platforms recognize both the user and the selected billing identity, and that the billing user has delegated access to the user in both platforms.
 
-To handle direct payments the user must authorize the home platform to act on its behalf when submitting requests to the host platform. This is done using oAuth. The home platform must redirect the user to the host platform which then returns an authorization token to the home platform. Federated platforms must run an oAuth endpoint for this purpose and certain restrictions must be put on its functioning (for example on refresh token lifetime).
+To handle direct payments the user must authorize the home platform to act on its behalf when submitting requests to the host platform. This is done using OAuth. The home platform must redirect the user to the host platform which then returns an authorization token to the home platform. Federated platforms must run an OAuth endpoint for this purpose and certain restrictions must be put on its functioning (for example on refresh token lifetime).
 
 Other system components must then use an access token when making requests to the host platform. The host platform should still report costs and identifiers to the home platform, which must be passed to the Billing Service to be recorded. This aids dispute resolution and the reporting of total costs for particular requests.
 
@@ -387,7 +389,7 @@ The Billing Service handles inter-platform payments and supports direct payments
 To support this for volume-based charges, interaction between other system components and the Billing Service proceeds as follows:
 
 * Prior to federated resource use, a component must make a request to the Billing Service with the estimated cost (or a fixed value if not available) and the identity of the host platform. It must also include the transaction ID for the user action which resulted in the payment.
-* The Billing Service determines what kind of payment handling is available, if any. It returns success or failure and, optionally, an oAuth URL to authorize direct payment.
+* The Billing Service determines what kind of payment handling is available, if any. It returns success or failure and, optionally, an OAuth URL to authorize direct payment.
 * The component proceeds with its activity, incurring charges. The activity occurs on the compute platform, which may also be the home or host platform.
 * The compute platform seeks authorization from the host platform before charges are incurred. The host platform checks that an authorized payment exist (directly between the home and host platform). If the charge is for compute resources then these are the same platform and may be a no-op, but this may not be the case for computation using licensed data or software.
 * If the compute platform seeks access from a host platform which has no authorized payment in place then it must report this to the home platform. The home platform may then request authorization or abort the processing. This may happen if the home platform cannot fully predict the accesses made during computation.
@@ -472,7 +474,7 @@ Resource owners must be able to configure licences. The UIs and APIs allowing th
 
 In some cases users may have multiple home platforms, initiating some workloads from different locations. To ensure that users can use their licences for workloads initiated across all locations licence 'porting' may be used.
 
-A user 'ports' a licence from one platform to another by using oAuth to authorize the licence manager on the local platform to access his licences on another. This is only permitted if the licences have been marked as 'portable' by the licenser.
+A user 'ports' a licence from one platform to another by using OAuth to authorize the licence manager on the local platform to access his licences on another. This is only permitted if the licences have been marked as 'portable' by the licenser.
 
 
 This mechanism may be used for two purposes. In the first, a publisher a has publshed his Resource in both platforms (which may be done to permit lower processing latencies, lower payment processing costs or the use of proprietary features). The platform receiving the licence must verify its signature using the licenser's public key before accepting it. In the second case the Resource is not available on the receiving platform but may still be used in cross-platform workflows (including the case when a processing service is transferred from a remote host platform to execute locally).

@@ -4,7 +4,7 @@
 
 The Service API and its associated Client Library together present a standard platform interface against which analysis and exploitation activities may be developed, and through which platform services can be federated.
 
-The Client Library is a programmtic representation of the Service API which acts as an abstraction of the Exploitation Platform and so facilitates the development of portable client implementations.
+The Client Library is a programmatic representation of the Service API which acts as an abstraction of the Exploitation Platform and so facilitates the development of portable client implementations.
 
 [#img_clientLibServiceInterfaces,reftext='{figure-caption} {counter:figure-num}']
 .Client Library Service Interfaces

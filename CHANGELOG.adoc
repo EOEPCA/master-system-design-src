@@ -31,7 +31,7 @@ All notable changes to this project will be documented in this file.
 
 === Changed
 * Updates to Glossary and Terminology
-* IAM: Federated authorisation
+* IAM: Federated authorization
 
 == https://github.com/EOEPCA/master-system-design-src/compare/v0.1%2E%2E%2Ev0.2[v0.2] - 2019.04.25
 
