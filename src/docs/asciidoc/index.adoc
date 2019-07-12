@@ -14,8 +14,10 @@
 // attributes
 :hardbreaks:
 :sectnums:
-:toc: macro
+:sectnumlevels: 5
+:toc: left
 :toclevels: 5
+:toc-title: Master System Design
 //:toc-title:
 :description: Master System Design for the Common Architecture
 :keywords: common architecture master system design

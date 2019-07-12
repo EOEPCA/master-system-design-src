@@ -1,5 +1,5 @@
 
-[cols="5,1,5,1"]
+[cols="70,20,50,25a"]
 |===
 | Resource | HTTP Method | Description | WPS operation
 
@@ -11,22 +11,26 @@
 | /processes
 | GET
 | Retrieve available processes
-| GetCapabilities
+| Get +
+Capabilities
 
 | /processes
 | POST
 | Deploy a process
-| DeployProcess
+| Deploy +
+Process
 
 | /processes/{id}
 | GET
 | Retrieve a process description
-| DescribeProcess
+| Describe +
+Process
 
 | /processes/{id}
 | DELETE
 | Undeploy a process
-| UndeployProcess
+| Undeploy +
+Process
 
 | /processes/{id}/jobs
 | GET

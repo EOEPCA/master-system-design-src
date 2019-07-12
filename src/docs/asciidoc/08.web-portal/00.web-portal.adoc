@@ -1,4 +1,4 @@
-
+[[mainWebPortal]]
 = Web Portal
 
 The Web Portal represents the browser-based user interface through which the user interacts with the EO Exploitation Platform.

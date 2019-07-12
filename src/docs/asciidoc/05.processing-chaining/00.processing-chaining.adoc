@@ -383,22 +383,20 @@ A consistent vocabulary of services must be defined to unambiguously express the
 [[mainAppCatalogue,Application Catalogue]]
 == Application Catalogue
 
-#TBD - Ref. CEOS OpenSearch Best Practice#
-
 The Application Catalogue provides an inventory of applications/services that can be presented as a ‘Marketplace’ for users to discover and browse for processing services to use with EP data.
 
 The metadata for each application record describes what data an application can be applied to, and how it can be chained in a workflow.
 
-The current current OGC Testbed-15 (EOPAD)
-
 The Application Catalogue is the subject of the current OGC Testbed-15 EOPAD Thread, through which the Data Model and catalogue Service Interface are being explored:
 
-OGC 17-084 (GeoJSON(-LD) metadata encoding for EO collections) <<GEOJSON-LD>>::
+* *OGC 17-084 (GeoJSON(-LD) metadata encoding for EO collections) <<GEOJSON-LD>>* +
 Explore the capabilities of OGC 17-084 to encode application metadata
 
-OGC 17-047 (OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard) <<GEOJSON-LD-RESP>>::
+* *OGC 17-047 (OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard) <<GEOJSON-LD-RESP>>* +
 Explore the capabilities of OGC 17-047 to encode OpenSearch responses in GeoJSON(-LD)
 Use of multi-step discovery and faceted search
 
-Registration::
+* *Registration* +
 Explore transactional extension to OGC-CSW for application registration.
+
+It is anticipated that the outcome of the OGC Testbed-15 (EOPAD) will further inform the design of the Application Catalogue.

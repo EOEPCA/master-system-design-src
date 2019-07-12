@@ -53,8 +53,8 @@ The Catalogue provides the user the capability to discover data/products by brow
 The data is organised into Collections, typically representing a dataset. Each collection is composed of multiple granules as files. The catalogue metadata follows a similar organisation and allows the user to discover the data in natural sympathy with this data organisation. Hence, the metadata is presented at the following levels:
 
 Browse Metadata (collection)::
-Browse metadata is defined at the collection/dataset level. It typically uses ISO19115 records to describe the high-level collection information, such as title, description, spatial**/temporal coverage, list of variables available, access rights, T&Cs, etc. +
-**For collections, the spatial coverage is often full-earth.
+Browse metadata is defined at the collection/dataset level. It typically uses ISO19115 records to describe the high-level collection information, such as title, description, spatial/temporal coverage, list of variables available, access rights, T&Cs, etc. +
+(For collections, the spatial coverage is often full-earth).
 
 Discovery Metadata (product)::
 Discovery metadata is defined for each granule (file) comprising the collection. This typically includes information such as file-type(s), spatial/temporal coverage, variable, data access (download) method(s). Much of this information can be obtained from the headers of the individual files – depending on file-type. Thus, the Discovery metadata can in-part be populated automatically from the underlying files.
@@ -74,16 +74,15 @@ This metadata model can be exploited, for example, using OpenSearch:
 [[mainOpenSearch,Open Search]]
 === OpenSearch
 
-#TBD - Ref. CEOS OpenSearch Best Practice#
-
-For the Exploitation Platform, OpenSearch is used with the OGC extensions and recommendations:
+The Common Architecture provision of OpenSearch should be based-upon the CEOS OpenSearch Best Practise <<CEOS-OS-BP>> which provides a blueprint for dataset search and discovery. Within this context, the following OGC extensions and recommendations are applicable:
 
 * OpenSearch GEO: OpenSearch Geo and Time Extensions <<OS-GEO-TIME>>
 * OpenSearch EO: OGC OpenSearch Extension for Earth Observation <<OS-EO>>
+
+In addition, the possibility to use the JSON-LD processing model might be considered (further analysis required) through application of:
+
 * OGC EO Dataset Metadata GeoJSON(-LD) Encoding Standard <<GEOJSON-LD>>
 * OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard <<GEOJSON-LD-RESP>>
-
-The CEOS OpenSearch Best Practise <<CEOS-OS-BP>> provides a blueprint – this is the approach adopted by the FedEO project.
 
 === Resource Types
 
