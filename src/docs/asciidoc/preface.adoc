@@ -1,6 +1,7 @@
 
 {project-name}
 _{doc-title}_
+{doc-num}
 
 [cols="^1,^1"]
 |===

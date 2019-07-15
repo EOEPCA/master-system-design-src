@@ -1,4 +1,3 @@
-= {doc-title}
 :doctype: book
 :author: TVUK System Team
 :email: <Eoepca.SystemTeam@telespazio.com>
@@ -32,6 +31,8 @@
 :pdf-style: eoepca
 :media: screen
 :title-logo-image: image::telespazio.png[top=5%, align=right, pdfwidth=6.5in]
+
+= {doc-title}: {doc-num}
 
 :leveloffset: +1
 
