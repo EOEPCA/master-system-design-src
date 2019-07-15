@@ -11,27 +11,11 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.9.2'
-        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.16'
         classpath 'org.ajoberstar:gradle-git-publish:2.0.0'
     }
 }
 
-apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'org.ajoberstar.git-publish'
-
-asciidoctor {
-    backends 'html5', 'pdf'
-    sources {
-        include 'index.adoc'
-    }
-    resources {
-        from(sourceDir) {
-            include 'images/**'
-            include 'stylesheets/**'
-        }
-    }
-}
 
 // Need to set your GitHub personal access token in the environment variable GRGIT_USER.
 gitPublish {
@@ -45,6 +29,3 @@ gitPublish {
         from 'CHANGELOG.adoc'
     }
 }
-
-build.dependsOn 'asciidoctor'
-gitPublishReset.dependsOn 'build'
