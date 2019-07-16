@@ -10,6 +10,7 @@ The following acronyms and abbreviations have been used in this report.
 | AAI | Authentication & Authorization Infrastructure
 | ABAC | Attribute Based Access Control
 | ADES | Application Deployment and Execution Service
+| ALFA | Abbreviated Language For Authorization
 | AOI | Area of Interest
 | API | Application Programming Interface
 | CMS | Content Management System
@@ -19,6 +20,7 @@ The following acronyms and abbreviations have been used in this report.
 | EO | Earth Observation
 | EP | Exploitation Platform
 | FUSE | Filesystem in Userspace
+| GeoXACML | Geo-specific extension to the XACML Policy Language
 | IAM | Identity and Access Management
 | IdP | Identity Provider
 | JSON | JavaScript Object Notation
@@ -33,6 +35,7 @@ The following acronyms and abbreviations have been used in this report.
 | REST | Representational State Transfer
 | SSH | Secure Shell
 | TOI | Time of Interest
+| UMA | User-Managed Access
 | VNC | Virtual Network Computing
 | WCS | Web Coverage Service
 | WCPS | Web Coverage Processing Service

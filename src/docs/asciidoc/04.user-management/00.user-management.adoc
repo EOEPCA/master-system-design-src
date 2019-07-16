@@ -276,9 +276,74 @@ This may be of interest in a couple of cases:
 * The case of access to federated resources in other EPs, where a resource server in one EP may be acting as an OIDC client of the Login Service in another EP – in which case auto-client-registration might be of interest.
 * The case where a common Login Service is deployed outside of the context of a given Exploitation Platform, acting as an IdP Proxy. In this case, the local Login Service deployed in each EP would register as an OIDC Client of the IdP Proxy.
 
-=== Authorization (Policy Decision)
+== Authorization (Policy Decision)
 
+The Authorization flow is relevant to the following interfaces:
+
+* PEP <-> PDP +
+The PEP, acting as a filter for the access attempt on the resource, defers its authorization decision to the PDP.
+
+* PDP <-> Other PDP +
+Aspects of the authorization policy can be delegated from one PDP to another, e.g. to govern resource access through an administrative domain represented by a _Virtual Organisation_.
+
+The approach (data model and protocol) for these two interfaces can be aligned. It is not yet defined - further design analysis is required. At this stage the candidate technologies to be investigated are:
+
+* XACML (eXtensible Access Control Markup Language)
+* UMA (User-Managed Access)
+
+=== XACML (eXtensible Access Control Markup Language)
+
+XACML defines an architecture in which the access decision is separate from the point of use, and is thus consistent with the high-level IAM approach described in this design document. The XACML architecture framework describes a Request-Response protocol, and a policy language in which access policies are defined as rules comprising attributes. XACML additionally describes the process through which policies are evaluated, for example through _combining algorithms_ that mediate competing rules.
+
+==== XACML 3.0
+
+XACML 3.0 includes some additional aspects that are of interest to our proposed IAM approach. Namely:
+
+Administrative delegation::
+The delegation mechanism is used to support decentralized administration of access policies. It allows an authority (delegator) to delegate all or parts of its own authority or someone else's authority to another user (delegate) without any need to involve modification of the root policy.
+
+JSON Request/Response Profile::
+JSON bindings for the request/response messages between the PEP and the PDP - as an alternative to the core XML message definitions.
+
+REST Profile::
+Providing REST semantics for the PEP/PDP interface.
+
+==== GeoXACML
+
+GeoXACML is standardised by the OGC to provide a geo-specific extension to XACML 2.0. GeoXACML provides support for spatial data types and spatial authorization decision functions. Those data types and functions can be used to define additional spatial constraints for XACML based policies.
+
+==== ALFA (Abbreviated Language For Authorization)
+
+Authoring of XACML rules can be facilitated by the use of https://en.wikipedia.org/wiki/ALFA_(XACML)[*ALFA (Abbreviated Language For Authorization)*], which is a pseudocode language used in the formulation of access-control policies. ALFA policies can be directly converted to XACML 3.0 policies. ALFA can support GeoXACML through extensions, that supports definition of custom geometry functions.
+
+==== XACML Related Technologies
+
+The following items represent some interesting existing implementations that may be considered as a possible basis for a reference implementation of the Common Architecture.
+
+AuthzForce PDP::
+An authorization service providing authorization policy decision evaluation and policy administration.
+Provides an API to get authorization decisions based on authorization policies, and authorization requests from PEPs. The API follows the REST architecture style, and complies with XACML v3.0.
+* Project page: https://fimac.m-iti.org/6d.php
+* Documentation: https://authzforce-ce-fiware.readthedocs.io/en/latest/
+
+geoPDP::
+GeoXACML for AuthzForce PDP - extends the AuthZForce PDP implementation with a Geometry data type and related functions as specified in the OGC Implementation Standard GeoXACML 1.0.1.
+* GitHub page: https://github.com/securedimensions/authzforce-geoxacml-basic
+* geoPDP Docker: https://github.com/securedimensions/geopdp-docker
+
+geoPEP::
+Related to the geoPDP is the geoPEP that delivers a PEP as an Apache2 reverse proxy - implemented as an Apache2 module - interfacing with the geoPDP for the authorization decisions.
+* geoPEP Docker: https://github.com/securedimensions/geopep-apache2-reverse-proxy
+
+=== UMA (User-Managed Access)
 #TBD#
+
+==== UMA Related Technologies
+
+Triple-A for Exploitation Platforms (Deimos)::
+Provides the Triple-As (Authentication, Authorization and Accounting) based on Oauth, OIDC and UMA.
+* Home page: https://triple-a-web.elecnor-deimos.com/
+* Related products: identity4EO, archive4EO, monitor4eo
 
 [[mainBilling,Accounting and Billing]]
 == Accounting and Billing
