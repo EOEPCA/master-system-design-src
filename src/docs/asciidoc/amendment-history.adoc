@@ -10,7 +10,7 @@ The Amendment Record Sheet below records the history and issue status of this do
 |===
 | ISSUE | DATE | REASON
 
-| 0.6 | dd/mm/yyyy | TBD
+| 0.6 | 18/07/2019 | Added XACML description + PDF template modifications
 | 0.5 | 09/07/2019 | Added Client Library + Billing
 | 0.4 | 21/06/2019 | Added Platform API
 | 0.3 | 13/05/2019 | Added content for Processing & Chaining and Resource Management

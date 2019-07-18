@@ -1,6 +1,14 @@
 = Changelog
 All notable changes to this project will be documented in this file.
 
+== https://github.com/EOEPCA/master-system-design-src/compare/v0.5%2E%2E%2Ev0.6[v0.6] - 18.07.2019
+
+=== Added
+* Added some information regarding XACML and associated technologies
+
+=== Changed
+* Tweak document template for PDF generation
+
 == https://github.com/EOEPCA/master-system-design-src/compare/v0.4%2E%2E%2Ev0.5[v0.5] - 09.07.2019
 
 === Added
