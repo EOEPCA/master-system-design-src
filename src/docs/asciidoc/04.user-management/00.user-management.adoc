@@ -336,7 +336,147 @@ Related to the geoPDP is the geoPEP that delivers a PEP as an Apache2 reverse pr
 * geoPEP Docker: https://github.com/securedimensions/geopep-apache2-reverse-proxy
 
 === UMA (User-Managed Access)
-#TBD#
+
+User-Managed Access (UMA) is a profile of OAuth 2.0. UMA defines how resource owners can control protected-resource access by clients operated by arbitrary requesting parties, where the resources reside on any number of resource servers, and where a centralized authorization server governs access based on resource owner policies. Resource owners configure authorization servers with access policies that serve as asynchronous authorization grants.
+
+==== UMA Main Actors
+
+The main UMA actors are briefly summarised as follows:
+
+Resource Owner (RO)::
+The "user" and the owner of the resource who defines the access authorization - typically the end-user, but it can also be a corporation or other legal person.
+
+Client::
+An application making protected resource requests with the Resource Owner's authorization and on the Requesting Party's behalf - typically a web or native application.
+
+Resource Server (RS)::
+The custodian of the resource - typically a service through which access to the resource is gained.
+
+Authorization Server (AS)::
+A server that issues _Authorization Data_ and RPTs to a client and protects resources managed at a resource server. Authorization Data is associated with an RPT to enable some combination of the Authorization Server and Resource Server to determine the correct extent of access to allow to a Client.
+
+Requesting Party (RqP)::
+The entity that uses a Client to seek access to a protected resource. May be the Resource Owner, or can be some other third party entity requesting access to the resource.
+
+The software components that fill the roles of UMA authorization servers, resource servers, and clients respectively are intended to work in an interoperable fashion when each is operated by an independent party (for example, different organizations).
+
+[quote, Wikipedia, https://en.wikipedia.org/wiki/User-Managed_Access]
+____
+In a typical OAuth flow, a human resource owner (RO) operating a client application is redirected to an authorization server (AS) to log in and consent to the issuance of an access token so that the client application can gain access to the resource server (RS) on the RO’s behalf in future, likely in a scoped (limited) fashion. The RS and AS are in all likelihood operating within the same security domain, and any communication between them is not standardized by the main OAuth specification.
+
+UMA adds three main concepts and corresponding structures and flows. First, it defines a standardized API at the AS, called the protection API, that the RS speaks to; this enables multiple RS’s to communicate with one AS and vice versa, and because the API is itself secured with OAuth, allows for formal trust establishment between each pair. This also allows an AS to present an RO with a centralized user interface. Second, UMA defines a formal notion of a requesting party (RqP) that is autonomous from an RO, enabling party-to-party sharing and delegation of access authorization. An RO need not consent to token issuance at run time but can set policy at an AS, allowing an RqP to attempt access asynchronously. Third, UMA enables access attempts to result in successful issuance of tokens associated with authorization data based on a process of trust elevation in the RqP, for example, gathering identity claims or other claims from them.
+____
+
+==== UMA Phases
+
+UMA describes three phases...
+
+[.strong]
+. *Protect Resource* +
+The Resource Owner, who manages online resources at the Resource Server, introduces it to the Authorization Server so that the latter can begin protecting the resources. To accomplish this, the Authorization Server presents a *_Protection API_* to the resource server. This API is protected by OAuth (or an OAuth-based authentication protocol) and requires a *_Protection API Token (PAT)_* for access. Out of band, the Resource Owner configures the Authorization Server with policies associated with the resource sets that the resource registers for protection.
+
+. *Get Authorization* +
+The Client approaches the Resource Server seeking access to an UMA-protected resource. In order to access it successfully, the Client must first use the Authorization Server's *_Authorization API_* to obtain authorization data and a *_Requesting Party token (RPT)_* on behalf of its Requesting Party, and the Requesting Party may need to undergo a process of trust elevation, for example, supplying identity claims. The API is protected by OAuth (or an OAuth-based authentication protocol) and requires an *_Authorization API Token (AAT)_* for access.
+
+. *Access Resource* +
+The Client successfully presents to the Resource Server an RPT that has sufficient authorization data associated with it, gaining access to the desired resource.
+
+==== UMA Terminology
+
+To elaborate the descriptions of these phases, UMA employs a set of terminology that is summarised below...
+
+TERMS::
+
+* *Policy* +
+The configuration parameters of an authorization server that effect resource access management - typically defined is terms of "subjects", "verbs" and "objects". Policy configuration takes place between the resource owner and the authorization server.
+
+* *Claim* +
+A statement of the value or values of one or more identity attributes of a Requesting Party. A Requesting Party may need to provide claims to an Authorization Server in order to gain permission for access to a protected resource.
+
+* *Resource Set* +
+One or more protected resources that a resource server manages as a set - thus, a Resource Set is the "object" being protected.
+
+* *Scope* +
+A bounded extent of access that is possible to perform on a Resource Set - a scope is one of the potentially many "verbs" that can logically apply to a Resource Set ("object").
+
+* *Permission* +
+A scope of access over a particular Resource Set at a particular Resource Server that is being requested by, or granted to, a Requesting Party. Thus, a Permission is an entitlement that includes a "subject" (Requesting Party), "verbs" (one or more Scopes of access), and an "object" (Resource Set).
+
+* *Permission Ticket* +
+A correlation handle that is conveyed from an Authorization Server to a Resource Server, from a Resource Server to a Client, and ultimately from a Client back to an Authorization Server, to enable the Authorization Server to assess the correct policies to apply to a request for Authorization Data.
+
+* *Authorization Data* +
+Data (e.g. a Permission) associated with an RPT that enables some combination of the Authorization Server and Resource Server to determine the correct extent of access to allow to a Client.
+
+TOKENS::
+
+* *Requesting Party Token (RPT)* +
+An UMA access token associated with a set of Authorization Data, used by the Client to gain access to protected resources at the Resource Server.
+
+* *Authorization API Token (AAT)* +
+An OAuth access token with the scope *_uma_authorization_*, used by the Client at the Authorization API _'RPT Endpoint'_. An AAT binds a Requesting Party, a Client being used by that party, and an Authorization Server that protects resources this Client is seeking access to on this Requesting Party's behalf. The issuance of an AAT represents the approval of this Requesting Party for this Client to engage with this Authorization Server to supply claims, ask for authorization, and perform any other tasks needed for obtaining authorization for access to resources at all Resource Servers that use this Authorization Server.
+
+* *Protection API Token (PAT)* +
+An OAuth access token with the scope *_uma_protection_*, used by the Resource Server at the Protection API, consisting of the _'Resource Set Registration'_, _'Permission Registration'_, and _'Token Introspection'_ endpoints. A PAT binds a Resource Owner, a Resource Server the owner uses for resource management, and an Authorization Server the owner uses for protection of resources at this Resource Server. The issuance of a PAT represents the approval of the Resource Owner for this Resource Server to use this Authorization Server for protecting some or all of the resources belonging to this Resource Owner.
+
+ENDPOINTS::
+
+* *Authorization API*
+Requires access token with _uma_authorization_ scope (AAT). An entity that can acquire an access token with this scope is by definition a Client.
+** *RPT Endpoint* +
+An endpoint at the Authorization Server that issues RPTs and Authorization Data to the Client.
+
+* *Protection API* +
+Requires access token with _uma_protection_ scope (PAT). An entity that can acquire an access token with this scope is by definition a Resource Server.
+** *Resource Set Registration Endpoint* +
+An endpoint at the Authorization Server that allows the Resource Server to register Resource Sets.
+** *Permission Registration Endpoint* +
+An endpoint at the Authorization Server that allows the Resource Server to request Permission Tickets.
+** *Token Introspection Endpoint* +
+An endpoint at the Authorization Server that allows the Resource Server to query the status of an RPT and its associated Authorization Data.
+
+==== Resource Protection
+
+The resource owner, resource server, and authorization server perform the following high-level actions to put resources under protection:
+
+. The Authorization Server issues client credentials to the resource server, (either dynamically or statically)
+. The Resource Server acquires a PAT from the Authorization Server
+. The Resource Server registers any Resource Sets with the Authorization Server for which it intends to outsource protection, using the Resource Set Registration Endpoint of the Protection API
+
+==== Access Resource
+
+An Authorization Server orchestrates and controls Clients' access on their Requesting Parties' behalf to a Resource Owner's protected resources at a Resource Server, under conditions specified by that Resource Owner through policy.
+
+The process of getting authorization and accessing a resource always begins with the Client attempting access at a protected resource endpoint at the Resource Server.
+
+If the Client's attempt has a valid RPT with sufficient Authorization Data, the Resource Owner's policies have been met for access to the protected resource, and hence access is granted - <<img_umaAccessResource>>.
+
+[.text-center]
+[#img_umaAccessResource,reftext='{figure-caption} {counter:figure-num}']
+.UMA Access Resource (Success)
+include::include/uma-access-resource.uml[]
+
+==== Resource Server Register Permission
+
+If the Client's request at the protected resource has no RPT, or has an invalid RPT or insufficient Authorization Data associated with the RPT as determined through RPT status checking, the Resource Server registers a requested permission with the relevant Authorization Server, and responds to the Client with the resulting Permission Ticket and the Authorization Server's location. The extent of the requested permission MUST suffice for the extent of the Client's access attempt at that resource. The PAT provided in the API request enables the Authorization Server to map the requested permission to the appropriate Resource Owner. The Authorization Server returns a Permission Ticket in its response for the Resource Server to give to the Client that represents the same extent of requested access that the Resource Server registered - <<img_umaRegisterPermission>>.
+
+[.text-center]
+[#img_umaRegisterPermission,reftext='{figure-caption} {counter:figure-num}']
+.UMA Resource Server Register Permission
+include::include/uma-register-permission.uml[]
+
+==== Client Request Authorization
+
+In order to access a protected resource successfully, a client needs to present a valid RPT with sufficient authorization data. The client uses the authorization API to acquire an RPT and to ask for authorization data, providing the permission ticket it received from the resource server.
+
+The authorization server uses the permission ticket to look up the details of the previously registered requested permission, maps the requested permission to operative resource owner policies based on the resource set identifier and scopes associated with it, potentially requests additional information and receives additional information such as claims, and ultimately responds positively or negatively to the request for authorization data. *The authorization server bases the issuance of authorization data on resource owner policies. Thus, these policies function as authorization that has been granted ahead of time.*
+
+[.text-center]
+[#img_umaClientRequestAuthorization,reftext='{figure-caption} {counter:figure-num}']
+.UMA Client Request Authorization
+include::include/uma-client-request-authorization.uml[]
+
+Optionally, the Authorization Server may need additional information in order to determine whether the Client is authorized to have this authorization data. The Authorization Server response indicates "need_info" including one or more sub-properties with hints about the nature of further required information. The Client then has the opportunity to continue seeking authorization by engaging in follow-on flows with the authorization server, either directly or through redirection of an end-user Requesting Party.
 
 ==== UMA Related Technologies
 
