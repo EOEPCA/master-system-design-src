@@ -21,7 +21,8 @@ cp -r src/docs/asciidoc/stylesheets "${OUTPUT_DIR}"
 
 # Generate HTML
 echo -n "Generating HTML output: "
-docker run --rm -it -v $(pwd):/documents/ asciidoctor/docker-asciidoctor asciidoctor -D "${OUTPUT_DIR}" src/docs/asciidoc/index.adoc
+docker run --user $(id -u):$(id -g) --rm -it -v $(pwd):/documents/ asciidoctor/docker-asciidoctor asciidoctor -r asciidoctor-diagram -D "${OUTPUT_DIR}" src/docs/asciidoc/index.adoc
+rm -rf \?
 echo "[done]"
 
 # Generate PDF
@@ -30,7 +31,7 @@ then
     echo "WARNING: Skipping generation of PDF file (${PDF_FILE})"
 else
     echo -n "Generating PDF output (${PDF_FILE}): "
-    docker run --rm -it -v $(pwd):/documents/ asciidoctor/docker-asciidoctor bash -c "cd src/docs/asciidoc && asciidoctor-pdf -D \"../../../${OUTPUT_DIR}\" -o \"${PDF_FILE}\" index.adoc"
+    docker run --user $(id -u):$(id -g) --rm -it -v $(pwd):/documents/ asciidoctor/docker-asciidoctor bash -c "cd src/docs/asciidoc && asciidoctor-pdf -r asciidoctor-diagram -D \"../../../${OUTPUT_DIR}\" -o \"${PDF_FILE}\" index.adoc"
     echo "[done]"
 fi
 
