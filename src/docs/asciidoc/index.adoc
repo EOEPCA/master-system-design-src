@@ -5,8 +5,8 @@
 :project-name: EO Exploitation Platform Common Architecture
 :doc-title: Master System Design Document
 :doc-num: {project}.SDD.001
-:revnumber: 0.6
-:revdate: 18.07.2019
+:revnumber: 0.7-inprogress
+:revdate: dd/mm/yyyy
 :revremark: In-Progress Draft
 :category: Design Document
 :copyrightYear: 2019

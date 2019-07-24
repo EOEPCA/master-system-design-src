@@ -23,7 +23,7 @@ opt Claims gathering
   alt Client Redirects Requesting Party to Authorization Server for Authentication
     Client -> RqP : <<redirect>> Reauthenticate
     activate RqP
-    RqP -> AuthzAPI : Authenticate ("step-up")
+    RqP -> AuthzAPI : Authenticate <<"step-up">>
     AuthzAPI -> RqP : <<redirect>> AuthN OK
     return AuthN OK
     Client -> AuthzAPI : Request Authz (AAT,Ticket,?claim_tokens)
@@ -36,13 +36,15 @@ opt Claims gathering
     activate RqP
     RqP -> AuthzAPI : Gather Claims
     note over AuthzAPI
-      Authorization Server does what it needs to gather required claims
-      Eg. it may act as a relying party in a federated identity interaction
+      Authorization Server does what it needs to gather
+      required claims. Eg. it may act as a relying
+      party in a federated identity interaction
     end note
     AuthzAPI -> RqP : <<redirect>> "claims_submitted"
     note right
       Success case
-      Indicates Client should re-submit to the RPT endpoint
+      Indicates Client should
+      re-submit to the RPT endpoint
     end note
     return "claims_submitted"
     Client -> AuthzAPI : Request Authz (AAT,Ticket,?claim_tokens)
@@ -55,6 +57,10 @@ end
 AuthzAPI -> Client : OK (RPT)
 deactivate AuthzAPI
 deactivate Client
+
+note over RqP, ProtAPI
+  Sequence can continue with flow 'UMA Access Resource'
+end note
 
 @enduml
 ....
