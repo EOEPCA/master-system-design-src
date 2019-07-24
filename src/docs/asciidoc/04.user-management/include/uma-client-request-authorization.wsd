@@ -1,6 +1,4 @@
-[plantuml, uma-get-authorization, png]
-....
-@startuml
+@startuml "UMA Client Request Authorization"
 autonumber
 actor "Requesting Party" as RqP
 participant Client
@@ -63,4 +61,3 @@ note over RqP, ProtAPI
 end note
 
 @enduml
-....

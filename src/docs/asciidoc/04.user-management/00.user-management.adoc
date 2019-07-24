@@ -71,9 +71,13 @@ image::iam-overview-flow.png[width=100%,pdfwidth=100%,align="center"]
 
 <<img_iamInterfaces>> illustrates the interfaces of the IAM architecture.
 
+[.text-center]
 [#img_iamInterfaces,reftext='{figure-caption} {counter:figure-num}']
 .IAM Interfaces
-image::iam-interfaces.png[width=80%,pdfwidth=80%,align="center"]
+[plantuml, iam-interfaces, png]
+....
+include::include/iam-interfaces.wsd[]
+....
 
 User Agent -> PEP::
 The PEP acts as a HTTP filter on the access request to the API of the Protected Resource. The PEP intercepts the incoming request in order to enforce the authorization policy decision.
@@ -449,32 +453,41 @@ An Authorization Server orchestrates and controls Clients' access on their Reque
 
 The process of getting authorization and accessing a resource always begins with the Client attempting access at a protected resource endpoint at the Resource Server.
 
-If the Client's attempt has a valid RPT with sufficient Authorization Data, the Resource Owner's policies have been met for access to the protected resource, and hence access is granted - <<img_umaAccessResource>>.
+If the Client's attempt has a valid RPT with sufficient Authorization Data, the Resource Owner's policies have been met for access to the protected resource, and hence access is granted. See <<img_umaAccessResource>>.
 
 [.text-center]
 [#img_umaAccessResource,reftext='{figure-caption} {counter:figure-num}']
 .UMA Access Resource (Success)
-include::include/uma-access-resource.uml[]
+[plantuml, uma-access-resource, png]
+....
+include::include/uma-access-resource.wsd[]
+....
 
 ==== Resource Server Register Permission
 
-If the Client's request at the protected resource has no RPT, or has an invalid RPT or insufficient Authorization Data associated with the RPT as determined through RPT status checking, the Resource Server registers a requested permission with the relevant Authorization Server, and responds to the Client with the resulting Permission Ticket and the Authorization Server's location. The extent of the requested permission MUST suffice for the extent of the Client's access attempt at that resource. The PAT provided in the API request enables the Authorization Server to map the requested permission to the appropriate Resource Owner. The Authorization Server returns a Permission Ticket in its response for the Resource Server to give to the Client that represents the same extent of requested access that the Resource Server registered - <<img_umaRegisterPermission>>.
+If the Client's request at the protected resource has no RPT, or has an invalid RPT or insufficient Authorization Data associated with the RPT as determined through RPT status checking, the Resource Server registers a requested permission with the relevant Authorization Server, and responds to the Client with the resulting Permission Ticket and the Authorization Server's location. The extent of the requested permission MUST suffice for the extent of the Client's access attempt at that resource. The PAT provided in the API request enables the Authorization Server to map the requested permission to the appropriate Resource Owner. The Authorization Server returns a Permission Ticket in its response for the Resource Server to give to the Client that represents the same extent of requested access that the Resource Server registered. See <<img_umaRegisterPermission>>.
 
 [.text-center]
 [#img_umaRegisterPermission,reftext='{figure-caption} {counter:figure-num}']
 .UMA Resource Server Register Permission
-include::include/uma-register-permission.uml[]
+[plantuml, uma-register-permission, png]
+....
+include::include/uma-register-permission.wsd[]
+....
 
 ==== Client Request Authorization
 
 In order to access a protected resource successfully, a client needs to present a valid RPT with sufficient authorization data. The client uses the authorization API to acquire an RPT and to ask for authorization data, providing the permission ticket it received from the resource server.
 
-The authorization server uses the permission ticket to look up the details of the previously registered requested permission, maps the requested permission to operative resource owner policies based on the resource set identifier and scopes associated with it, potentially requests additional information and receives additional information such as claims, and ultimately responds positively or negatively to the request for authorization data. *The authorization server bases the issuance of authorization data on resource owner policies. Thus, these policies function as authorization that has been granted ahead of time.*
+The authorization server uses the permission ticket to look up the details of the previously registered requested permission, maps the requested permission to operative resource owner policies based on the resource set identifier and scopes associated with it, potentially requests additional information and receives additional information such as claims, and ultimately responds positively or negatively to the request for authorization data. *The authorization server bases the issuance of authorization data on resource owner policies. Thus, these policies function as authorization that has been granted ahead of time.* See <<img_umaClientRequestAuthorization>>.
 
 [.text-center]
 [#img_umaClientRequestAuthorization,reftext='{figure-caption} {counter:figure-num}']
 .UMA Client Request Authorization
-include::include/uma-client-request-authorization.uml[]
+[plantuml, uma-client-request-authorization, png]
+....
+include::include/uma-client-request-authorization.wsd[]
+....
 
 Optionally, the Authorization Server may need additional information in order to determine whether the Client is authorized to have this authorization data. The Authorization Server response indicates "need_info" including one or more sub-properties with hints about the nature of further required information. The Client then has the opportunity to continue seeking authorization by engaging in follow-on flows with the authorization server, either directly or through redirection of an end-user Requesting Party.
 

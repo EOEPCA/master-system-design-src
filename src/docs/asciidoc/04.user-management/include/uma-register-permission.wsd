@@ -1,6 +1,4 @@
-[plantuml, uma-register-permission, png]
-....
-@startuml
+@startuml "UMA Register Permission"
 autonumber
 autoactivate on
 participant Client
@@ -21,4 +19,3 @@ note over Client, ProtAPI
   Sequence continues with flow 'UMA Client Request Authorization'
 end note
 @enduml
-....

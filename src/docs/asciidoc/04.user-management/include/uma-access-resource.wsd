@@ -1,6 +1,4 @@
-[plantuml, uma-access-resource, png]
-....
-@startuml
+@startuml "UMA Access Resource"
 autonumber
 autoactivate on
 participant Client
@@ -14,4 +12,3 @@ RS -> ProtAPI : Check RPT status (PAT,RPT)
 return RPT status = (OK,scopes)
 return resource
 @enduml
-....
