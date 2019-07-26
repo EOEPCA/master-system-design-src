@@ -17,6 +17,8 @@ These are explored in the following sub-sections.
 [[IAM,Identity and Access Management]]
 == Identity and Access Management (IAM)
 
+The solution for IAM is driven by the need for Federated Identity and Authorization in the context of a network of collaborating exploitation platforms and connected services. This federated environment should facilitate an end-user experience in which they can use a single identity across collaborating platforms *(Single Sign-On)*, they can bring their own existing identity to the platforms *('Login With' service)*, and platforms can access the federated services of other platforms on behalf of the end-user *(delegated access and authorization)*.
+
 The goal of IAM is to uniquely identify the user and limit access to protected resources to those having suitable access rights. We assume an Attribute Based Access Control (ABAC) approach in which authorization decisions are made based upon access policies/rules that define attributes required by resources and possessed (as claims) by users. ABAC is is seen as a more flexible approach than Role Base Access Control (RBAC), affording the ability to express more sophisticated authorizations rules beyond the role(s) of the user - and noting the fact that a role-based ruleset could be implemented within an attribute based approach, (i.e. RBAC is a subset/specialisation of ABAC).
 
 In achieving this there are three main concerns:
