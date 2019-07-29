@@ -20,7 +20,7 @@ It provides authentication, authorization and accounting services that are requi
 
 _Provides access to a variety of processing functions, tools and applications, as well as execution environments in which to deploy them._
 
-Hosting and maintaining an inventory of all processing tasks, analysis tools and interactive applications. Handles and abstracts the low-level complexities of the different underlying compute technologies, and ensures the compute layer is scaled in accordance with current demand. Provides an integrated development environment to facilitate development of new processing algorithms and applications. Facilitating the network of EO resources by providing a federated interface to other processing services within the wider EO network.
+Provides a deployment and execution environment for processing tasks, analysis tools and interactive applications. Supports the chaining of processing tasks in workflows whose execution can include steps executed external to the origin exploitation platform. Handles and abstracts the low-level complexities of the different underlying compute technologies, and ensures the compute layer is scaled in accordance with current demand. Provides an integrated development environment to facilitate development of new processing algorithms and applications. Facilitating the network of EO resources by providing a federated interface to other processing services within the wider EO network.
 
 The development and analysis environment provides a platform for the expert user to develop their own processing chains, experiments and workflows. It integrates with platform catalogue services (for data, processing services and applications) for discovery of available published datasets and processing elements. Subject to appropriate controls and permissions, the user can publish their own processing services and results. Workflows can be executed within the context of the processing facility, with the possibility to execute steps ‘remotely’ in collaborating platforms, with the results being collected for the continuation of the workflow.
 
@@ -28,13 +28,17 @@ The development and analysis environment provides a platform for the expert user
 
 _Responsible for storing and cataloguing a variety of resources._
 
-
-Resource Management::
 Storage and cataloguing of all persistent resources. First and foremost, this will contain multidimensional geo-spatial datasets. In addition it may include a variety of heterogeneous data and other resources, such as documentation, Docker images, processing workflows, etc. Handles and abstracts the low-level complexities of different underlying storage technologies and strategies. Facilitating the network of EO resources by providing a federated interface to other data services within the wider EO network.
 
 The catalogue holds corresponding metadata for every published resource item in the local platform storage, as well as entries for resources that are located on remote collaborating platforms. Catalogue search and data access is provided through a range of standard interfaces, which are used by the local Web Portal and Processing & Chaining elements and may be exposed externally as web services. Access to services and resources is controlled according to an associated policy - ref <<IAM>>. Similarly, the ingestion process is controlled, in order to ensure the quality of any published resource, including associated metadata, and to maintain the integrity of the catalogue. This component may interact with corresponding peer components on other platforms - for example to synchronise catalogue entries.
 
 The user has a personal workspace in which to upload files, organise links to resources of interest (services/application/data), and receive/manage results output from processing executions. Shared workspaces for collaboration can similarly be provisioned.
+
+== Platform API
+
+_Defines standard interfaces at both service and programmatic levels._
+
+The Service API and its associated Client Library together present a standard platform interface against which analysis and exploitation activities may be developed, and through which platform services can be federated. The Platform API encourages interoperation between platforms and provides a consistent and portable programming paradigm for expert users.
 
 == Web Portal
 

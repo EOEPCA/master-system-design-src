@@ -18,7 +18,7 @@ To exploit the services of the Platform, users need to discover available data, 
 .Resource Management Use Case
 image::use-cases-data.png[width=100%,pdfwidth=100%,align="center"]
 
-Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the ‘Processing & Chaining’ domain area by the provision of an Application Catalogue. See <<mainAppCatalogue>> for more details.
+Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the provision of an Application Catalogue. See <<mainAppCatalogue>> for more details.
 
 The inventory and presentation of resources to users must be organised in such a way as to facilitate the discovery and usage of resources in other federated Exploitation Platforms. For example, users must be able to discover data and services in other EPs in order to construct and execute workflows that span multiple federated EPs.
 
@@ -30,7 +30,7 @@ A Data Ingestion component abstracts the interface to the underlying Resource Ti
 
 The main components comprising the Resource Management domain are illustrated in <<img_resourceOverview>>:
 
-* Data Catalogue
+* Resource Catalogue
 * Data Access Services
 * Data Access Gateway
 * Data Access Library
@@ -43,12 +43,52 @@ image::resource-overview.png[width=85%,pdfwidth=85%,align="center"]
 
 To some degree, the role of these components is to provide an integration of the Exploitation Platform to the Resource Tier, by providing public services that bridge to the underlying data supply.
 
+
+[[mainResourceCatalogue,Resource Catalogue]]
+== Resource Catalogue
+
+The Catalogue provides the user the capability to discover resources, (including data/products/services/applications), by browse/search, and to obtain details on specific resources discovered. Resources of different type can be catalogued and delivered through the same service architecture and catalogue service interfaces - provided as a consolidated catalogue service, or through discrete services for each resource type. In each case the catalogue provides an inventory of resources that can be presented as a _Marketplace_ for users to discover and browse.
+
+Perhaps the most challenging aspect of this is that the Catalogues for both Data and Processing-Services must facilitate the proper construction of processing tasks, to ensure there is a correct match of the data types expected as input to the processing. This extends into the construction of workflows where the data types output by a processing task must match the supported inputs of the next task in the chain. The Catalogue must have a rich and consistent metadata model for both Data and Processing-Services in order to achieve these goals.
+
+[[mainOpenSearch,Open Search]]
+=== CEOS OpenSearch Best Practise
+
+The Common Architecture advocates standardisation on the use of OpenSearch based-upon the CEOS OpenSearch Best Practise <<CEOS-OS-BP>> which provides a blueprint for catalogue search and discovery. Within this context, the following OGC extensions and recommendations are applicable:
+
+* OpenSearch GEO: OpenSearch Geo and Time Extensions <<OS-GEO-TIME>>
+* OpenSearch EO: OGC OpenSearch Extension for Earth Observation <<OS-EO>>
+
+In addition, the possibility to use the JSON-LD processing model might be considered (further analysis required) through application of:
+
+* OGC EO Dataset Metadata GeoJSON(-LD) Encoding Standard <<GEOJSON-LD>>
+* OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard <<GEOJSON-LD-RESP>>
+
+[[mainAppCatalogue,Application Catalogue]]
+=== Application Catalogue
+
+Processing services are published in an Application Catalogue that acts as a Marketplace and facilitates their discovery. Via the Marketplace users have a single point of access to all processing services that are published across the federated system. In order to invoke processing services and workflows, users must specify the data inputs and parameterisation. The metadata for each application record describes what data an application can be applied to, and how it can be chained in a workflow.
+
+The Application Catalogue is the subject of the current OGC Testbed-15 EOPAD Thread, through which the Data Model and catalogue Service Interface are being explored. Thus, in addition to the best practise identified above, the outcomes of the TB15 EOPAD thread should be taken into consideration:
+
+* *OGC 17-084 (GeoJSON(-LD) metadata encoding for EO collections) <<GEOJSON-LD>>* +
+Explore the capabilities of OGC 17-084 to encode application metadata
+
+* *OGC 17-047 (OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard) <<GEOJSON-LD-RESP>>* +
+Explore the capabilities of OGC 17-047 to encode OpenSearch responses in GeoJSON(-LD)
+Use of multi-step discovery and faceted search
+
+* *Registration* +
+Explore transactional extension to OGC-CSW for application registration.
+
+It is anticipated that the outcome of the OGC Testbed-15 (EOPAD) will further inform the design of the Application Catalogue.
+
 [[mainDataCatalogue,Data Catalogue]]
-== Data Catalogue
+=== Data Catalogue
 
 The Catalogue provides the user the capability to discover data/products by browse/search, and to obtain details on specific data/products discovered.
 
-=== Metadata Organisation
+==== Metadata Organisation
 
 The data is organised into Collections, typically representing a dataset. Each collection is composed of multiple granules as files. The catalogue metadata follows a similar organisation and allows the user to discover the data in natural sympathy with this data organisation. Hence, the metadata is presented at the following levels:
 
@@ -62,7 +102,7 @@ Discovery metadata is defined for each granule (file) comprising the collection.
 Archive Metadata (file)::
 Archive metadata refers to the information that is available in the file header. As described above this can be extracted and published into the Discovery metadata of the catalogue.
 
-=== Example Usage with OpenSearch
+==== Example Usage with OpenSearch
 
 This metadata model can be exploited, for example, using OpenSearch:
 
@@ -71,29 +111,12 @@ This metadata model can be exploited, for example, using OpenSearch:
 * Once discovered, the granules can then be exploited by the user, for example as input to a processing request, or downloaded.
 * Facets can be applied to both the Browse and Discovery metadata, to supported facetted search at both levels.
 
-[[mainOpenSearch,Open Search]]
-=== OpenSearch
-
-The Common Architecture provision of OpenSearch should be based-upon the CEOS OpenSearch Best Practise <<CEOS-OS-BP>> which provides a blueprint for dataset search and discovery. Within this context, the following OGC extensions and recommendations are applicable:
-
-* OpenSearch GEO: OpenSearch Geo and Time Extensions <<OS-GEO-TIME>>
-* OpenSearch EO: OGC OpenSearch Extension for Earth Observation <<OS-EO>>
-
-In addition, the possibility to use the JSON-LD processing model might be considered (further analysis required) through application of:
-
-* OGC EO Dataset Metadata GeoJSON(-LD) Encoding Standard <<GEOJSON-LD>>
-* OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard <<GEOJSON-LD-RESP>>
-
-=== Resource Types
-
-Perhaps the most challenging aspect of this is that the Catalogues for both Data and Processing-Services must facilitate the proper construction of processing tasks, to ensure there is a correct match of the data types expected as input to the processing. This extends into the construction of workflows where the data types output by a processing task must match the supported inputs of the next task in the chain. The Catalogue must have a rich and consistent metadata model for both Data and Processing-Services in order to achieve these goals.
-
-=== Data Access
+==== Data Access
 There is a direct link between the way the data is described in the Catalogue and how it is accessed by the consumers of the data. This links to the Data Access Services (e.g. WMS. WCS, WFS, etc.) provided by the EP, and the way in which the access links are encoded into the Catalogue. These links must be usable by the data consumers which could be processing services, or users downloading the data.
 
 Hence the contents of the Catalogue reflects the data services offered by the platform, including the underlying resource tier services. Each data Collection is presented in the Catalogue as accessible through one or more data access services, as applicable to the specfic data. The Catalogue must present the data access URLs is such a way that the URL resolves correctly to the underlying data via the providing data access service.
 
-=== Catalogue Composition/Aggregation
+==== Catalogue Composition/Aggregation
 
 The Exploitation Platform is designed to be hosted in a compute environment that is close to the data of interest. This means that the typical deployment is made to the likes of DIAS, Public Cloud (such as AWS), or National Research Infrastructure (such as CEDA/JASMIN) – that provide the Resources-tier/infrastructure upon which the EP relies. The Resources-tier provides virtual ICT-infrastructure and data. It is common that the Resources-tier provides their own Catalogue to support the data hosted within.
 

@@ -49,7 +49,7 @@ The URL of the OpenSearch interface to the <<mainDataCatalogue>>.
 
 */search* (example)
 
-Implements an OpenSearch interface in accordance with section <<mainOpenSearch>>.
+Implements an OpenSearch interface in accordance with section <<mainResourceCatalogue>>.
 
 == data_catalogue
 

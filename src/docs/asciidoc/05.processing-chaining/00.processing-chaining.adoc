@@ -3,7 +3,7 @@
 
 The Processing & Chaining domain area must provide an extensible repository of processing functions, tools and applications (referred here generically as ‘processing services’) that can be discovered by search query, invoked individually, and utilised in workflows.
 
-Processing services are published in an Application Catalogue that acts as a Marketplace and facilitates their discovery. Via the Marketplace users have a single point of access to all processing services that are published across the federated system. In order to invoke processing services and workflows, users must specify the data inputs and parameterisation.
+The Resource Management domain area provides the facilities through which processing services are published in an Application Catalogue that acts as a Marketplace and facilitates their discovery, (see section <<mainAppCatalogue>>). Via the Marketplace users have a single point of access to all processing services that are published across the federated system. In order to invoke processing services and workflows, users must specify the data inputs and parameterisation.
 
 Users must be able to define and execute workflows that chain processing steps, in which the input(s) of a step are provided by the output of preceding step(s). Users can publish workflows as new processing services, and so the possibility of workflow nesting.
 
@@ -50,7 +50,7 @@ WPS-T (REST/JSON) service that provides an umbrella orchestration service to dep
 <<mainProcADES, Application Deployment and Execution Service (ADES)>>::
 WPS-T (REST/JSON) service that incorporates the Docker execution engine, and is responsible for the execution of the processing service (as a WPS request) within the ‘target’ Exploitation Platform (i.e. one that is close to the data). The ADES relies upon the EMS to ensure that the processor is deployed as a WPS service before it is invoked.
 
-<<mainAppCatalogue>>::
+<<mainAppCatalogue, Application Catalogue (ref. Resource Management domain)>>::
 An Application Catalogue provides an inventory of processing services that acts as a Marketplace for the discovery and browse for processing services. The Application Catalogue provides a service that can be searched by facet/keyword and provides supporting metadata and information.
 
 Thus, each platform that supports processing should include an ADES, and each platform that supports workflow orchestration should include an EMS.
@@ -379,24 +379,3 @@ In this case, the processing task would have a dependency that the Exploitation 
 * The parameterisation for the ‘required’ service are passed to the processing task at invocation
 
 A consistent vocabulary of services must be defined to unambiguously express the ‘required’ and ‘provides’ declarations.
-
-[[mainAppCatalogue,Application Catalogue]]
-== Application Catalogue
-
-The Application Catalogue provides an inventory of applications/services that can be presented as a ‘Marketplace’ for users to discover and browse for processing services to use with EP data.
-
-The metadata for each application record describes what data an application can be applied to, and how it can be chained in a workflow.
-
-The Application Catalogue is the subject of the current OGC Testbed-15 EOPAD Thread, through which the Data Model and catalogue Service Interface are being explored:
-
-* *OGC 17-084 (GeoJSON(-LD) metadata encoding for EO collections) <<GEOJSON-LD>>* +
-Explore the capabilities of OGC 17-084 to encode application metadata
-
-* *OGC 17-047 (OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard) <<GEOJSON-LD-RESP>>* +
-Explore the capabilities of OGC 17-047 to encode OpenSearch responses in GeoJSON(-LD)
-Use of multi-step discovery and faceted search
-
-* *Registration* +
-Explore transactional extension to OGC-CSW for application registration.
-
-It is anticipated that the outcome of the OGC Testbed-15 (EOPAD) will further inform the design of the Application Catalogue.
