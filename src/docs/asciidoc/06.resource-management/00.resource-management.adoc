@@ -1,7 +1,7 @@
 [[mainResourceManagement,Resource Management]]
 = Resource Management
 
-The role of the Resource Management domain is the storage, discovery and access to resources in the Exploitation Platform. In this context, resources primarily refers to data and processing assets. The concerns of processing assets are addressed in the ‘Processing & Chaining’ domain area. Thus, Resource Management focuses primarily on the provision of data within the EP.
+The role of the Resource Management domain is the storage, discovery and access to resources in the Exploitation Platform. In this context, resources primarily refers to data and processing assets.
 
 Storage is largely taken care of by the Resource Tier upon which the Exploitation Platform is hosted. The role of the Exploitation Platform is to ensure that the data can be accessed through common data access protocols based upon open standards.
 
@@ -12,11 +12,11 @@ This is important for:
 * processing workflow steps accessing intermediate outputs from prior steps
 * other federated Exploitation Platforms accessing each other’s data and services through well understood interfaces
 
-To exploit the services of the Platform, users need to discover available data, obtain detailed collection/product information, including the ability to visualise the data in the platform. This applies to data held within the platform, data added by end-users and data produced as the result of processing operations within the platform.
+To exploit the services of the Platform, users need to discover available resources and obtain detailed resource information. For example, a user's data discovery workflow should include the ability to view collection/product information and visualise the data in the platform - this applies to data held within the platform, data added by end-users and data produced as the result of processing operations within the platform.
 
 [#img_resourceUseCase,reftext='{figure-caption} {counter:figure-num}']
 .Resource Management Use Case
-image::use-cases-data.png[width=100%,pdfwidth=100%,align="center"]
+image::use-cases-resources.png[width=100%,pdfwidth=100%,align="center"]
 
 Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the provision of an Application Catalogue. See <<mainAppCatalogue>> for more details.
 
@@ -86,7 +86,7 @@ It is anticipated that the outcome of the OGC Testbed-15 (EOPAD) will further in
 [[mainDataCatalogue,Data Catalogue]]
 === Data Catalogue
 
-The Catalogue provides the user the capability to discover data/products by browse/search, and to obtain details on specific data/products discovered.
+The Catalogue provides the user the capability to discover data/products by browse/search, and to obtain details on specific data/products discovered. The Marketplace concept can be extended to embrace the discovery and access to data.
 
 ==== Metadata Organisation
 
