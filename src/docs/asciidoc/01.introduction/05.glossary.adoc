@@ -28,6 +28,7 @@ The following acronyms and abbreviations have been used in this report.
 | KVP | Key-value Pair
 | M2M | Machine-to-machine
 | OGC | Open Geospatial Consortium
+| PDE | Processor Development Environment
 | PDP | Policy Decision Point
 | PEP | Policy Enforcement Point
 | PIP | Policy Information Point

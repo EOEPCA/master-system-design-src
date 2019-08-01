@@ -277,7 +277,7 @@ The processing framework must establish an environment in which the data access 
 . The processing service / application natively supports the data access protocol, in which case there is no need to stage-in the data. Nevertheless, the Processing Framework must support the pass-through of input data as URL, and the reception of the output(s) as URL. This is facilitated by the utilisation of a <<procDataAccessLib>> as described below. Also, it must be ensured that any outputs, e.g. to object store, are appropriately directed.
 . The processing service / application does not natively support the data access protocol(s) offered by the underlying platform storage, e.g. the processing service only supports local storage (mounted volume), in which case the Processing Framework must facilitate access to the data on behalf of the processing service.
 
-In cases where the processing service does not natively support the data access protocols offered by the underlying platform, the processing framework must facilitate acces to platform data in a form that can be consumed by the processing service.
+In cases where the processing service does not natively support the data access protocols offered by the underlying platform, the processing framework must facilitate access to platform data in a form that can be consumed by the processing service.
 
 To support this, the service/application should declare the data access protocol that it requires. This declaration should be made in the Application Descriptor (ref. Application Package), and is selected from a standard set of protocols, including:
 
@@ -379,3 +379,21 @@ In this case, the processing task would have a dependency that the Exploitation 
 * The parameterisation for the ‘required’ service are passed to the processing task at invocation
 
 A consistent vocabulary of services must be defined to unambiguously express the ‘required’ and ‘provides’ declarations.
+
+== Processor Development Environment (PDE)
+
+The Processor Development Environment provides a rich, interactive environment in which processing algorithms and services can be developed, tested, debugged and ultimately packaged so that they can be deployed to the platform and published via the marketplace.
+
+The PDE supports the packaging of the user’s application in accordance with the Application Packaging format that is suitable for deployment at the EMS/ADES. It provides a sandboxed environment in which the user can test the deployment and execution of their packaged application, with access to suitable test data to perform the validation.
+
+The PDE provides the tools for the developer to fully specify the metadata for their validated application and then add it as a tool in their workspace and/or publish it to the Resource Catalogue for wider consumption.
+
+== Interactive Analysis Tool
+
+The Interactive Analysis Tool presents a hosted coding environment through which expert users can interact directly with the data and services of the platform. It should provide support for a variety of coding languages, including those most popular in the community – Python, R, Julia, Javascript.
+
+For example, the Interactive Analysis Tool can be provided as a Jupyter Notebook instance that is provisioned in the user’s context with a ‘platform integration’ layer that provides simple access to platform resources, including resources held within the user’s Workspace.
+
+It must be integrated with the platforms authentication and authorization scheme in accordance with the IAM approach described by the User Management domain.
+
+The Interactive Analysis Tool should support the user to save their interactive analysis sessions for future resumption and sharing with others for purposes of collaboration.

@@ -7,7 +7,7 @@ Identity and Access Management (IAM)::
 Identification/authentication of users and authorization of access to protected resources (data/services) within the EP.
 
 Accounting and Billing::
-Maintaining an accounting record of all user accesses to data/services/applications, supported by appropriate systems of credits and billing.
+Maintaining an accounting record of all user accesses to data/compute/services/applications, supported by appropriate systems of credits and billing.
 
 User Profile::
 Maintenance of details associated to the user that may be needed in support of access management and billing.
@@ -217,7 +217,7 @@ The ID Token is a JWT that has been signed by the Login Service. Using the jwks 
 
 === Federated User Access
 
-Based upon the above authentication model, an EP could access the resources of another EP by obtaining an access token through OIDC flows. However, considering that these EP->EP invocations will typically be Machine-to-machine (M2M), then we need to consider how the end-user (resource owner) is able to compete their consent. Two possibilities are explored in the subsequent sections:
+Based upon the above authentication model, an EP could access the resources of another EP by obtaining an access token through OIDC flows. However, considering that these EP->EP invocations will typically be Machine-to-machine (M2M), then we need to consider how the end-user (resource owner) is able to complete their consent. Two possibilities are explored in the subsequent sections:
 
 . The user pre-authorizes the EP->EP access in advance of the operation
 . Use of OIDC JWKS for trusted federation of identity between platforms
@@ -292,10 +292,12 @@ The PEP, acting as a filter for the access attempt on the resource, defers its a
 * PDP <-> Other PDP +
 Aspects of the authorization policy can be delegated from one PDP to another, e.g. to govern resource access through an administrative domain represented by a _Virtual Organisation_.
 
-The approach (data model and protocol) for these two interfaces can be aligned. It is not yet defined - further design analysis is required. At this stage the candidate technologies to be investigated are:
+The approach (data model and protocol) for these two interfaces can be aligned - but is not yet defined in the Common Architecture. At this stage the candidate technologies to be investigated are:
 
 * XACML (eXtensible Access Control Markup Language)
 * UMA (User-Managed Access)
+
+XACML and UMA can possibly be used together in an overall solution in which *XACML provides the policy language* through which rules are configured and *UMA provides the ‘protocol’ flows*.
 
 === XACML (eXtensible Access Control Markup Language)
 
@@ -306,7 +308,7 @@ XACML defines an architecture in which the access decision is separate from the 
 XACML 3.0 includes some additional aspects that are of interest to our proposed IAM approach. Namely:
 
 Administrative delegation::
-The delegation mechanism is used to support decentralized administration of access policies. It allows an authority (delegator) to delegate all or parts of its own authority or someone else's authority to another user (delegate) without any need to involve modification of the root policy.
+The delegation mechanism is used to support decentralized administration of access policies. It allows an authority (delegator) to delegate all or parts of its own authority, (or someone else's authority), to another user (delegate) without any need to involve modification of the root policy.
 
 JSON Request/Response Profile::
 JSON bindings for the request/response messages between the PEP and the PDP - as an alternative to the core XML message definitions.
@@ -493,17 +495,10 @@ include::include/uma-client-request-authorization.wsd[]
 
 Optionally, the Authorization Server may need additional information in order to determine whether the Client is authorized to have this authorization data. The Authorization Server response indicates "need_info" including one or more sub-properties with hints about the nature of further required information. The Client then has the opportunity to continue seeking authorization by engaging in follow-on flows with the authorization server, either directly or through redirection of an end-user Requesting Party.
 
-==== UMA Related Technologies
-
-Triple-A for Exploitation Platforms (Deimos)::
-Provides the Triple-As (Authentication, Authorization and Accounting) based on Oauth, OIDC and UMA.
-* Home page: https://triple-a-web.elecnor-deimos.com/
-* Related products: identity4EO, archive4EO, monitor4eo
-
 [[mainBilling,Accounting and Billing]]
 == Accounting and Billing
 
-The platform must account for resource use both within the platform and in other platforms via federation. In additional, several inter-platform billing models are supported as defined in the use cases, <<EOEPCA-UC>>. A number of principles must first be established:
+The platform must account for resource use both within the platform and in other platforms via federation. In addition, several inter-platform billing models are supported as defined in the use cases, <<EOEPCA-UC>>. A number of principles must first be established:
 
 * Actions are performed within the context of a 'billing identity', which may be different to the user's identity.
 * Charges are the result of discrete 'billing events' occuring within a particular 'billing window'. Pricing must consider all events within the window, not events individually (to support, for example, tiered pricing).
@@ -643,7 +638,7 @@ The User Profile for a given user is tied to the unique identifier provided by t
 
 === Licence and T&C Management
 
-A licence manager must determine whether or not licence requirements permit certain actions by a certain user. For freely available resources simple acceptance of the licence may be necessary. For commercially licensed resources it may be much more complicated. For example, a licence may have been bought for non-educational use by up to 5 users for satellite images with a certain resolution and area, with an extra charge made for images less than 15 degress off nadir. Alternatively, a commercially licensed processing service may be charged by the CPU-hour or user-month. This is handled by the pricing and billing services, but acceptance of these terms must still be made first.
+A licence manager must determine whether or not licence requirements permit certain actions by a certain user. For freely available resources simple acceptance of the licence may be necessary. For commercially licensed resources it may be much more complicated. For example, a licence may have been bought for non-educational use by up to 5 users for satellite images with a certain resolution and area, with an extra charge made for images less than 15 degrees off nadir. Alternatively, a commercially licensed processing service may be charged by the CPU-hour or user-month. This is handled by the pricing and billing services, but acceptance of these terms must still be made first.
 
 Some concepts applicable within the licence manager must be established:
 
@@ -697,5 +692,5 @@ In some cases users may have multiple home platforms, initiating some workloads 
 A user 'ports' a licence from one platform to another by using OAuth to authorize the licence manager on the local platform to access his licences on another. This is only permitted if the licences have been marked as 'portable' by the licenser.
 
 
-This mechanism may be used for two purposes. In the first, a publisher a has publshed his Resource in both platforms (which may be done to permit lower processing latencies, lower payment processing costs or the use of proprietary features). The platform receiving the licence must verify its signature using the licenser's public key before accepting it. In the second case the Resource is not available on the receiving platform but may still be used in cross-platform workflows (including the case when a processing service is transferred from a remote host platform to execute locally).
+This mechanism may be used for two purposes. In the first, a publisher has published his Resource in both platforms (which may be done to permit lower processing latencies, lower payment processing costs or the use of proprietary features). The platform receiving the licence must verify its signature using the licenser's public key before accepting it. In the second case the Resource is not available on the receiving platform but may still be used in cross-platform workflows (including the case when a processing service is transferred from a remote host platform to execute locally).
 

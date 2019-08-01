@@ -18,9 +18,9 @@ To exploit the services of the Platform, users need to discover available resour
 .Resource Management Use Case
 image::use-cases-resources.png[width=100%,pdfwidth=100%,align="center"]
 
-Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the provision of an Application Catalogue. See <<mainAppCatalogue>> for more details.
+Processing services and applications are also platform resources that are stored in artefact repositories and must be discoverable by users, including the information required by users to exploit the service. It is assumed that users will store their software artefacts in external public repositories such as DockerHub, GitHub, etc. In the future, it may be necessary for an Exploitation Platform to provide such repository services to its users. Discovery of processing services and applications is met though the provision of an <<mainAppCatalogue, Application Catalogue>>.
 
-The inventory and presentation of resources to users must be organised in such a way as to facilitate the discovery and usage of resources in other federated Exploitation Platforms. For example, users must be able to discover data and services in other EPs in order to construct and execute workflows that span multiple federated EPs.
+The inventory and presentation of resources to users must be organised in such a way as to facilitate the discovery and usage of resources in other federated Exploitation Platforms. For example, users must be able to discover data and services in other EPs in order to construct and execute workflows that span multiple federated EPs. *Thus a Resource Catalogue provides the inventory of data, processing services, applications in such a way as to create a Marketplace for resource discovery, and provide a launchpad for their use within the exploitation platform*.
 
 Access to resources must be controlled according to the privileges afforded to the logged in user, and appropriate hooks must be established into the EPs accounting and billing subsystems. Thus, the Resource Management services must be implemented according to the approach defined by User Management for authorization, accounting and billing.
 
@@ -114,13 +114,13 @@ This metadata model can be exploited, for example, using OpenSearch:
 ==== Data Access
 There is a direct link between the way the data is described in the Catalogue and how it is accessed by the consumers of the data. This links to the Data Access Services (e.g. WMS. WCS, WFS, etc.) provided by the EP, and the way in which the access links are encoded into the Catalogue. These links must be usable by the data consumers which could be processing services, or users downloading the data.
 
-Hence the contents of the Catalogue reflects the data services offered by the platform, including the underlying resource tier services. Each data Collection is presented in the Catalogue as accessible through one or more data access services, as applicable to the specfic data. The Catalogue must present the data access URLs is such a way that the URL resolves correctly to the underlying data via the providing data access service.
+Hence the contents of the Catalogue reflects the data services offered by the platform, including the underlying resource tier services. Each data Collection is presented in the Catalogue as accessible through one or more data access services, as applicable to the specific data. The Catalogue must present the data access URLs in such a way that the URL resolves correctly to the underlying data via the providing data access service.
 
 ==== Catalogue Composition/Aggregation
 
 The Exploitation Platform is designed to be hosted in a compute environment that is close to the data of interest. This means that the typical deployment is made to the likes of DIAS, Public Cloud (such as AWS), or National Research Infrastructure (such as CEDA/JASMIN) – that provide the Resources-tier/infrastructure upon which the EP relies. The Resources-tier provides virtual ICT-infrastructure and data. It is common that the Resources-tier provides their own Catalogue to support the data hosted within.
 
-In order to ensure a coherent link between data discovery and access, the Exploitation Platform provides its own Catalogue that presents the data holding to be accessed through the available data access services. In doing so it must aggregate the catalogue records of the underlying resource tier, the records of other 'federated' platforms, and the value-added data that is contributed through the actions of users on the EP. Thus the EP provides a Catalgue that is tailored to its service offering to ensure a consistent data access interface that can be relied upon by other EP services, in particular by the executing user analysis functions running within the Processing & Chaining context.
+In order to ensure a coherent link between data discovery and access, the Exploitation Platform provides its own Catalogue that presents the data holding to be accessed through the available data access services. In doing so it must aggregate the catalogue records of the underlying resource tier, the records of other 'federated' platforms, and the value-added data that is contributed through the actions of users on the EP. Thus the EP provides a Catalogue that is tailored to its service offering to ensure a consistent data access interface that can be relied upon by other EP services, in particular by the executing user analysis functions running within the Processing & Chaining context.
 
 [#img_catalogueAggregation,reftext='{figure-caption} {counter:figure-num}']
 .Catalogue Aggregation
@@ -172,7 +172,7 @@ Other services that may also be considered include:
 * FTP
 * CDMI
 
-The integration of these services into the data-layer of the hosting Resource Tier relies upon the Data Access Gateway providing an infrastructure agnostic interface for accessing the underlying data holding.
+Integration of these data access services with the data-layer of the hosting Resource Tier relies upon the Data Access Gateway providing an infrastructure agnostic interface for accessing the underlying data holding.
 
 [[mainDataAccessGateway,Data Access Gateway]]
 == Data Access Gateway
@@ -195,7 +195,7 @@ The Gateway must provide a data bridge between the EP components and the Resourc
 * AWS S3 Object Store
 
 Through docker/kubernetes we can use mounted 'volumes' to present data through a local filesystem interface.
-Through s3fs-fuse we can establish local filesytem mount points to S3 object stores.
+Through s3fs-fuse we can establish local filesystem mount points to S3 object stores.
 The Processing Framework makes use of these capabilities to ensure that data is presented to processing services/applications in a form that they can consume.
 
 Thus, the Data Access Gateway presents an S3 interface as an internal data access abstraction, whilst implementing the data access interface to the infrastructure Resource Tier storage.
@@ -248,7 +248,7 @@ The Workspace provides a service to users through which they can organise data/p
 
 This concept can be extended to create a Group Workspace for sharing and collaboration.
 
-It may be possible to model the Workspace as a Catalogue, in which the browse/discover access privilege is limited either to an individual user (personal workspace) or a group of collaborating users (group workspace):
+It may be possible to model the Workspace as a Catalogue, in which the browse/discover access privilege is limited to either an individual user (personal workspace) or a group of collaborating users (group workspace):
 
 * READ access: OpenSearch should provide a good fit for this interface
-* CREATE/UPDATE/DELETE: Interface semantics must be defined
+* CREATE/UPDATE/DELETE: Transactional extension to OGC-CSW (to be explored)

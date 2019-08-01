@@ -12,7 +12,7 @@ A potential federation concept is represented by interactions between correspond
 
 == User Management
 
-_Responsible for all aspects related to the user’s account, profile, identity and access management in a federated system-of-systems environment._
+_Responsible for all aspects related to user identity, authentication, authorization, accounting and billing in a federated system-of-systems environment._
 
 It provides authentication, authorization and accounting services that are required to access other elements of the architecture, including the processing-oriented services and resource-oriented services. Individual resources may have an associated access and/or charging policy, but these have to be checked against the identity of the user. Resource consumption may also be controlled e.g. by credits and/or quotas associated with the user account. In the Network of EO Resources, a user should not need to create an account on multiple platforms. Therefore some interactions will be required between the User Management functions, whether directly or in directly via trusted third party.
 
@@ -26,13 +26,15 @@ The development and analysis environment provides a platform for the expert user
 
 == Resource Management
 
-_Responsible for storing and cataloguing a variety of resources._
+_Responsible for maintaining an inventory of platform and federated resources, and providing services for data access and visualisation._
 
 Storage and cataloguing of all persistent resources. First and foremost, this will contain multidimensional geo-spatial datasets. In addition it may include a variety of heterogeneous data and other resources, such as documentation, Docker images, processing workflows, etc. Handles and abstracts the low-level complexities of different underlying storage technologies and strategies. Facilitating the network of EO resources by providing a federated interface to other data services within the wider EO network.
 
-The catalogue holds corresponding metadata for every published resource item in the local platform storage, as well as entries for resources that are located on remote collaborating platforms. Catalogue search and data access is provided through a range of standard interfaces, which are used by the local Web Portal and Processing & Chaining elements and may be exposed externally as web services. Access to services and resources is controlled according to an associated policy - ref <<IAM>>. Similarly, the ingestion process is controlled, in order to ensure the quality of any published resource, including associated metadata, and to maintain the integrity of the catalogue. This component may interact with corresponding peer components on other platforms - for example to synchronise catalogue entries.
+The catalogue holds corresponding metadata for every published resource item in the local platform storage, as well as entries for resources that are located on remote collaborating platforms. Catalogue search and data access is provided through a range of standard interfaces, which are used by the local Web Portal and Processing & Chaining elements and may be exposed externally as web services.
 
-The user has a personal workspace in which to upload files, organise links to resources of interest (services/application/data), and receive/manage results output from processing executions. Shared workspaces for collaboration can similarly be provisioned.
+Access to services and resources is controlled according to an associated authorization policy as defined by the IAM approach. This component may interact with corresponding peer components on other platforms - for example to synchronise catalogue entries.
+
+The user has a personal workspace in which to upload files, organise links to resources of interest (services/application/data), and receive/manage results output from processing executions. Shared workspaces for collaboration can be similarly provisioned. The ingestion of new data is controlled to ensure the quality of any published resource, including associated metadata, and to maintain the integrity of the catalogue.
 
 == Platform API
 
