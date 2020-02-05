@@ -251,7 +251,7 @@ Data Input Sources::
 The data input sources may be the local exploitation platform, or output from a previous workflow step (local or other platform).
 
 Data Input Protocol::
-The data input protocol may be natively supported by the processing service - otherwise it will need to be staged-in by the Processing Frameowkr.
+The data input protocol may be natively supported by the processing service - otherwise it will need to be staged-in by the Processing Framework.
 
 Data Stage-in::
 In order to stage-in the data, the Processing Framework must support the data access protocol through which the input data is provided, and it must know the capabilities of the processing service to be invoked. *This represents a two-way contract between the Platform (on behalf of the Processing Framework) and the service/application being executed.* Options for staging-in the data include local file-system access (e.g. via s3fs-fuse mount), or it may be more optimal for the service to access the data directly via HTTP-based interfaces, e.g. to exploit the efficiencies offered by cloud-optimised file formats.
